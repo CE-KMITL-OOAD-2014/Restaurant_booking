@@ -26,3 +26,14 @@ Route::post('register_action', function()
         $obj = new RegisterController() ;
         return $obj->store();
 });
+
+Route::get('openRes',function()
+{
+	return View::make('formOpen');
+});
+
+Route::post('openRes_action',function()
+{
+	/*$obj = new RegisterController() ;
+    return $obj->store();*/
+});
