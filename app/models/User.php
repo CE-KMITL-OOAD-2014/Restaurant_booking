@@ -1,26 +1,14 @@
 <?php
 
-use Illuminate\Auth\UserTrait;
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableTrait;
-use Illuminate\Auth\Reminders\RemindableInterface;
+class User extends Eloquent {
+        protected $guarded = array();
+        protected $table = 'users'; // table name
+        public $timestamps = 'false' ; // to disable default timestamp fields
 
-class User extends Eloquent implements UserInterface, RemindableInterface {
-
-	use UserTrait, RemindableTrait;
-
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
-
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = array('password', 'remember_token');
+        // model function to store form data to database
+        public static function saveFormData($data)
+        {
+            DB::table('users')->insert($data);
+        }
 
 }

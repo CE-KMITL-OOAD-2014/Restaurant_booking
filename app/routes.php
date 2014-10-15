@@ -16,7 +16,13 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('aa', function()
+Route::get('register', function()
 {
-	return View::make('hello');
+	return View::make('register');
+});
+
+Route::post('register_action', function()
+{
+        $obj = new RegisterController() ;
+        return $obj->store();
 });
