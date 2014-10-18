@@ -8,7 +8,7 @@ class UserRepository implements Repository {
       $eloquentRepo = new EloquentUserRepo();
       $test = $eloquentRepo->all();
     */
-    $eloquents = Elo::all();
+    $eloquents = User::all();
     foreach ($eloquents as $eloquent) {
       echo $eloquent->id." ".$eloquent->name." ".$eloquent->lastname." ".$eloquent->email." ".$eloquent->tel."<br>";
     }
@@ -20,7 +20,7 @@ class UserRepository implements Repository {
       $eloquentRepo = new EloquentUserRepo();
       $test = $eloquentRepo->find($id);
     */
-    return Elo::find($id);
+    return User::find($id);
   }
  
   public function save($input)
@@ -37,12 +37,12 @@ class UserRepository implements Repository {
       $eloquentRepo->save($user);
     */
 
-    $elo = new Elo;
-    $elo->name = $input->name;
-    $elo->lastname = $input->lastname;
-    $elo->password = Hash::make($input->password);
-    $elo->email = $input->email;
-    $elo->tel = $input->tel;
+    $elo = new User;
+    $elo->name = $input->getName();
+    $elo->lastname = $input->getLastname();
+    $elo->password = $input->getPassword();
+    $elo->email = $input->getEmail();
+    $elo->tel = $input->getTel();
     return $elo->save();
   }
 
@@ -60,12 +60,12 @@ class UserRepository implements Repository {
       $eloquentRepo->update($id,$user);
     */
 
-    $elo = Elo::find($id);
-    $elo->name = $input->name;
-    $elo->lastname = $input->lastname;
-    $elo->password = Hash::make($input->password);
-    $elo->email = $input->email;
-    $elo->tel = $input->tel;
+    $elo = User::find($id);
+    $elo->name = $input->getName();
+    $elo->lastname = $input->getLastname();
+    $elo->password = $input->getPassword();
+    $elo->email = $input->getEmail();
+    $elo->tel = $input->getTel();
     return $elo->save();
   }
  

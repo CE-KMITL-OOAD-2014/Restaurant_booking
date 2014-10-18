@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>Look at me Login</title>
+	<title>Login</title>
 </head>
 <body>
 

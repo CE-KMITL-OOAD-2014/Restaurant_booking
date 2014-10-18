@@ -25,12 +25,12 @@ public function store()
             {
                     //User::saveFormData(Input::except(array('_token','cpassword')));
 
-                    $user           = new User;
-                    $user->name     = Input::get('name');
-                    $user->lastname = Input::get('lastname');
-                    $user->password = Input::get('password');
-                    $user->email    = Input::get('email');
-                    $user->tel      = Input::get('tel');
+                    $user  = new CoreUser;
+                    $user->setName(Input::get('name'));
+                    $user->setLastname(Input::get('lastname'));
+                    $user->setPassword(Input::get('password'));
+                    $user->setEmail(Input::get('email'));
+                    $user->setTel(Input::get('tel'));
         
                     $eloquentRepo = new UserRepository();
                     $eloquentRepo->save($user);

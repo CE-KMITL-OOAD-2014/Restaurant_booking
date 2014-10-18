@@ -30,7 +30,7 @@ class HomeController extends BaseController {
 		// validate the info, create rules for the inputs
 		$rules = array(
 			'email'    => 'required|email', // make sure the email is an actual email
-			'password' => 'required|alphaNum|min:3' // password can only be alphanumeric and has to be greater than 3 characters
+			'password' => 'required|min:6' 
 		);
 
 		// run the validation rules on the inputs from the form
@@ -56,13 +56,13 @@ class HomeController extends BaseController {
 				// redirect them to the secure section or whatever
 				// return Redirect::to('secure');
 				// for now we'll just echo success (even though echoing in a controller is bad)
-				
+				$id = Auth::id();
 				return Redirect::to('logout');
 
 			} else {	 	
 
 				// validation not successful, send back to form	
-				return Redirect::to('login');
+				return Redirect::to('login')->withMessage('Incorrect E-mail or password');
 
 			}
 
