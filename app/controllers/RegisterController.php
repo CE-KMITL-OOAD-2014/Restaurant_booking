@@ -7,7 +7,7 @@ public function store()
 {
             $data =  Input::except(array('_token')) ;
             $rule  =  array(
-                    'name'   => 'required|unique:users',
+                    'name'       => 'required|unique:users',
                     'lastname'   => 'required',
                     'email'      => 'required|email|unique:users',
                     'tel'        => 'required|min:10|unique:users',
@@ -23,7 +23,17 @@ public function store()
             }
             else
             {
-                    User::saveFormData(Input::except(array('_token','cpassword')));
+                    //User::saveFormData(Input::except(array('_token','cpassword')));
+
+                    $user           = new User;
+                    $user->name     = Input::get('name');
+                    $user->lastname = Input::get('lastname');
+                    $user->password = Input::get('password');
+                    $user->email    = Input::get('email');
+                    $user->tel      = Input::get('tel');
+        
+                    $eloquentRepo = new UserRepository();
+                    $eloquentRepo->save($user);
 
                     return Redirect::to('register')->withMessage('Data inserted');
             }
