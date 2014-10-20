@@ -1,6 +1,6 @@
-<?php 
-
-interface Repository {
+<?php namespace Core\Storage\User;
+ 
+interface UserRepository {
    
   public function all();
  

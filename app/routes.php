@@ -45,6 +45,7 @@ Route::post('openRes_action',function()
 	return $data;
 });
 
+Route::get('user', array('uses' => 'UserController@index'));
 
 
 
