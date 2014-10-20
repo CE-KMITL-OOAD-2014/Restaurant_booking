@@ -39,6 +39,12 @@ Route::get('regisres',function()
 	return View::make('formOpen');
 });
 
+Route::post('openRes_action',function()
+{
+	$data[] = Input::all();
+	return $data;
+});
+
 
 
 

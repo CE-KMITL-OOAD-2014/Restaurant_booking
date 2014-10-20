@@ -8,7 +8,7 @@
     <body>
 
         <h2> Register Restaurant : </h2>
-        
+
         @if ($errors->any())
 
             <ul style="color:red;">
@@ -27,7 +27,7 @@
 
 
 
-        {{ Form::open(array('url' => 'openRes_action')) }}
+        <form action="{{ url('openRes_action') }}" method="POST">
 
             <p>Restaurant Name :</p>
 
@@ -35,7 +35,7 @@
 
             <p>Address :</p>
 
-            <p>{{ Form::text('address') }}</p>
+            <textarea rows="10" cols="30"></textarea>
 
             <p>Date Open :</p>
             
@@ -58,19 +58,66 @@
             {{ Form::label('fri', 'Friday') }}<br>
 
             {{ Form::checkbox('Sat', '7', false) }}
-            {{ Form::label('Sat', 'saturday') }}<br>
+            {{ Form::label('sat', 'Saturday') }}<br><br>
 
 
-            <!--    เวลาเปิดปิด
-                    มุม
-            -->
+
+            <p>Select a time OPEN :  &nbsp;&nbsp;&nbsp;&nbsp;  <input type="time" name="open_time"> </p>
+            <p>Select a time CLOSE :  &nbsp;&nbsp;&nbsp;  <input type="time" name="close_time"> </p>
+            <br>
+
+            
+            <p>Area in your restaurant :</p>
+
+            <!-- <textarea rows="10" cols="30"></textarea>
+ -->
+
+                <!-- {{ Form::select('size[]', array('L' => 'Large', 'M' => 'Medium', 'S' => 'Small'), array('S', 'M'), array('multiple')); }} -->
+                <select multiple name="areaList[]" id="areaList" size="8" style="width: 200px;">
+                    <!-- <option selected>Apple</option>
+                    <option selected>Pear</option>
+                    <option selected>Banana</option>
+                    <option selected>Orange</option> -->
+                </select>
+
+            <p><input name="area" type="text" id="area"> <button type="button" onclick="addArea()">Add</button> <button type="button" onclick="myFunction()">Remove selected item</button></p>
+            <p>Click the button to add area in your Restaurant to list.</p>
+            <p><b>Note :</b> ถ้าในร้านมีแค่มุมเดียว ใส่ "มุมทั่วไป"</p>
+
+            
+
+            <script>
+                function myFunction() {
+                    var x = document.getElementById("areaList");
+                    x.remove(x.selectedIndex);
+                }
+            </script>
+
+            <script>
+                function addArea() {
+                    var x = document.getElementById("areaList");
+                    var option = document.createElement("option");
+                    option.text = document.getElementById("area").value;
+                    x.add(option);
+                    document.getElementById("area").value = "";
+
+                    //if (!hasOptions(x)) { return; }
+                    for (var i=0; i<x.options.length; i++) {
+                        x.options[i].selected = true;
+                    }
+                }
+
+            </script>
+
+
+
             <p>Tel number :</p>
 
             <p>{{ Form::text('tel') }}</p>
 
             <p>{{ Form::submit('Submit') }}</p>
 
-        {{ Form::close() }}
+        </form>
 
     </body>
 </html>
