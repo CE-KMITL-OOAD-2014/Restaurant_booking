@@ -6,6 +6,9 @@
     </head>
 
     <body>
+
+        <h2> Register Restaurant : </h2>
+        
         @if ($errors->any())
 
             <ul style="color:red;">
@@ -21,6 +24,8 @@
             <p>{{ Session::get('message') }}</p>
 
         @endif
+
+
 
         {{ Form::open(array('url' => 'openRes_action')) }}
 

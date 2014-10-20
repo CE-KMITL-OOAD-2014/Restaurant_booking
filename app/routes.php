@@ -34,7 +34,7 @@ Route::get('logout',function(){
 Route::get('logout_action', array('uses' => 'HomeController@doLogout'));
 
 
-Route::get('openRes',function()
+Route::get('regisres',function()
 {
 	return View::make('formOpen');
 });
