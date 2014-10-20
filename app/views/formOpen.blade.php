@@ -25,7 +25,7 @@
 
         @endif
 
-
+        <p> Your ID : {{$id = Auth::id();}} </p>
 
         <form action="{{ url('openRes_action') }}" method="POST">
 
