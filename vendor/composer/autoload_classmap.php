@@ -8,10 +8,10 @@ $baseDir = dirname($vendorDir);
 return array(
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'CoreUser' => $baseDir . '/app/models/CoreUser.php',
+    'Core\\Storage\\StorageServiceProvider' => $baseDir . '/app/lib/Core/Storage/StorageServiceProvider.php',
+    'Core\\Storage\\User\\EloquentUserRepository' => $baseDir . '/app/lib/Core/Storage/User/EloquentUserRepository.php',
+    'Core\\Storage\\User\\UserRepository' => $baseDir . '/app/lib/Core/Storage/User/UserRepository.php',
     'CreateUsersTable' => $baseDir . '/app/database/migrations/2014_10_15_071508_create-users-table.php',
-    'Cribbb\\Storage\\StorageServiceProvider' => $baseDir . '/app/lib/Cribbb/Storage/StorageServiceProvider.php',
-    'Cribbb\\Storage\\User\\EloquentUserRepository' => $baseDir . '/app/lib/Cribbb/Storage/User/EloquentUserRepository.php',
-    'Cribbb\\Storage\\User\\UserRepository' => $baseDir . '/app/lib/Cribbb/Storage/User/UserRepository.php',
     'DatabaseSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
     'HomeController' => $baseDir . '/app/controllers/HomeController.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',

@@ -1,6 +1,6 @@
 <?php
  
-use Cribbb\Storage\User\UserRepository as User;
+use Core\Storage\User\UserRepository as User;
  
 class UserController extends BaseController {
 	public function __construct(User $user)
@@ -14,6 +14,6 @@ class UserController extends BaseController {
  	*/
 	public function index()
 	{
-  		return $this->user->all();
+  		return $this->user->find(1);
 	}
 }

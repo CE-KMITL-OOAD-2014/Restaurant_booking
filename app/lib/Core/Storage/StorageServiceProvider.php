@@ -1,4 +1,4 @@
-<?php namespace Cribbb\Storage;
+<?php namespace Core\Storage;
  
 use Illuminate\Support\ServiceProvider;
  
@@ -7,8 +7,8 @@ class StorageServiceProvider extends ServiceProvider {
   public function register()
   {
     $this->app->bind(
-      'Cribbb\Storage\User\UserRepository',
-      'Cribbb\Storage\User\EloquentUserRepository'
+      'Core\Storage\User\UserRepository',
+      'Core\Storage\User\EloquentUserRepository'
     );
   }
  
