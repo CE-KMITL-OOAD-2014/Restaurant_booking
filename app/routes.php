@@ -39,7 +39,7 @@ Route::get('openRes',function()
 	return View::make('formOpen');
 });
 
-
+Route::resource('user', 'UserController');
 
 
 
