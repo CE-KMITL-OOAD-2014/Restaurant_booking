@@ -6,6 +6,6 @@
 	<p> Login SUCCESS! </p>
 	<!-- LOGOUT BUTTON -->
 	<p> ID : {{$id = Auth::id();}} </p>
-	<a href="{{ URL::to('logou') }}">Logout</a>
+	<a href="{{ URL::to('logout_action') }}">Logout</a>
 </body>
 </html>
