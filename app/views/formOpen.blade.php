@@ -27,7 +27,7 @@
 
         <p> Your ID : {{$id = Auth::id();}} </p>
 
-        <form action="{{ url('openRes_action') }}" method="POST">
+        <form action="{{ url('regisres_action') }}" method="POST">
 
             <p>Restaurant Name :</p>
 
@@ -35,35 +35,35 @@
 
             <p>Address :</p>
 
-            <textarea rows="10" cols="30"></textarea>
+            <textarea name="addr" id="addr" rows="10" cols="30"></textarea>
 
             <p>Date Open :</p>
             
-            {{ Form::checkbox('sun', '1', false) }}
+            {{ Form::checkbox('day[]', '1', false) }}
             {{ Form::label('sun', 'Sunday') }} <br>
 
-            {{ Form::checkbox('mon', '2', false) }}
+            {{ Form::checkbox('day[]', '2', false) }}
             {{ Form::label('mon', 'Monday') }}<br>
 
-            {{ Form::checkbox('tue', '3', false) }}
+            {{ Form::checkbox('day[]', '3', false) }}
             {{ Form::label('tue', 'Tuesday') }}<br>
 
-            {{ Form::checkbox('wed', '4', false) }}
+            {{ Form::checkbox('day[]', '4', false) }}
             {{ Form::label('wed', 'Wednesday') }}<br>
 
-            {{ Form::checkbox('thu', '5', false) }}
+            {{ Form::checkbox('day[]', '5', false) }}
             {{ Form::label('thu', 'Thurseday') }}<br>
 
-            {{ Form::checkbox('fri', '6', false) }}
+            {{ Form::checkbox('day[]', '6', false) }}
             {{ Form::label('fri', 'Friday') }}<br>
 
-            {{ Form::checkbox('Sat', '7', false) }}
+            {{ Form::checkbox('day[]', '7', false) }}
             {{ Form::label('sat', 'Saturday') }}<br><br>
 
 
 
-            <p>Select a time OPEN :  &nbsp;&nbsp;&nbsp;&nbsp;  <input type="time" name="open_time"> </p>
-            <p>Select a time CLOSE :  &nbsp;&nbsp;&nbsp;  <input type="time" name="close_time"> </p>
+            <p>Select a time OPEN :  &nbsp;&nbsp;&nbsp;&nbsp;  <input type="time" name="time_open"> </p>
+            <p>Select a time CLOSE :  &nbsp;&nbsp;&nbsp;  <input type="time" name="time_close"> </p>
             <br>
 
             

@@ -1,7 +1,14 @@
 <?php
 
+use Core\Storage\User\UserRepository as User;
+
 class RegisterController extends BaseController
 {
+
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
 
 public function store()
 {
@@ -23,17 +30,15 @@ public function store()
             }
             else
             {
-                    //User::saveFormData(Input::except(array('_token','cpassword')));
-
+                    
                     $user  = new CoreUser;
                     $user->setName(Input::get('name'));
                     $user->setLastname(Input::get('lastname'));
                     $user->setPassword(Input::get('password'));
                     $user->setEmail(Input::get('email'));
                     $user->setTel(Input::get('tel'));
-        
-                    $eloquentRepo = new UserRepository();
-                    $eloquentRepo->save($user);
+
+                    $this->user->save($user);
 
                     return Redirect::to('register')->withMessage('Data inserted');
             }

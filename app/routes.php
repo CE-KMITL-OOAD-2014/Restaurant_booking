@@ -39,14 +39,18 @@ Route::get('regisres',function()
 	return View::make('formOpen');
 });
 
-Route::post('openRes_action',function()
-{
-	$data[] = Input::all();
-	return $data;
-});
+Route::post('regisres_action',array('uses' => 'RegisresController@store'));
+
 
 Route::get('user', array('uses' => 'UserController@index'));
 
+Route::get('restau', array('uses' => 'RestaurantController@index'));
+
+Route::post('test',function()
+{
+	$x = Input::get('day');
+	return $x;
+});
 
 
 
