@@ -50,12 +50,12 @@ class RestaurantController extends BaseController {
         
                     $this->rest->save($rest);
 
-                    return Redirect::to('register')->withMessage('Data inserted');
+                    return Redirect::to('regisres')->withMessage('Data inserted');
             }
 	}
 
 	public function show($id)
 	{
-		return $id;
+		return $this->rest->find($id);
 	}
 }
