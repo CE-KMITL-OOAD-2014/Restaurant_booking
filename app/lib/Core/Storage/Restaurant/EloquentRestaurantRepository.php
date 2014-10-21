@@ -23,6 +23,7 @@ class EloquentRestaurantRepository implements RestaurantRepository {
     $elo->day = $input->getDay();
     $elo->time_open = $input->getTimeOpen();
     $elo->time_close = $input->getTimeClose();
+    $elo->area = $input->getArea();
     $elo->tel = $input->getTel();
     return $elo->save();
   }
@@ -36,6 +37,7 @@ class EloquentRestaurantRepository implements RestaurantRepository {
     $elo->day = $input->getDay();
     $elo->time_open = $input->getTimeOpen();
     $elo->time_close = $input->getTimeClose();
+    $elo->area = $input->getArea();
     $elo->tel = $input->getTel();
     return $elo->save();
   }

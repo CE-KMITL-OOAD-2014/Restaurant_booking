@@ -37,6 +37,7 @@ public function store()
                     $rest->setDay(implode(",", Input::get('day')));
                     $rest->setTimeOpen(Input::get('time_open'));
                     $rest->setTimeClose(Input::get('time_close'));
+                    $rest->setArea(implode(",", Input::get('areaList')));
                     $rest->setTel(Input::get('tel'));
         
                     $this->rest->save($rest);

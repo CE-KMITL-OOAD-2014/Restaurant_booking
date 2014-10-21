@@ -41,12 +41,15 @@ Route::get('regisres',function()
 
 Route::post('regisres_action',array('uses' => 'RegisresController@store'));
 
-
 Route::get('user', array('uses' => 'UserController@index'));
 
 Route::get('restau', array('uses' => 'RestaurantController@index'));
 
-Route::get('test',array('uses' => 'AreaController@index'));
+Route::post('test',function()
+{
+	return implode(",", Input::get('areaList'));
+});
+
 
 
 

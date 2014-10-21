@@ -7,8 +7,9 @@ class CoreRestaurant {
   protected $day;
   protected $time_open;
   protected $time_close;
-  protected $tel;
   protected $area;
+  protected $tel;
+  
 
 
   public function getId(){
@@ -35,14 +36,15 @@ class CoreRestaurant {
     return $this->time_close;
   }
 
-  public function getTel(){
-    return $this->tel;
-  }
-
   public function getArea(){
     return $this->area;
   }
 
+  public function getTel(){
+    return $this->tel;
+  }
+
+  
   public function setName($name){
     $this->name = $name;
   }
@@ -63,11 +65,13 @@ class CoreRestaurant {
     $this->time_close = $time_close;
   }
 
+  public function setArea($area){
+    $this->area = $area;
+  }
+
   public function setTel($tel){
     $this->tel = $tel;
   }
 
-  public function setArea($area){
-    $this->area = $area;
-  }
+  
 }
