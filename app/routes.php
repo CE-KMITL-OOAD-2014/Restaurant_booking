@@ -46,11 +46,7 @@ Route::get('user', array('uses' => 'UserController@index'));
 
 Route::get('restau', array('uses' => 'RestaurantController@index'));
 
-Route::post('test',function()
-{
-	$x = Input::get('day');
-	return $x;
-});
+Route::get('test',array('uses' => 'AreaController@index'));
 
 
 

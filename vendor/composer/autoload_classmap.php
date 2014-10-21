@@ -6,9 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Area' => $baseDir . '/app/models/Area.php',
+    'AreaController' => $baseDir . '/app/controllers/AreaController.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
+    'CoreArea' => $baseDir . '/app/models/CoreArea.php',
     'CoreRestaurant' => $baseDir . '/app/models/CoreRestaurant.php',
     'CoreUser' => $baseDir . '/app/models/CoreUser.php',
+    'Core\\Storage\\Area\\AreaRepository' => $baseDir . '/app/lib/Core/Storage/Area/AreaRepository.php',
+    'Core\\Storage\\Area\\EloquentAreaRepository' => $baseDir . '/app/lib/Core/Storage/Area/EloquentAreaRepository.php',
     'Core\\Storage\\Restaurant\\EloquentRestaurantRepository' => $baseDir . '/app/lib/Core/Storage/Restaurant/EloquentRestaurantRepository.php',
     'Core\\Storage\\Restaurant\\RestaurantRepository' => $baseDir . '/app/lib/Core/Storage/Restaurant/RestaurantRepository.php',
     'Core\\Storage\\StorageServiceProvider' => $baseDir . '/app/lib/Core/Storage/StorageServiceProvider.php',
