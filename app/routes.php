@@ -39,16 +39,13 @@ Route::get('regisres',function()
 	return View::make('formOpen');
 });
 
-Route::post('regisres_action',array('uses' => 'RegisresController@store'));
+Route::post('regisres_action',array('uses' => 'RestaurantController@store'));
 
 Route::get('user', array('uses' => 'UserController@index'));
 
 Route::get('restau', array('uses' => 'RestaurantController@index'));
 
-Route::post('test',function()
-{
-	return implode(",", Input::get('areaList'));
-});
+Route::get('restaurant/{id}',array('uses' => 'RestaurantController@show'));
 
 
 
