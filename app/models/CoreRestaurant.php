@@ -2,6 +2,7 @@
 
 class CoreRestaurant {
   protected $id;
+  protected $id_owner;
   protected $name;
   protected $addr;
   protected $day;
@@ -14,6 +15,10 @@ class CoreRestaurant {
 
   public function getId(){
     return $this->id;
+  }
+
+  public function getIdOwner(){
+    return $this->id_owner;
   }
 
   public function getName(){
@@ -44,6 +49,9 @@ class CoreRestaurant {
     return $this->tel;
   }
 
+  public function setIdOwner ($id_owner){
+    $this->id_owner = $id_owner;
+  }
   
   public function setName($name){
     $this->name = $name;

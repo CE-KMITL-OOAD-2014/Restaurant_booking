@@ -26,7 +26,7 @@ class RestaurantController extends BaseController {
                     'day'        => 'required',
                     'time_open'  => 'required',
                     'time_close' => 'required',
-                    'area'		 => 'required',
+                    'areaList'	 => 'required',
                     'tel'        => 'required|min:10|unique:restaurants'
                 ) ;
 
@@ -40,6 +40,7 @@ class RestaurantController extends BaseController {
             {
                     
                     $rest  = new CoreRestaurant;
+                    $rest->setIdOwner(Auth::id());
                     $rest->setName(Input::get('name'));
                     $rest->setAddr(Input::get('addr'));
                     $rest->setDay(implode(",", Input::get('day')));
@@ -50,7 +51,9 @@ class RestaurantController extends BaseController {
         
                     $this->rest->save($rest);
 
-                    return Redirect::to('regisres')->withMessage('Data inserted');
+                    //{{$id = Auth::id();}}
+
+                    return Redirect::to('logout')->withMessage('Data inserted');
             }
 	}
 

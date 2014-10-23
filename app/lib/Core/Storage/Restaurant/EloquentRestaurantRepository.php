@@ -18,6 +18,7 @@ class EloquentRestaurantRepository implements RestaurantRepository {
   {
 
     $elo = new Restaurant;
+    $elo->id_owner = $input->getIdOwner();
     $elo->name = $input->getName();
     $elo->addr = $input->getAddr();
     $elo->day = $input->getDay();

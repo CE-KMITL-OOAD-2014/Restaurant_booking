@@ -10,11 +10,21 @@
 	{{ Form::open(array('url' => 'login')) }}
 		<h1>Login</h1>
 
-		<!-- if there are login errors, show them here -->
-		<p>
-			{{ $errors->first('email') }}
-			{{ $errors->first('password') }}
-		</p>
+		@if (Session::has('message'))
+
+            <p style="color:red;">{{ Session::get('message') }}</p>
+
+        @endif
+
+        @if ($errors->any())
+
+            <ul style="color:red;">
+
+                {{ implode('', $errors->all('<li>:message</li>')) }}
+
+            </ul>
+
+        @endif
 
 		<p>
 			{{ Form::label('email', 'Email Address') }}
