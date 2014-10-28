@@ -27,7 +27,7 @@ class RestaurantController extends BaseController {
                     'time_open'  => 'required',
                     'time_close' => 'required',
                     'areaList'	 => 'required',
-                    'tel'        => 'required|min:10|unique:restaurants'
+                    'tel'        => 'required|min:10|integer|unique:restaurants'
                 ) ;
 
             $validator = Validator::make($data,$rule);
@@ -47,6 +47,7 @@ class RestaurantController extends BaseController {
                     $rest->setTimeOpen(Input::get('time_open'));
                     $rest->setTimeClose(Input::get('time_close'));
                     $rest->setArea(implode(",", Input::get('areaList')));
+                    $rest->setSeat(implode(",", Input::get('seatList')));
                     $rest->setTel(Input::get('tel'));
         
                     $this->rest->save($rest);

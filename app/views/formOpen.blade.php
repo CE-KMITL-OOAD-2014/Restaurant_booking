@@ -69,29 +69,22 @@
             
             <p>Area in your restaurant :</p>
 
-            <!-- <textarea rows="10" cols="30"></textarea>
- -->
+                <select multiple name="areaList[]" id="areaList" size="8" style="width: 200px;"></select>
 
-                <!-- {{ Form::select('size[]', array('L' => 'Large', 'M' => 'Medium', 'S' => 'Small'), array('S', 'M'), array('multiple')); }} -->
-                <select multiple name="areaList[]" id="areaList" size="8" style="width: 200px;">
-                    <!-- <option selected>Apple</option>
-                    <option selected>Pear</option>
-                    <option selected>Banana</option>
-                    <option selected>Orange</option> -->
-                </select>
-
-            <p><input name="area" type="text" id="area"> <button type="button" onclick="addArea()">Add</button> <button type="button" onclick="myFunction()">Remove selected item</button></p>
+            <p><input name="area" type="text" id="area"> <button type="button" onclick="addArea()">Add</button> </p>
             <p>Click the button to add area in your Restaurant to list.</p>
             <p><b>Note :</b> ถ้าในร้านมีแค่มุมเดียว ใส่ "มุมทั่วไป"</p>
 
-            
 
-            <script>
-                function myFunction() {
-                    var x = document.getElementById("areaList");
-                    x.remove(x.selectedIndex);
-                }
-            </script>
+
+            <p>จำนวนที่นั่งในแต่ละมุม :</p>
+        
+                <select multiple name="seatList[]" id="seatList" size="8" style="width: 100px;"></select>
+
+            <p><input name="seat" type="text" id="seat"> <button type="button" onclick="addSeat()">Add</button> </p>
+            <p><b>Note :</b> ใส่ให้ครบทุก area</p>
+
+
 
             <script>
                 function addArea() {
@@ -100,6 +93,22 @@
                     option.text = document.getElementById("area").value;
                     x.add(option);
                     document.getElementById("area").value = "";
+
+                    //if (!hasOptions(x)) { return; }
+                    for (var i=0; i<x.options.length; i++) {
+                        x.options[i].selected = true;
+                    }
+                }
+
+            </script>
+
+            <script>
+                function addSeat() {
+                    var x = document.getElementById("seatList");
+                    var option = document.createElement("option");
+                    option.text = document.getElementById("seat").value;
+                    x.add(option);
+                    document.getElementById("seat").value = "";
 
                     //if (!hasOptions(x)) { return; }
                     for (var i=0; i<x.options.length; i++) {

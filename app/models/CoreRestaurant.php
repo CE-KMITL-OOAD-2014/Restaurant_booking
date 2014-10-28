@@ -9,6 +9,7 @@ class CoreRestaurant {
   protected $time_open;
   protected $time_close;
   protected $area;
+  protected $seat;
   protected $tel;
   
 
@@ -45,6 +46,10 @@ class CoreRestaurant {
     return $this->area;
   }
 
+  public function getSeat(){
+    return $this->seat;
+  }
+
   public function getTel(){
     return $this->tel;
   }
@@ -75,6 +80,10 @@ class CoreRestaurant {
 
   public function setArea($area){
     $this->area = $area;
+  }
+
+  public function setSeat($seat){
+    $this->seat = $seat;
   }
 
   public function setTel($tel){
