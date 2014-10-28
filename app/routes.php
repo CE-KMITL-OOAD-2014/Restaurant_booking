@@ -50,15 +50,10 @@ Route::get('restau', array('uses' => 'RestaurantController@index'));
 
 Route::get('restaurant/{id}',array('uses' => 'RestaurantController@show'));
 
-Route::get('test',function()
-{
-	$roles = DB::table('restaurants')->where('id_owner',Auth::id())->get();
-	return count($roles);
-});
 
-Route::get('book/{id}',array('uses' => 'BookController@book'));
+Route::get('book/{id}',array('uses' => 'BookController@index'));
 
-//Route::post('booking_action',/*implement*/);
+Route::post('booking_action',array('uses' => 'BookController@book'));
 
 
 

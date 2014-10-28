@@ -29,10 +29,12 @@
 
         <form action="{{ url('booking_action') }}" method="POST">
 
+        <input type="hidden" name="id_res" value={{ $data["id"] }} >
+        <input type="hidden" name="id_user" value={{ $id }} >
 
             <p> Date:  <input type="date" name="date"> </p>
             <p> Party Size: 
-            <select>
+            <select name="amout" id="amout">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -43,12 +45,12 @@
                 <option value="8">8</option>
                 <option value="9">9</option>
                 <option value="10">10</option>
-                <option value="max">Larger</option>
+                <option value="Larger">Larger</option>
             </select> </p>
 
             <p> Time : 
                 <!-- TIME [button] -->
-                <select>
+                <select name="time" id="time">
                     <?php
                         $times = explode(",", $data["avail"] );
                         foreach ($times as $time) {
@@ -60,7 +62,7 @@
 
             <p> Area :
                 <!-- AREA [dropdown] -->
-                <select>
+                <select name="area" id="area">
                     <?php
                         $areas = explode(",", $data["area"] );
                         foreach ($areas as $area) {
@@ -69,7 +71,6 @@
                     ?>
                 </select> 
             </p>
-
 
             <p>{{ Form::submit('Submit') }}</p>
 

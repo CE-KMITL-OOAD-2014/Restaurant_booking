@@ -61,6 +61,9 @@ class RestaurantController extends BaseController {
 	public function show($id)
 	{
 		$data = $this->rest->find($id);
+        if($data==NULL)
+            return Redirect::to('logout')->withMessage('Restaurant does not exist');
+        
 		return View::make('showRestaurant')->with('data',$data);
 	}
 }
