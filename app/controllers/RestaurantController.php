@@ -14,7 +14,7 @@ class RestaurantController extends BaseController {
  	*/
 	public function index()
 	{
-  		return $this->rest->all();
+  		return View::make('formOpen');
 	}
 
 	public function store()

@@ -33,14 +33,7 @@ Route::get('logout',function(){
 // Do Log out
 Route::get('logout_action', array('uses' => 'HomeController@doLogout'));
 
-
-Route::get('regisres',array(
-	'before' => 'auth | over',
-	function()
-	{
-		return View::make('formOpen');
-	}
-));
+Route::get('regisres',array('before' => 'auth | over',	'uses' => 'RestaurantController@index'));
 
 Route::post('regisres_action',array('uses' => 'RestaurantController@store'));
 
@@ -49,7 +42,6 @@ Route::get('user', array('uses' => 'UserController@index'));
 Route::get('restau', array('uses' => 'RestaurantController@index'));
 
 Route::get('restaurant/{id}',array('uses' => 'RestaurantController@show'));
-
 
 Route::get('book/{id}',array('uses' => 'BookController@index'));
 
