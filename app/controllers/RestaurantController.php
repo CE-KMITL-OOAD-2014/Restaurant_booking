@@ -59,6 +59,7 @@ class RestaurantController extends BaseController {
 
 	public function show($id)
 	{
-		return $this->rest->find($id);
+		$data = $this->rest->find($id);
+		return View::make('showRestaurant')->with('data',$data);
 	}
 }

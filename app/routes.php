@@ -56,6 +56,8 @@ Route::get('test',function()
 	return count($roles);
 });
 
+Route::get('book/{id}',array('uses' => 'BookController@book'));
+
 
 
 
