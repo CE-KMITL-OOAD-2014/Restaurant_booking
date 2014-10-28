@@ -58,6 +58,8 @@ Route::get('test',function()
 
 Route::get('book/{id}',array('uses' => 'BookController@book'));
 
+//Route::post('booking_action',/*implement*/);
+
 
 
 
