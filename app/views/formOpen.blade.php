@@ -64,7 +64,9 @@
 
             <p>Select a time OPEN :  &nbsp;&nbsp;&nbsp;&nbsp;  <input type="time" name="time_open"> </p>
             <p>Select a time CLOSE :  &nbsp;&nbsp;&nbsp;  <input type="time" name="time_close"> </p>
-            <br>
+            
+
+            <p> bug : เวลาเปิดปิดร้านต้องอยู่ระหว่าง ตี 1 ถึง 5 ทุ่มครึ่ง !!! </p><br>
 
             
             <p>Area in your restaurant :</p>

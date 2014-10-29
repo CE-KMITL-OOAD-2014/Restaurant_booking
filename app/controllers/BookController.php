@@ -1,12 +1,14 @@
 <?php
 
 use Core\Storage\Restaurant\RestaurantRepository as Restaurant;
+use Core\Storage\Book\BookRepository as Book;
 
 class BookController extends BaseController {
 
-	public function __construct(Restaurant $rest)
+	public function __construct(Restaurant $rest, Book $book)
 	{
   		$this->rest = $rest;
+        $this->book = $book;
 	}
 
 	public function index ($id) {
@@ -65,6 +67,7 @@ class BookController extends BaseController {
 			'time_close' => $restaurant->time_close,
 			'area' => $restaurant->area,
 			'seat' => $restaurant->seat,
+            'booked' => $restaurant->booked,
 			'tel' => $restaurant->tel,
 			'avail' => $avail);
 		
@@ -74,7 +77,37 @@ class BookController extends BaseController {
 	}
 
 	public function book () {
-		var_dump(Input::all());
+
+        $data =  Input::all() ;
+            $rule  =  array(
+                    'date'      => 'required',
+                    'amout'     => 'required',
+                    'time'      => 'required',
+                    'area'      => 'required',
+                ) ;
+
+            $validator = Validator::make($data,$rule);
+
+            if ($validator->fails())
+            {
+                    return Redirect::to('booking')->withErrors($validator->messages());
+            }
+            else
+            {
+                
+                $book  = new CoreBook;
+                $book->setIdRes(Input::get('id_res'));
+                $book->setIdUser(Input::get('id_user'));
+                $book->setDate(Input::get('date'));
+                $book->setAmout(Input::get('amout'));
+                $book->setTime(Input::get('time'));
+                $book->setArea(Input::get('area'));
+        
+                $this->book->save($book);
+
+                return Redirect::to('logout')->withMessage('Data inserted');
+            }
+
 	}
 
 }

@@ -13,8 +13,10 @@
 
 	<p> Area : </p>
 	<p> {{ $data->area }} </p>
-	<p>ที่ว่าง : </p>
+	<p>ที่นั่งทั้งหมด : </p>
 	<p> {{ $data->seat }} </p>
+	<p>ที่นั่งทั้งที่ถูกจองแล้ว : </p>
+	<p> {{ $data->booked }} </p>
 
 	{{"<a href=\"http://localhost/ResBook/public/index.php/book/$data->id\">book</a>"}}
 

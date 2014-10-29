@@ -57,7 +57,7 @@
                             echo "<option value=\"".$time."\">".$time."</option>";
                         }
                     ?>
-                </select> 
+                </select>
             </p>
 
             <p> Area :
