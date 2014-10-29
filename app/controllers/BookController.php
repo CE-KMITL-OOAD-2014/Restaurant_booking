@@ -90,12 +90,23 @@ class BookController extends BaseController {
 
             if ($validator->fails())
             {
-                    return Redirect::to('booking')->withErrors($validator->messages());
+                $link = "book/".(Input::get('id_res'));
+                return Redirect::to($link)->withErrors($validator->messages());
             }
             else
             {
+                $rest = $this->rest->find(Input::get('id_res'));
+                $area = explode(",", $rest->area);
+                $booked = explode(",", $rest->booked);
+                $index = array_search(Input::get('area'), $area );
+                $booked[$index] = $booked[$index]+(Input::get('amout'));
+                $books = implode(",", $booked);
+                $rest->booked = $books; 
+                $rest->save();
+                echo $rest;
+
                 
-                $book  = new CoreBook;
+                /*$book  = new CoreBook;
                 $book->setIdRes(Input::get('id_res'));
                 $book->setIdUser(Input::get('id_user'));
                 $book->setDate(Input::get('date'));
@@ -105,7 +116,7 @@ class BookController extends BaseController {
         
                 $this->book->save($book);
 
-                return Redirect::to('logout')->withMessage('Data inserted');
+                return Redirect::to('logout')->withMessage('Data inserted');*/
             }
 
 	}
