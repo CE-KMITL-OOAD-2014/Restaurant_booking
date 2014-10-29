@@ -6,6 +6,8 @@
     </head>
 
     <body>
+        <h2> Register : </h2>
+
         @if ($errors->any())
 
             <ul style="color:red;">
