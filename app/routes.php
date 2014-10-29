@@ -43,9 +43,10 @@ Route::get('restau', array('uses' => 'RestaurantController@index'));
 
 Route::get('restaurant/{id}',array('uses' => 'RestaurantController@show'));
 
-Route::get('book/{id}',array('uses' => 'BookController@index'));
+Route::get('book/{id}',array('before' => 'auth' ,'uses' => 'BookController@index'));
 
-Route::post('booking_action',array('uses' => 'BookController@book'));
+Route::post('booking_action',array('before' => 'auth' ,'uses' => 'BookController@book'));
+
 
 
 

@@ -26,6 +26,7 @@ class EloquentRestaurantRepository implements RestaurantRepository {
     $elo->time_close = $input->getTimeClose();
     $elo->area = $input->getArea();
     $elo->seat = $input->getSeat();
+    $elo->booked = $input->getBooked();
     $elo->tel = $input->getTel();
     return $elo->save();
   }

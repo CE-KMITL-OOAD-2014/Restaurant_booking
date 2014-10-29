@@ -11,6 +11,11 @@
 	<p> Addr : {{ $data->addr }} </p>
 	<p> Blah Blah Blah  </p>
 
+	<p> Area : </p>
+	<p> {{ $data->area }} </p>
+	<p>ที่ว่าง : </p>
+	<p> {{ $data->seat }} </p>
+
 	{{"<a href=\"http://localhost/ResBook/public/index.php/book/$data->id\">book</a>"}}
 
 </body>

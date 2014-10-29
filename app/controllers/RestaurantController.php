@@ -38,23 +38,25 @@ class RestaurantController extends BaseController {
             }
             else
             {
-                    
-                    $rest  = new CoreRestaurant;
-                    $rest->setIdOwner(Auth::id());
-                    $rest->setName(Input::get('name'));
-                    $rest->setAddr(Input::get('addr'));
-                    $rest->setDay(implode(",", Input::get('day')));
-                    $rest->setTimeOpen(Input::get('time_open'));
-                    $rest->setTimeClose(Input::get('time_close'));
-                    $rest->setArea(implode(",", Input::get('areaList')));
-                    $rest->setSeat(implode(",", Input::get('seatList')));
-                    $rest->setTel(Input::get('tel'));
+                for ($i=0; $i < count(Input::get('areaList')); $i++) { 
+                    $booked[$i] = '0';
+                }
+
+                $rest  = new CoreRestaurant;
+                $rest->setIdOwner(Auth::id());
+                $rest->setName(Input::get('name'));
+                $rest->setAddr(Input::get('addr'));
+                $rest->setDay(implode(",", Input::get('day')));
+                $rest->setTimeOpen(Input::get('time_open'));
+                $rest->setTimeClose(Input::get('time_close'));
+                $rest->setArea(implode(",", Input::get('areaList')));
+                $rest->setSeat(implode(",", Input::get('seatList')));
+                $rest->setBooked(implode(",", $booked));
+                $rest->setTel(Input::get('tel'));
         
-                    $this->rest->save($rest);
+                $this->rest->save($rest);
 
-                    //{{$id = Auth::id();}}
-
-                    return Redirect::to('logout')->withMessage('Data inserted');
+                return Redirect::to('logout')->withMessage('Data inserted');
             }
 	}
 
@@ -63,6 +65,7 @@ class RestaurantController extends BaseController {
 		$data = $this->rest->find($id);
         if($data==NULL)
             return Redirect::to('logout')->withMessage('Restaurant does not exist');
+        
         
 		return View::make('showRestaurant')->with('data',$data);
 	}
