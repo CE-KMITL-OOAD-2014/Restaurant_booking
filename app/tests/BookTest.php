@@ -15,7 +15,7 @@ class BookTest extends TestCase {
 		return $book;
 	}
 
-	public function testFindAHomePost()
+	public function testSaveBook()
 	{
 	
 		$mock = BookTest::mockBook ('99','55','2014-10-30','2','12:00','A');
