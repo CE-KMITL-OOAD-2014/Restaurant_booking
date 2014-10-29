@@ -1,6 +1,6 @@
 <?php
 
-class AvailSeatTest extends TestCase {
+class FindRestaurantTest extends TestCase {
 
 	public function testAvailSeat () {
 
