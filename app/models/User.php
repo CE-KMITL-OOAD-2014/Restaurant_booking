@@ -1,14 +1,45 @@
 <?php
 
-class User extends Eloquent {
-        protected $guarded = array();
-        protected $table = 'users'; // table name
-        public $timestamps = 'false' ; // to disable default timestamp fields
+use Illuminate\Auth\UserInterface;
+use Illuminate\Auth\Reminders\RemindableInterface;
 
-        // model function to store form data to database
-        public static function saveFormData($data)
-        {
-            DB::table('users')->insert($data);
-        }
+class User extends Eloquent implements UserInterface, RemindableInterface {
+	
+	protected $table = 'users';
+	public $timestamps = false;
 
+	public function setPasswordAttribute($password)
+  {
+    $this->attributes['password'] = Hash::make($password);
+  }
+
+  public function getAuthIdentifier()
+  {
+    return $this->getKey();
+  }
+
+  public function getAuthPassword()
+  {
+    return $this->password;
+  }
+
+  public function getReminderEmail()
+  {
+    return $this->email;
+  }
+
+  public function getRememberToken()
+  {
+    return $this->remember_token;
+  }
+
+  public function setRememberToken($value)
+  {
+    $this->remember_token = $value;
+  }
+
+  public function getRememberTokenName()
+  {
+    return 'remember_token';
+  }
 }

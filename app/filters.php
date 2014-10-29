@@ -43,7 +43,7 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			return Redirect::guest('login')->withMessage('Plz LOGIN !!!');
 		}
 	}
 });
@@ -86,5 +86,14 @@ Route::filter('csrf', function()
 	if (Session::token() != Input::get('_token'))
 	{
 		throw new Illuminate\Session\TokenMismatchException;
+	}
+});
+
+
+Route::filter('over',function()
+{
+	$res = DB::table('restaurants')->where('id_owner',Auth::id())->get();
+	if(count($res)>4){
+		return Redirect::to('logout')->withMessage('ร้านครบ 5 ร้านแล้ว');
 	}
 });
