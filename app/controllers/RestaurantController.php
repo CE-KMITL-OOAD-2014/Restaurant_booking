@@ -14,7 +14,20 @@ class RestaurantController extends BaseController {
  	*/
 	public function index()
 	{
-  		return View::make('formOpen');
+        $results[0] = "00:00";
+        $close = "23:30";
+        for ($i=1 ; $results[count($results)-1]!=$close ; $i++) {
+            $time = explode(":", $results[$i-1]);
+
+            if(($i%2)!=0){                                
+                $results[$i] = $time[0].":"."30";
+            }
+            else {
+                $results[$i] = ($time[0]+1).":"."00";
+            }   
+
+        }
+  		return View::make('formOpen')->with('results',$results);
 	}
 
 	public function store()

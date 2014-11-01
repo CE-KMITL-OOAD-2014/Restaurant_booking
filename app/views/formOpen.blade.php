@@ -62,8 +62,25 @@
 
 
 
-            <p>Select a time OPEN :  &nbsp;&nbsp;&nbsp;&nbsp;  <input type="time" name="time_open"> </p>
-            <p>Select a time CLOSE :  &nbsp;&nbsp;&nbsp;  <input type="time" name="time_close"> </p>
+            
+            <p>Select a time OPEN :  
+
+                <select name="time_open" id="time_open">
+                    <?php
+                        foreach ($results as $result ) {
+                            echo "<option value=\"".$result."\">".$result."</option>";
+                        }
+                    ?>
+                </select> </p>
+
+            <p>Select a time CLOSE :  
+                <select name="time_close" id="time_close">
+                    <?php
+                        foreach ($results as $result ) {
+                            echo "<option value=\"".$result."\">".$result."</option>";
+                        }
+                    ?>
+                </select> </p>
             
 
             <p> bug : เวลาเปิดปิดร้านต้องอยู่ระหว่าง ตี 1 ถึง 5 ทุ่มครึ่ง !!! </p><br>
