@@ -32,7 +32,19 @@
         <input type="hidden" name="id_res" value={{ $data["id"] }} >
         <input type="hidden" name="id_user" value={{ $id }} >
 
-            <p> Date:  <input type="date" name="date"> </p>
+            <p> Date:  <!-- <input type="date" name="date"> -->
+                <select name="date" id="date">
+                    <?php
+                        $days = explode(",", $data["day"] );
+                        foreach ($days as $day) {
+                            echo "<option value=\"".$day."\">".$day."</option>";
+                        }
+                    ?>
+                </select>
+             </p>
+
+
+
             <p> Party Size: 
             <select name="amout" id="amout">
                 <option value="1">1</option>

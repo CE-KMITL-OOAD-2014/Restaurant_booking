@@ -39,25 +39,25 @@
 
             <p>Date Open :</p>
             
-            {{ Form::checkbox('day[]', '1', false) }}
+            {{ Form::checkbox('day[]', 'Sunday', false) }}
             {{ Form::label('sun', 'Sunday') }} <br>
 
-            {{ Form::checkbox('day[]', '2', false) }}
+            {{ Form::checkbox('day[]', 'Monday', false) }}
             {{ Form::label('mon', 'Monday') }}<br>
 
-            {{ Form::checkbox('day[]', '3', false) }}
+            {{ Form::checkbox('day[]', 'Tuesday', false) }}
             {{ Form::label('tue', 'Tuesday') }}<br>
 
-            {{ Form::checkbox('day[]', '4', false) }}
+            {{ Form::checkbox('day[]', 'Wednesday', false) }}
             {{ Form::label('wed', 'Wednesday') }}<br>
 
-            {{ Form::checkbox('day[]', '5', false) }}
-            {{ Form::label('thu', 'Thurseday') }}<br>
+            {{ Form::checkbox('day[]', 'Thursday', false) }}
+            {{ Form::label('thu', 'Thursday') }}<br>
 
-            {{ Form::checkbox('day[]', '6', false) }}
+            {{ Form::checkbox('day[]', 'Friday', false) }}
             {{ Form::label('fri', 'Friday') }}<br>
 
-            {{ Form::checkbox('day[]', '7', false) }}
+            {{ Form::checkbox('day[]', 'Saturday', false) }}
             {{ Form::label('sat', 'Saturday') }}<br><br>
 
 

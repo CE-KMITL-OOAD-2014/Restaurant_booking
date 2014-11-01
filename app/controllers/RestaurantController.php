@@ -51,9 +51,6 @@ class RestaurantController extends BaseController {
             }
             else
             {
-                for ($i=0; $i < count(Input::get('areaList')); $i++) { 
-                    $booked[$i] = '0';
-                }
 
                 $rest  = new CoreRestaurant;
                 $rest->setIdOwner(Auth::id());
@@ -64,7 +61,6 @@ class RestaurantController extends BaseController {
                 $rest->setTimeClose(Input::get('time_close'));
                 $rest->setArea(implode(",", Input::get('areaList')));
                 $rest->setSeat(implode(",", Input::get('seatList')));
-                $rest->setBooked(implode(",", $booked));
                 $rest->setTel(Input::get('tel'));
         
                 $this->rest->save($rest);
@@ -77,9 +73,9 @@ class RestaurantController extends BaseController {
 	{
 		$data = $this->rest->find($id);
         if($data==NULL)
-            return "NULL";//Redirect::to('logout')->withMessage('Restaurant does not exist');
+            return Redirect::to('logout')->withMessage('Restaurant does not exist');
         
         
-		return "View::make";//View::make('showRestaurant')->with('data',$data);
+		return View::make('showRestaurant')->with('data',$data);
 	}
 }

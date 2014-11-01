@@ -47,6 +47,10 @@ Route::get('book/{id}',array('before' => 'auth' ,'uses' => 'BookController@index
 
 Route::post('booking_action',array('before' => 'auth' ,'uses' => 'BookController@book'));
 
+Route::get('test',function()
+{
+	echo date("H:i",strtotime(date("H:i")));
+});
 
 
 

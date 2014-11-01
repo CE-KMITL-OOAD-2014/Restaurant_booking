@@ -19,66 +19,24 @@ class BookController extends BaseController {
 			return Redirect::to('logout')->withMessage('Restaurant does not exist');
 
 
-		$open = $restaurant->time_open;
-        $close = $restaurant->time_close;
-        $results[0] = $open;
-
-        if($open[3]=='0'){
-                        
-
-            for ($i=1 ; $results[count($results)-1]!=$close ; $i++) {
-                $time = explode(":", $results[$i-1]);
-
-                if(($i%2)!=0){                                
-                    $results[$i] = $time[0].":"."30";
-                }
-                else {
-                    $results[$i] = ($time[0]+1).":"."00";
-                }
-
-            }
-               
-        }
-
-        elseif ($open[3]=='3') {
-
-            for ($i=1 ; $results[count($results)-1]!=$close ; $i++) {
-                $time = explode(":", $results[$i-1]);
-
-                if(($i%2)==0){                                
-                    $results[$i] = $time[0].":"."30";
-                }
-                else {
-                    $results[$i] = ($time[0]+1).":"."00";
-                }
-
-            }
-             
-        }
-
-        $avail = implode(",", $results);
+        $avail = BookController::calTime($restaurant);
+        $day = BookController::calDate($restaurant);
 
 		$data = array('id' => $restaurant->id , 
 			'id_owner' => $restaurant->id_owner, 
 			'name' => $restaurant->name,
-			'addr' => $restaurant->addr,
-			'day' => $restaurant->day,
-			'time_open' => $restaurant->time_open,
-			'time_close' => $restaurant->time_close,
+			'day' => $day,
 			'area' => $restaurant->area,
 			'seat' => $restaurant->seat,
-            'booked' => $restaurant->booked,
-			'tel' => $restaurant->tel,
 			'avail' => $avail);
 		
 		return View::make('booking')->with('data',$data);
-
-
 	}
+
 
 	public function book () {
 
-        $data =  Input::all() ;
+            $data =  Input::all() ;
             $rule  =  array(
                     'date'      => 'required',
                     'amout'     => 'required',
@@ -95,6 +53,16 @@ class BookController extends BaseController {
             }
             else
             {
+                if (Input::get('date')==date("l d/m")) {
+                    $currentTime = strtotime(date("H:i"));
+                    $bookTime = strtotime(Input::get('time'));
+                    if ($bookTime < $currentTime) {
+                        $link = "book/".(Input::get('id_res'));
+                        return Redirect::to($link)->withMessage('เลยเวลาแล้ว!!!');
+                    }                   
+
+                }
+
                 $test = DB::table('books')->where('id_res',Input::get('id_res'))->where('time',Input::get('time'))->where('date',Input::get('date'))->where('area',Input::get('area'))->get();
                 $currentBook = 0;
                 for ($i=0; $i < count($test); $i++) { 
@@ -129,5 +97,85 @@ class BookController extends BaseController {
             }
 
 	}
+
+    public function calDate($restaurant) {
+        $days = explode(",", $restaurant->day);
+
+        $Currentdate = date("Y-m-d");
+        $date = strtotime("+0 day", strtotime($Currentdate));
+        $results[0] = "";
+
+        for ($i=0; $i < 15; $i++) { 
+            for ($j=0; $j < count($days); $j++) { 
+                if ($days[$j]==date("l", $date)) {
+                    
+                    $results[$i] = date("l d/m", $date);
+                    break;
+                }
+                
+            }
+            
+            if ($j==count($days)) {
+
+                $i--;
+            }
+            $date = date("Y-m-d",$date);
+            $date = strtotime("+1 day", strtotime($date));            
+        }
+
+        $results = implode(",", $results);
+        return $results;
+
+    }
+
+    public function calTime($restaurant) {
+
+        $open = $restaurant->time_open;
+        $close = $restaurant->time_close;
+        $results[0] = $open;
+
+        if($open[3]=='0'){
+                        
+
+            for ($i=1 ; $results[count($results)-1]!=$close ; $i++) {
+                $time = explode(":", $results[$i-1]);
+
+                if(($i%2)!=0){                                
+                    $results[$i] = $time[0].":"."30";
+                }
+                else {
+                    if ($results[$i-1] == "23:30") 
+                        $results[$i] = "00:00";
+                    
+                    else
+                        $results[$i] = ($time[0]+1).":"."00";
+                }
+
+            }
+               
+        }
+
+        elseif ($open[3]=='3') {
+
+            for ($i=1 ; $results[count($results)-1]!=$close ; $i++) {
+                $time = explode(":", $results[$i-1]);
+
+                if(($i%2)==0){                                
+                    $results[$i] = $time[0].":"."30";
+                }
+                else {
+                    if ($results[$i-1] == "23:30") 
+                        $results[$i] = "00:00";
+                    
+                    else                    
+                        $results[$i] = ($time[0]+1).":"."00";
+                }
+
+            }
+             
+        }
+        $avail = implode(",", $results);
+        return $avail;
+    }
 
 }
