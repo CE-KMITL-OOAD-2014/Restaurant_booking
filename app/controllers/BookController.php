@@ -95,28 +95,37 @@ class BookController extends BaseController {
             }
             else
             {
-                $rest = $this->rest->find(Input::get('id_res'));
-                $area = explode(",", $rest->area);
-                $booked = explode(",", $rest->booked);
-                $index = array_search(Input::get('area'), $area );
-                $booked[$index] = $booked[$index]+(Input::get('amout'));
-                $books = implode(",", $booked);
-                $rest->booked = $books; 
-                $rest->save();
-                echo $rest;
+                $test = DB::table('books')->where('id_res',Input::get('id_res'))->where('time',Input::get('time'))->where('date',Input::get('date'))->where('area',Input::get('area'))->get();
+                $currentBook = 0;
+                for ($i=0; $i < count($test); $i++) { 
+                    $currentBook += $test[$i]->amout;
+                }
+
+                $res = $this->rest->find(Input::get('id_res'));
+                $areas = explode(",", $res->area); 
+                $seats = explode(",", $res->seat);
+                $indexArea = array_search(Input::get('area'), $areas);
+                $seat = $seats[$indexArea];
+                
+                if ($currentBook+(Input::get('amout'))<=$seat )
+                {
+                    $book  = new CoreBook;
+                    $book->setIdRes(Input::get('id_res'));
+                    $book->setIdUser(Input::get('id_user'));
+                    $book->setDate(Input::get('date'));
+                    $book->setAmout(Input::get('amout'));
+                    $book->setTime(Input::get('time'));
+                    $book->setArea(Input::get('area'));
+        
+                    $this->book->save($book);
+                    return Redirect::to('logout')->withMessage('Data inserted');
+                }                
+                
+                else
+                    $link = "book/".Input::get('id_res');
+                    return Redirect::to($link)->withMessage('Seat unavailable now...');
 
                 
-                /*$book  = new CoreBook;
-                $book->setIdRes(Input::get('id_res'));
-                $book->setIdUser(Input::get('id_user'));
-                $book->setDate(Input::get('date'));
-                $book->setAmout(Input::get('amout'));
-                $book->setTime(Input::get('time'));
-                $book->setArea(Input::get('area'));
-        
-                $this->book->save($book);
-
-                return Redirect::to('logout')->withMessage('Data inserted');*/
             }
 
 	}
