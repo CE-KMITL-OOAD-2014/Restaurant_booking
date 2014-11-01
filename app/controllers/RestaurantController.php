@@ -14,7 +14,20 @@ class RestaurantController extends BaseController {
  	*/
 	public function index()
 	{
-  		return $this->rest->all();
+        $results[0] = "00:00";
+        $close = "23:30";
+        for ($i=1 ; $results[count($results)-1]!=$close ; $i++) {
+            $time = explode(":", $results[$i-1]);
+
+            if(($i%2)!=0){                                
+                $results[$i] = $time[0].":"."30";
+            }
+            else {
+                $results[$i] = ($time[0]+1).":"."00";
+            }   
+
+        }
+  		return View::make('formOpen')->with('results',$results);
 	}
 
 	public function store()
@@ -27,7 +40,7 @@ class RestaurantController extends BaseController {
                     'time_open'  => 'required',
                     'time_close' => 'required',
                     'areaList'	 => 'required',
-                    'tel'        => 'required|min:10|unique:restaurants'
+                    'tel'        => 'required|min:10|integer|unique:restaurants'
                 ) ;
 
             $validator = Validator::make($data,$rule);
@@ -38,27 +51,31 @@ class RestaurantController extends BaseController {
             }
             else
             {
-                    
-                    $rest  = new CoreRestaurant;
-                    $rest->setIdOwner(Auth::id());
-                    $rest->setName(Input::get('name'));
-                    $rest->setAddr(Input::get('addr'));
-                    $rest->setDay(implode(",", Input::get('day')));
-                    $rest->setTimeOpen(Input::get('time_open'));
-                    $rest->setTimeClose(Input::get('time_close'));
-                    $rest->setArea(implode(",", Input::get('areaList')));
-                    $rest->setTel(Input::get('tel'));
+
+                $rest  = new CoreRestaurant;
+                $rest->setIdOwner(Auth::id());
+                $rest->setName(Input::get('name'));
+                $rest->setAddr(Input::get('addr'));
+                $rest->setDay(implode(",", Input::get('day')));
+                $rest->setTimeOpen(Input::get('time_open'));
+                $rest->setTimeClose(Input::get('time_close'));
+                $rest->setArea(implode(",", Input::get('areaList')));
+                $rest->setSeat(implode(",", Input::get('seatList')));
+                $rest->setTel(Input::get('tel'));
         
-                    $this->rest->save($rest);
+                $this->rest->save($rest);
 
-                    //{{$id = Auth::id();}}
-
-                    return Redirect::to('logout')->withMessage('Data inserted');
+                return Redirect::to('logout')->withMessage('Data inserted');
             }
 	}
 
 	public function show($id)
 	{
-		return $this->rest->find($id);
+		$data = $this->rest->find($id);
+        if($data==NULL)
+            return Redirect::to('logout')->withMessage('Restaurant does not exist');
+        
+        
+		return View::make('showRestaurant')->with('data',$data);
 	}
 }

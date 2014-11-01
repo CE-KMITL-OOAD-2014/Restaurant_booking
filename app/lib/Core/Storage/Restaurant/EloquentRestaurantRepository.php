@@ -25,11 +25,12 @@ class EloquentRestaurantRepository implements RestaurantRepository {
     $elo->time_open = $input->getTimeOpen();
     $elo->time_close = $input->getTimeClose();
     $elo->area = $input->getArea();
+    $elo->seat = $input->getSeat();
     $elo->tel = $input->getTel();
     return $elo->save();
   }
 
-  public function update($id,$input)
+/*  public function update($id,$input)
   {
     
     $elo = Restaurant::find($id);
@@ -41,6 +42,6 @@ class EloquentRestaurantRepository implements RestaurantRepository {
     $elo->area = $input->getArea();
     $elo->tel = $input->getTel();
     return $elo->save();
-  }
+  }*/
  
 }

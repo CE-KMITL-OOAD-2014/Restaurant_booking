@@ -39,59 +39,71 @@
 
             <p>Date Open :</p>
             
-            {{ Form::checkbox('day[]', '1', false) }}
+            {{ Form::checkbox('day[]', 'Sunday', false) }}
             {{ Form::label('sun', 'Sunday') }} <br>
 
-            {{ Form::checkbox('day[]', '2', false) }}
+            {{ Form::checkbox('day[]', 'Monday', false) }}
             {{ Form::label('mon', 'Monday') }}<br>
 
-            {{ Form::checkbox('day[]', '3', false) }}
+            {{ Form::checkbox('day[]', 'Tuesday', false) }}
             {{ Form::label('tue', 'Tuesday') }}<br>
 
-            {{ Form::checkbox('day[]', '4', false) }}
+            {{ Form::checkbox('day[]', 'Wednesday', false) }}
             {{ Form::label('wed', 'Wednesday') }}<br>
 
-            {{ Form::checkbox('day[]', '5', false) }}
-            {{ Form::label('thu', 'Thurseday') }}<br>
+            {{ Form::checkbox('day[]', 'Thursday', false) }}
+            {{ Form::label('thu', 'Thursday') }}<br>
 
-            {{ Form::checkbox('day[]', '6', false) }}
+            {{ Form::checkbox('day[]', 'Friday', false) }}
             {{ Form::label('fri', 'Friday') }}<br>
 
-            {{ Form::checkbox('day[]', '7', false) }}
+            {{ Form::checkbox('day[]', 'Saturday', false) }}
             {{ Form::label('sat', 'Saturday') }}<br><br>
 
 
 
-            <p>Select a time OPEN :  &nbsp;&nbsp;&nbsp;&nbsp;  <input type="time" name="time_open"> </p>
-            <p>Select a time CLOSE :  &nbsp;&nbsp;&nbsp;  <input type="time" name="time_close"> </p>
-            <br>
+            
+            <p>Select a time OPEN :  
+
+                <select name="time_open" id="time_open">
+                    <?php
+                        foreach ($results as $result ) {
+                            echo "<option value=\"".$result."\">".$result."</option>";
+                        }
+                    ?>
+                </select> </p>
+
+            <p>Select a time CLOSE :  
+                <select name="time_close" id="time_close">
+                    <?php
+                        foreach ($results as $result ) {
+                            echo "<option value=\"".$result."\">".$result."</option>";
+                        }
+                    ?>
+                </select> </p>
+            
+
+            <p> bug : เวลาเปิดปิดร้านต้องอยู่ระหว่าง ตี 1 ถึง 5 ทุ่มครึ่ง !!! </p><br>
 
             
             <p>Area in your restaurant :</p>
 
-            <!-- <textarea rows="10" cols="30"></textarea>
- -->
+                <select multiple name="areaList[]" id="areaList" size="8" style="width: 200px;"></select>
 
-                <!-- {{ Form::select('size[]', array('L' => 'Large', 'M' => 'Medium', 'S' => 'Small'), array('S', 'M'), array('multiple')); }} -->
-                <select multiple name="areaList[]" id="areaList" size="8" style="width: 200px;">
-                    <!-- <option selected>Apple</option>
-                    <option selected>Pear</option>
-                    <option selected>Banana</option>
-                    <option selected>Orange</option> -->
-                </select>
-
-            <p><input name="area" type="text" id="area"> <button type="button" onclick="addArea()">Add</button> <button type="button" onclick="myFunction()">Remove selected item</button></p>
+            <p><input name="area" type="text" id="area"> <button type="button" onclick="addArea()">Add</button> </p>
             <p>Click the button to add area in your Restaurant to list.</p>
             <p><b>Note :</b> ถ้าในร้านมีแค่มุมเดียว ใส่ "มุมทั่วไป"</p>
 
-            
 
-            <script>
-                function myFunction() {
-                    var x = document.getElementById("areaList");
-                    x.remove(x.selectedIndex);
-                }
-            </script>
+
+            <p>จำนวนที่นั่งในแต่ละมุม :</p>
+        
+                <select multiple name="seatList[]" id="seatList" size="8" style="width: 100px;"></select>
+
+            <p><input name="seat" type="text" id="seat"> <button type="button" onclick="addSeat()">Add</button> </p>
+            <p><b>Note :</b> ใส่ให้ครบทุก area</p>
+
+
 
             <script>
                 function addArea() {
@@ -100,6 +112,22 @@
                     option.text = document.getElementById("area").value;
                     x.add(option);
                     document.getElementById("area").value = "";
+
+                    //if (!hasOptions(x)) { return; }
+                    for (var i=0; i<x.options.length; i++) {
+                        x.options[i].selected = true;
+                    }
+                }
+
+            </script>
+
+            <script>
+                function addSeat() {
+                    var x = document.getElementById("seatList");
+                    var option = document.createElement("option");
+                    option.text = document.getElementById("seat").value;
+                    x.add(option);
+                    document.getElementById("seat").value = "";
 
                     //if (!hasOptions(x)) { return; }
                     for (var i=0; i<x.options.length; i++) {

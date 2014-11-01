@@ -1,6 +1,6 @@
-<?php namespace Core\Storage\Restaurant;
+<?php namespace Core\Storage\Book;
  
-interface RestaurantRepository {
+interface BookRepository {
    
   public function all();
  
