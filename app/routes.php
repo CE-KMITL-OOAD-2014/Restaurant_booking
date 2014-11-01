@@ -37,9 +37,7 @@ Route::get('regisres',array('before' => 'auth | over',	'uses' => 'RestaurantCont
 
 Route::post('regisres_action',array('uses' => 'RestaurantController@store'));
 
-Route::get('user', array('uses' => 'UserController@index'));
-
-Route::get('restau', array('uses' => 'RestaurantController@index'));
+Route::get('user/{id}', array('before' => 'auth' ,'uses' => 'UserController@index'));
 
 Route::get('restaurant/{id}',array('uses' => 'RestaurantController@show'));
 
@@ -47,10 +45,9 @@ Route::get('book/{id}',array('before' => 'auth' ,'uses' => 'BookController@index
 
 Route::post('booking_action',array('before' => 'auth' ,'uses' => 'BookController@book'));
 
-Route::get('test',function()
-{
-	echo date("H:i",strtotime(date("H:i")));
-});
+Route::get('show/{id}',array('before' => 'auth' ,'uses'=>'UserController@showBooked'));
+
+Route::get('cancel/{id}',array('uses'=>'BookController@cancel'));
 
 
 

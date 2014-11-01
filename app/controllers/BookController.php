@@ -178,4 +178,12 @@ class BookController extends BaseController {
         return $avail;
     }
 
+    public function cancel($id) 
+    {
+        $book = $this->book->find($id);
+        $book->delete();
+        $link = "user/".Auth::id();
+        return Redirect::to($link)->withMessage('Books cenceled');
+    }
+
 }

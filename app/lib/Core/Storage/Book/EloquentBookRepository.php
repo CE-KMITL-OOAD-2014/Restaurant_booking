@@ -6,12 +6,12 @@ class EloquentBookRepository implements BookRepository {
  
   public function all()
   {
-    return User::all();
+    return Book::all();
   }
  
   public function find($id)
   {
-    return User::find($id);
+    return Book::find($id);
   }
  
   public function save($input)
