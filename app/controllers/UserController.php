@@ -25,7 +25,23 @@ class UserController extends BaseController {
 		$books = DB::table('books')->where('id_user',$id)->get();
 
 		foreach ($books as $book) {
-			echo $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br>";
+			if( strtotime(date("m/d")) < strtotime($book->date) )
+			{
+				
+				echo $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br>";
+
+			}
+
+			if ( strtotime(date("m/d")) == strtotime($book->date) )
+			{
+				if( strtotime(date("H:i")) < strtotime($book->time) )
+				
+				echo $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br>";
+			}
+
+
+
+
 		}
 	}
 }

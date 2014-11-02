@@ -53,7 +53,7 @@ class BookController extends BaseController {
             }
             else
             {
-                if (Input::get('date')==date("l d/m")) {
+                if (Input::get('date')==date("m/d")) {
                     $currentTime = strtotime(date("H:i"));
                     $bookTime = strtotime(Input::get('time'));
                     if ($bookTime < $currentTime) {
@@ -86,7 +86,8 @@ class BookController extends BaseController {
                     $book->setArea(Input::get('area'));
         
                     $this->book->save($book);
-                    return Redirect::to('logout')->withMessage('Data inserted');
+                    $link = "user/".Input::get('id_user');
+                    return Redirect::to($link)->withMessage('Data inserted');
                 }                
                 
                 else
@@ -109,7 +110,7 @@ class BookController extends BaseController {
             for ($j=0; $j < count($days); $j++) { 
                 if ($days[$j]==date("l", $date)) {
                     
-                    $results[$i] = date("l d/m", $date);
+                    $results[$i] = date("m/d", $date);
                     break;
                 }
                 
@@ -180,9 +181,16 @@ class BookController extends BaseController {
 
     public function cancel($id) 
     {
-        $book = $this->book->find($id);
-        $book->delete();
         $link = "user/".Auth::id();
+        $book = $this->book->find($id);
+
+        if (strtotime("+30 minute", strtotime(date("H:i")))>strtotime($book->time)) {
+            return Redirect::to($link)->withMessage('ใกล้ถึงเวลาแล้ว ยกเลิกไม่ได้');
+        }
+
+        
+        $book->delete();
+        
         return Redirect::to($link)->withMessage('Books cenceled');
     }
 

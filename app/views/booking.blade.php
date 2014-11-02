@@ -37,7 +37,7 @@
                     <?php
                         $days = explode(",", $data["day"] );
                         foreach ($days as $day) {
-                            echo "<option value=\"".$day."\">".$day."</option>";
+                            echo "<option value=\"".$day."\">".date("l d/m",strtotime($day))."</option>";
                         }
                     ?>
                 </select>

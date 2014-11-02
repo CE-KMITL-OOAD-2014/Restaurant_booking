@@ -49,7 +49,8 @@ Route::get('show/{id}',array('before' => 'auth' ,'uses'=>'UserController@showBoo
 
 Route::get('cancel/{id}',array('uses'=>'BookController@cancel'));
 
-
-
-
-
+Route::get('test',function()
+{
+	echo strtotime(date("l d/m"))."<br>"; 
+	echo strtotime($book->date)."<br>";
+});
