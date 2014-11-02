@@ -54,3 +54,5 @@ Route::get('cancel/{id}',array('uses'=>'BookController@cancel'));
 Route::get('manage/{id}',array('before' => 'auth' ,'uses'=>'UserController@manage'));
 
 Route::get('delete/{id}',array('before' => 'auth' ,'uses'=>'RestaurantController@deleteRestaurant'));
+
+Route::post('uploadpic/{id}',array('before' => 'auth' ,'uses'=>'RestaurantController@uploadPic'));

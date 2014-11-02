@@ -88,4 +88,29 @@ class RestaurantController extends BaseController {
         
         return Redirect::to($link)->withMessage('Deleted restaurant id : {{$id}}');
     }
+
+    public function uploadPic ($id_res)
+    {
+        $link = "manage/".$id_res;
+
+        $data =  Input::all() ;
+            $rule  =  array(
+                    'pic'       => 'required'
+                ) ;
+
+            $validator = Validator::make($data,$rule);
+
+            if ($validator->fails())
+            {
+                    return Redirect::to($link)->withErrors($validator->messages());
+            }
+
+        if (!in_array(Input::file('pic')->getClientOriginalExtension(), array('jpg', 'gif', 'png'))) 
+            return Redirect::to($link)->withMessage('Invalid image extension we just allow JPG, GIF, PNG');
+
+        $name = "idres".$id_res."_".Input::file('pic')->getClientOriginalName();
+        $messages = Input::file('pic')->getClientOriginalName()." UPLOADED!!";
+        Input::file('pic')->move(base_path().'/public/pics/',$name);
+        return Redirect::to($link)->withMessage($messages);
+    }
 }
