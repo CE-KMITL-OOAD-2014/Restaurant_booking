@@ -25,12 +25,14 @@ class UserController extends BaseController {
 	public function showBooked ($id)
 	{
 		$books = DB::table('books')->where('id_user',$id)->get();
+		$currentBookeds[0] = "";
+		$i = 0;
 
 		foreach ($books as $book) {
 			if( strtotime(date("m/d")) < strtotime($book->date) )
 			{
 				
-				echo $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br>";
+				$currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br>";
 
 			}
 
@@ -38,9 +40,17 @@ class UserController extends BaseController {
 			{
 				if( strtotime(date("H:i")) < strtotime($book->time) )
 				
-				echo $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br>";
+				$currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br>";
 			}
+			$i++;
 		}
+		if ($currentBookeds[0]=="") {
+			return "No Booked!";
+		}
+		foreach ($currentBookeds as $currentBooked) {
+			echo $currentBooked;
+		}
+
 	}
 
 	public function showRestaurant ($id)
@@ -50,5 +60,13 @@ class UserController extends BaseController {
 		foreach ($rests as $rest) {
 			echo $rest->id." : ".$rest->name."<a href=\"http://localhost/ResBook/public/index.php/manage/$rest->id\">MANAGE</a><br>";
 		}
+	}
+
+	public function manage ($id_res)
+	{
+		$restaurant = $this->rest->find($id_res);
+		echo "<h3> Restaurant id:".$restaurant->id." name: ".$restaurant->name."</h3>";
+		echo "EDIT<br>";
+		echo "<a href=\"http://localhost/ResBook/public/index.php/delete/$restaurant->id\">DELETE</a><br>";
 	}
 }

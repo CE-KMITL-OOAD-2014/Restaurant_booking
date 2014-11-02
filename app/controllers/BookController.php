@@ -181,6 +181,7 @@ class BookController extends BaseController {
 
     public function cancel($id) 
     {
+        //To do : add popup to comfirm cancel.
         $link = "user/".Auth::id();
         $book = $this->book->find($id);
 
@@ -191,7 +192,7 @@ class BookController extends BaseController {
         
         $book->delete();
         
-        return Redirect::to($link)->withMessage('Books cenceled');
+        return Redirect::to($link)->withMessage('Books canceled');
     }
 
 }

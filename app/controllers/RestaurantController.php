@@ -75,22 +75,17 @@ class RestaurantController extends BaseController {
         if($data==NULL)
             return Redirect::to('logout')->withMessage('Restaurant does not exist');
         
-        
 		return View::make('showRestaurant')->with('data',$data);
 	}
 
     public function deleteRestaurant ($id)
     {
+        //To do : add popup to comfirm delete.
         $link = "user/".Auth::id();
-        $book = $this->book->find($id);
+        $restaurant = $this->rest->find($id);
 
-        if (strtotime("+30 minute", strtotime(date("H:i")))>strtotime($book->time)) {
-            return Redirect::to($link)->withMessage('ใกล้ถึงเวลาแล้ว ยกเลิกไม่ได้');
-        }
-
+        $restaurant->delete();
         
-        $book->delete();
-        
-        return Redirect::to($link)->withMessage('Books cenceled');
+        return Redirect::to($link)->withMessage('Deleted restaurant id : {{$id}}');
     }
 }

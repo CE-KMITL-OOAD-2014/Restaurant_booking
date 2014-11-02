@@ -51,8 +51,6 @@ Route::get('showRes/{id}',array('before' => 'auth' ,'uses'=>'UserController@show
 
 Route::get('cancel/{id}',array('uses'=>'BookController@cancel'));
 
-Route::get('test',function()
-{
-	echo strtotime(date("l d/m"))."<br>"; 
-	echo strtotime($book->date)."<br>";
-});
+Route::get('manage/{id}',array('before' => 'auth' ,'uses'=>'UserController@manage'));
+
+Route::get('delete/{id}',array('before' => 'auth' ,'uses'=>'RestaurantController@deleteRestaurant'));
