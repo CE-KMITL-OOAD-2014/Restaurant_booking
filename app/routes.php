@@ -47,6 +47,8 @@ Route::post('booking_action',array('before' => 'auth' ,'uses' => 'BookController
 
 Route::get('show/{id}',array('before' => 'auth' ,'uses'=>'UserController@showBooked'));
 
+Route::get('showRes/{id}',array('before' => 'auth' ,'uses'=>'UserController@showRestaurant'));
+
 Route::get('cancel/{id}',array('uses'=>'BookController@cancel'));
 
 Route::get('test',function()

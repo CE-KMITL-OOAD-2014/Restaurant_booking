@@ -78,4 +78,19 @@ class RestaurantController extends BaseController {
         
 		return View::make('showRestaurant')->with('data',$data);
 	}
+
+    public function deleteRestaurant ($id)
+    {
+        $link = "user/".Auth::id();
+        $book = $this->book->find($id);
+
+        if (strtotime("+30 minute", strtotime(date("H:i")))>strtotime($book->time)) {
+            return Redirect::to($link)->withMessage('ใกล้ถึงเวลาแล้ว ยกเลิกไม่ได้');
+        }
+
+        
+        $book->delete();
+        
+        return Redirect::to($link)->withMessage('Books cenceled');
+    }
 }

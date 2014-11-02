@@ -15,6 +15,8 @@
 
         {{"<a href=\"http://localhost/ResBook/public/index.php/show/$user->id\">SHOW BOOKED</a>"}}
         <br>
+         {{"<a href=\"http://localhost/ResBook/public/index.php/showRes/$user->id\">SHOW MY RESTAURANTS</a>"}}
+        <br>
         {{"<a href=\"http://localhost/ResBook/public/index.php/logout_action\">LOG OUT</a>"}}
 
     </body>
