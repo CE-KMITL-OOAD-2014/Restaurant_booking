@@ -40,7 +40,7 @@ class RestaurantController extends BaseController {
                     'time_open'  => 'required',
                     'time_close' => 'required',
                     'areaList'	 => 'required',
-                    'tel'        => 'required|min:10|integer|unique:restaurants'
+                    'tel'        => 'required|min:10|numeric|unique:restaurants'
                 ) ;
 
             $validator = Validator::make($data,$rule);
