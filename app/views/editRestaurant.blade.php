@@ -7,7 +7,7 @@
 
     <body>
 
-        <h2> Register Restaurant : </h2>
+        <h2> Register Restaurant {{ $restaurant->id }} : </h2>
 
         @if ($errors->any())
 
@@ -27,15 +27,16 @@
 
         <p> Your ID : {{$id = Auth::id();}} </p>
 
-        <form action="{{ url('regisres_action') }}" method="POST">
+        <?php $link = "editRes_action/".$restaurant->id ?>
+        <form action="{{ url($link) }}" method="POST">
 
             <p>Restaurant Name :</p>
 
-            <p>{{ Form::text('name') }}</p>
+            <p>{{ Form::text('name',$restaurant->name) }}</p>
 
             <p>Address :</p>
 
-            <textarea name="addr" id="addr" rows="10" cols="30"></textarea>
+            <textarea name="addr" id="addr" rows="10" cols="30" > {{$restaurant->addr}} </textarea>
 
             <p>Date Open :</p>
             
@@ -81,8 +82,6 @@
                         }
                     ?>
                 </select> </p>
-            
-            <br>
 
             
             <p>Area in your restaurant :</p>
@@ -140,7 +139,7 @@
 
             <p>Tel number :</p>
 
-            <p>{{ Form::text('tel') }}</p>
+            <p>{{ Form::text('tel',$restaurant->tel) }}</p>
 
 
             <p>{{ Form::submit('Submit') }}</p>

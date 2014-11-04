@@ -27,8 +27,14 @@ class RestaurantController extends BaseController {
             }   
 
         }
-  		return View::make('formOpen')->with('results',$results);
+
+  		return $results;
 	}
+
+    public function showRegisRestaurant () {
+        $results = RestaurantController::index();
+        return View::make('formOpen')->with('results',$results);
+    }
 
 	public function store()
 	{
@@ -126,6 +132,75 @@ class RestaurantController extends BaseController {
         $messages = Input::file('pic')->getClientOriginalName()." UPLOADED!!";
         Input::file('pic')->move(base_path().'/public/pics/',$name);
         return Redirect::to($link)->withMessage($messages);
+    }
+
+    public function showEdit($id_res) {
+        $rest = $this->rest->find($id_res);
+        $results = RestaurantController::index();
+
+        return View::make('editRestaurant',array('results'=>$results , 'restaurant'=>$rest));
+    }
+
+    public function edit ($id_res) {
+        //To do : add confirm old password before edit.
+        $data =  Input::all() ;
+        $rule  =  array(
+                    'name'       => 'required',
+                    'addr'       => 'required',
+                    'day'        => 'required',
+                    'time_open'  => 'required',
+                    'time_close' => 'required',
+                    'areaList'   => 'required',
+                    'tel'        => 'required|min:10|numeric'
+                ) ;
+
+        $validator = Validator::make($data,$rule);
+
+        $link = "editRes/".$id_res;
+        if ($validator->fails())
+        {
+                
+            return Redirect::to($link)->withErrors($validator->messages());
+        }
+
+        else
+        {
+            $check_addr = DB::table('restaurants')->where('addr',$data['addr'])->get() ;
+            $check_tel = DB::table('restaurants')->where('tel',$data['tel'])->get() ;
+
+            if (count($check_addr)>1 || count($check_tel) > 1) {
+                return Redirect::to($link)->withMessage('Duplicate addr or tel');
+            }
+            
+            if (count($check_addr)==1 ) {
+                if ($check_addr[0]->id != $id_res) {
+
+                    return Redirect::to($link)->withMessage('Duplicate address');
+                }
+            }
+         
+            if (count($check_tel) == 1) {
+                if ($check_tel[0]->id != $id_res) {
+
+                    return Redirect::to($link)->withMessage('Duplicate tel');
+                }
+            }
+
+                    
+            $rest  = $this->rest->find($id_res);
+            $rest->name = $data['name'];
+            $rest->addr = $data['addr'];
+            $rest->day = implode(",", Input::get('day'));
+            $rest->time_open = $data['time_open'];
+            $rest->time_close = $data['time_close'];
+            $rest->area = implode(",", Input::get('areaList'));
+            $rest->seat = implode(",", Input::get('seatList'));
+            $rest->tel = $data['tel'];
+            $rest->save();
+
+            $link = "manage/".$id_res;
+            return Redirect::to($link)->withMessage('edit profile complete! ^^');
+        }
     }
 
 }

@@ -33,7 +33,7 @@ Route::get('logout',function(){
 // Do Log out
 Route::get('logout_action', array('uses' => 'HomeController@doLogout'));
 
-Route::get('regisres',array('before' => 'auth | over',	'uses' => 'RestaurantController@index'));
+Route::get('regisres',array('before' => 'auth | over',	'uses' => 'RestaurantController@showRegisRestaurant'));
 
 Route::post('regisres_action',array('uses' => 'RestaurantController@store'));
 
@@ -60,6 +60,10 @@ Route::post('uploadpic/{id}',array('before' => 'auth' ,'uses'=>'RestaurantContro
 Route::get('edit/{id}',array('uses'=>'UserController@showEdit'));
 
 Route::post('edit_action',array('uses'=>'UserController@edit'));
+
+Route::get('editRes/{id}',array('uses'=>'RestaurantController@showEdit'));
+
+Route::post('editRes_action/{id_res}',array('uses'=>'RestaurantController@edit'));
 
 Route::get('test',function()
 	{

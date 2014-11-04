@@ -29,7 +29,7 @@
 
         <?php
             echo "<h3> Restaurant id:".$restaurant->id." name: ".$restaurant->name."</h3>";
-            echo "EDIT<br>";
+            echo "<a href=\"http://localhost/ResBook/public/index.php/editRes/$restaurant->id\">EDIT</a><br>";
             echo "<a href=\"http://localhost/ResBook/public/index.php/delete/$restaurant->id\">DELETE</a><br>";
         ?>
 
