@@ -32,7 +32,8 @@ class UserController extends BaseController {
 			if( strtotime(date("m/d")) < strtotime($book->date) )
 			{
 				
-				$currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br>";
+				$currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/showBook/$book->id\">DETAIL</a> "
+									."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br> ";
 
 			}
 
@@ -40,7 +41,8 @@ class UserController extends BaseController {
 			{
 				if( strtotime(date("H:i")) < strtotime($book->time) )
 				
-				$currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br>";
+				$currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/showBook/$book->id\">DETAIL</a> "
+									."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br> ";
 			}
 			$i++;
 		}

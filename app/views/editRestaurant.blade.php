@@ -95,12 +95,6 @@
             <p>Area in your restaurant :</p>
 
                 <select multiple name="areaList[]" id="areaList" size="8" style="width: 200px;">
-                    <?php
-                        $areas = explode(",", $restaurant->area);
-                        foreach ($areas as $area) {
-                            echo "<option value=\"".$area."\" selected>".$area."</option>";
-                        }
-                    ?>
 
                 </select>
 
@@ -113,12 +107,6 @@
             <p>จำนวนที่นั่งในแต่ละมุม :</p>
         
                 <select multiple name="seatList[]" id="seatList" size="8" style="width: 100px;">
-                    <?php
-                        $seats = explode(",", $restaurant->seat);
-                        foreach ($seats as $seat) {
-                            echo "<option value=\"".$seat."\" selected>".$seat."</option>";
-                        }
-                    ?>
                 </select>
 
             <p><input name="seat" type="text" id="seat"> <button type="button" onclick="addSeat()">Add</button> </p>
@@ -163,6 +151,8 @@
             <p>Tel number :</p>
 
             <p>{{ Form::text('tel',$restaurant->tel) }}</p>
+
+            <p>Delete Picture coming soon!!!</p>
 
 
             <p>{{ Form::submit('Submit') }}</p>
