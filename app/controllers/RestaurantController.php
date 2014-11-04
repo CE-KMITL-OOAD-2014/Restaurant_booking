@@ -85,6 +85,30 @@ class RestaurantController extends BaseController {
 
 	}
 
+    public function search () {
+        $restaurants = DB::table('restaurants')->get();
+        $str = Input::get('str');
+        
+        if ($str=="") {
+            echo "<h2>Search result ALL : </h2>";
+            foreach ($restaurants as $restaurant) {
+            
+            $link = "http://localhost/ResBook/public/index.php/restaurant/".$restaurant->id;
+            echo "<a href=\"".$link."\">".$restaurant->name."</a><br>";
+            
+            }
+        }
+        else {
+            echo "<h2>Search result ".$str." : </h2>";
+            foreach ($restaurants as $restaurant) {
+                if (strrchr($restaurant->name, $str)) {
+                    $link = "http://localhost/ResBook/public/index.php/restaurant/".$restaurant->id;
+                    echo "<a href=\"".$link."\">".$restaurant->name."</a><br>";
+                }
+            }
+        }
+    }
+
     public function deleteRestaurant ($id)
     {
         //To do : add popup to comfirm delete.

@@ -56,3 +56,5 @@ Route::get('showBook/{id}',array('uses'=>'BookController@showDetailBook'));
 Route::get('editBook/{id}',array('uses'=>'BookController@showEdit'));
 
 Route::post('editBook_action/{id_book}',array('uses'=>'BookController@edit'));
+
+Route::post('search',array('uses'=>'RestaurantController@search'));
