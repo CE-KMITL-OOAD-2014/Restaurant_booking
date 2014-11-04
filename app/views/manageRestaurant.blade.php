@@ -55,5 +55,12 @@
                 }
             }
         ?>
+        <br>
+        <h4>Book List :</h4>
+        <?php
+            foreach ($currentBookeds as $currentBooked) {
+                echo $currentBooked;
+            }
+        ?>
     </body>
 </html>

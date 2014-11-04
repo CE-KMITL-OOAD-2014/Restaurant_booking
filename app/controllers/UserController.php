@@ -22,33 +22,39 @@ class UserController extends BaseController {
   		return View::make('userHome')->with('user',$user);
 	}
 
+	public function currentBook($books) {
+		$currentBookeds[0] = "";
+        $i = 0;
+
+        foreach ($books as $book) {
+            if( strtotime(date("m/d")) < strtotime($book->date) )
+            {
+                
+                $currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/showBook/$book->id\">DETAIL</a> "
+                                ."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br> ";
+            }
+
+            if ( strtotime(date("m/d")) == strtotime($book->date) )
+            {
+                if( strtotime(date("H:i")) < strtotime($book->time) )
+                
+                $currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/showBook/$book->id\">DETAIL</a> "
+                             ."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br> ";
+            }
+            $i++;
+        }
+        
+        if ($currentBookeds[0]=="") {
+            $currentBookeds[0] = "No Booked!";
+        }
+
+        return $currentBookeds;
+	}
+
 	public function showBooked ($id)
 	{
 		$books = DB::table('books')->where('id_user',$id)->get();
-		$currentBookeds[0] = "";
-		$i = 0;
-
-		foreach ($books as $book) {
-			if( strtotime(date("m/d")) < strtotime($book->date) )
-			{
-				
-				$currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/showBook/$book->id\">DETAIL</a> "
-									."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br> ";
-
-			}
-
-			if ( strtotime(date("m/d")) == strtotime($book->date) )
-			{
-				if( strtotime(date("H:i")) < strtotime($book->time) )
-				
-				$currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/showBook/$book->id\">DETAIL</a> "
-									."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br> ";
-			}
-			$i++;
-		}
-		if ($currentBookeds[0]=="") {
-			return "No Booked!";
-		}
+		$currentBookeds = UserController::currentBook($books);
 		foreach ($currentBookeds as $currentBooked) {
 			echo $currentBooked;
 		}
@@ -67,8 +73,9 @@ class UserController extends BaseController {
 	public function manage ($id_res)
 	{
 		$restaurant = $this->rest->find($id_res);
-		return View::make('manageRestaurant')->with('restaurant',$restaurant);
-
+		$books = DB::table('books')->where('id_res',$id_res)->get();
+		$currentBookeds = UserController::currentBook($books);
+		return View::make('manageRestaurant',array('restaurant'=>$restaurant,'currentBookeds'=>$currentBookeds));
 	}
 
 	//show Edit profile page
