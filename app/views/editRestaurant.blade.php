@@ -69,7 +69,11 @@
                 <select name="time_open" id="time_open">
                     <?php
                         foreach ($results as $result ) {
-                            echo "<option value=\"".$result."\">".$result."</option>";
+                            if ($result == $restaurant->time_open) {
+                                echo "<option value=\"".$result."\" selected>".$result."</option>";
+                            }
+                            else
+                                echo "<option value=\"".$result."\">".$result."</option>";
                         }
                     ?>
                 </select> </p>
@@ -78,7 +82,11 @@
                 <select name="time_close" id="time_close">
                     <?php
                         foreach ($results as $result ) {
-                            echo "<option value=\"".$result."\">".$result."</option>";
+                            if ($result == $restaurant->time_close) {
+                                echo "<option value=\"".$result."\" selected>".$result."</option>";
+                            }
+                            else
+                                echo "<option value=\"".$result."\">".$result."</option>";
                         }
                     ?>
                 </select> </p>
@@ -86,7 +94,15 @@
             
             <p>Area in your restaurant :</p>
 
-                <select multiple name="areaList[]" id="areaList" size="8" style="width: 200px;"></select>
+                <select multiple name="areaList[]" id="areaList" size="8" style="width: 200px;">
+                    <?php
+                        $areas = explode(",", $restaurant->area);
+                        foreach ($areas as $area) {
+                            echo "<option value=\"".$area."\" selected>".$area."</option>";
+                        }
+                    ?>
+
+                </select>
 
             <p><input name="area" type="text" id="area"> <button type="button" onclick="addArea()">Add</button> </p>
             <p>Click the button to add area in your Restaurant to list.</p>
@@ -96,7 +112,14 @@
 
             <p>จำนวนที่นั่งในแต่ละมุม :</p>
         
-                <select multiple name="seatList[]" id="seatList" size="8" style="width: 100px;"></select>
+                <select multiple name="seatList[]" id="seatList" size="8" style="width: 100px;">
+                    <?php
+                        $seats = explode(",", $restaurant->seat);
+                        foreach ($seats as $seat) {
+                            echo "<option value=\"".$seat."\" selected>".$seat."</option>";
+                        }
+                    ?>
+                </select>
 
             <p><input name="seat" type="text" id="seat"> <button type="button" onclick="addSeat()">Add</button> </p>
             <p><b>Note :</b> ใส่ให้ครบทุก area</p>
