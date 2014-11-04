@@ -67,6 +67,70 @@ class UserController extends BaseController {
 		$restaurant = $this->rest->find($id_res);
 		return View::make('manageRestaurant')->with('restaurant',$restaurant);
 
+	}
 
+	//show Edit profile page
+	public function showEdit ($id) {
+		$user = $this->user->find($id);
+		return View::make('editProfile')->with('user',$user);
+	}
+
+	//Edit profile
+	public function edit () {
+		//To do : add confirm old password before edit.
+		$data =  Input::all() ;
+        $rule  =  array(
+                'name'       => 'required',
+                'lastname'   => 'required',
+                'email'      => 'required|email',
+                'tel'        => 'required|min:10',
+                'password'   => 'required|min:6|same:cpassword',
+                'cpassword'  => 'required|min:6'
+            ) ;
+
+        $validator = Validator::make($data,$rule);
+
+        $link = "edit/".Auth::id();
+        if ($validator->fails())
+        {
+            	
+            return Redirect::to($link)->withErrors($validator->messages());
+        }
+
+        else
+        {
+         	$check_email = DB::table('users')->where('email',$data['email'])->get() ;
+         	$check_tel = DB::table('users')->where('tel',$data['tel'])->get() ;
+
+         	if (count($check_email)>1 || count($check_tel) > 1) {
+          		return Redirect::to($link)->withMessage('Duplicate email or tel');
+         	}
+         	
+         	if (count($check_email)==1 ) {
+          		if ($check_email[0]->id != Auth::id()) {
+
+           			return Redirect::to($link)->withMessage('Duplicate email');
+          		}
+         	}
+         
+         	if (count($check_tel) == 1) {
+          		if ($check_tel[0]->id != Auth::id()) {
+
+           			return Redirect::to($link)->withMessage('Duplicate tel');
+          		}
+         	}
+
+                    
+        	$user  = $this->user->find(Auth::id());
+        	$user->name = Input::get('name');
+        	$user->lastname = Input::get('lastname');
+        	$user->password = Input::get('password');
+        	$user->email = Input::get('email');
+        	$user->tel = Input::get('tel');
+        	$user->save();
+
+        	$link = "user/".Auth::id();
+        	return Redirect::to($link)->withMessage('edit profile complete! ^^');
+        }
 	}
 }

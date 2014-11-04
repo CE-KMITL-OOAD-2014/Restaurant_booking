@@ -56,3 +56,13 @@ Route::get('manage/{id}',array('before' => 'auth' ,'uses'=>'UserController@manag
 Route::get('delete/{id}',array('before' => 'auth' ,'uses'=>'RestaurantController@deleteRestaurant'));
 
 Route::post('uploadpic/{id}',array('before' => 'auth' ,'uses'=>'RestaurantController@uploadPic'));
+
+Route::get('edit/{id}',array('uses'=>'UserController@showEdit'));
+
+Route::post('edit_action',array('uses'=>'UserController@edit'));
+
+Route::get('test',function()
+	{
+		$name = "ResBook/public/pics/16_3";
+		File::delete($name);
+	});

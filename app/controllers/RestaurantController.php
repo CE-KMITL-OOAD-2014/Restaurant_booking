@@ -76,6 +76,7 @@ class RestaurantController extends BaseController {
             return Redirect::to('logout')->withMessage('Restaurant does not exist');
         
 		return View::make('showRestaurant')->with('data',$data);
+
 	}
 
     public function deleteRestaurant ($id)
@@ -108,9 +109,23 @@ class RestaurantController extends BaseController {
         if (!in_array(Input::file('pic')->getClientOriginalExtension(), array('jpg', 'gif', 'png'))) 
             return Redirect::to($link)->withMessage('Invalid image extension we just allow JPG, GIF, PNG');
 
-        $name = "idres".$id_res."_".Input::file('pic')->getClientOriginalName();
+        //set name of picture => "idRes_idPicOfRes"
+        $rest = $this->rest->find($id_res);
+        $stringPic = $rest->name_pic;
+        if ($stringPic=="") {
+            $name = $id_res."_1";
+        }
+        else {
+            $pics = explode("_", $stringPic);
+            $name = $id_res."_".($pics[count($pics)-1]+1);
+        }
+        
+        $rest->name_pic = $stringPic.",".$name;
+        $rest->save();
+
         $messages = Input::file('pic')->getClientOriginalName()." UPLOADED!!";
         Input::file('pic')->move(base_path().'/public/pics/',$name);
         return Redirect::to($link)->withMessage($messages);
     }
+
 }

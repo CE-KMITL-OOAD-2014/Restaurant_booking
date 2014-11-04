@@ -41,6 +41,19 @@
             enctype="multipart/form-data">
             <input type="file" name="pic" />
             <input type="submit">
-        </form>
+        </form><br>
+
+        Pic : <br>
+        <?php
+            $pics = explode(",", $restaurant->name_pic);
+            if ($pics[0]=="") {
+                echo "<img src=\"/ResBook/public/pics/pic\">";
+            }
+            else {
+                foreach ($pics as $pic) {
+                    echo "<img src=\"/ResBook/public/pics/".$pic."\">";
+                }
+            }
+        ?>
     </body>
 </html>
