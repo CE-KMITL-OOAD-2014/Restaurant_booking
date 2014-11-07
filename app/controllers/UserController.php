@@ -43,8 +43,12 @@ class UserController extends BaseController {
             }
             $i++;
         }
+
+        if (strrchr($currentBookeds[0], "No Booked!")) {
+            $currentBookeds[0] = substr($currentBookeds[0], 0, 10);
+        }
         
-        if ($currentBookeds[0]=="") {
+        elseif ($currentBookeds[0]=="") {
             $currentBookeds[0] = "No Booked!";
         }
 

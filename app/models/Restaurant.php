@@ -4,7 +4,7 @@
 class Restaurant extends Eloquent {
 	
 	protected $table = 'restaurants';
-	public $timestamps = false;
+	public $timestamps = true;
 
 
 }

@@ -193,15 +193,18 @@ class BookController extends BaseController {
         //To do : add popup to comfirm cancel.
         $link = "user/".Auth::id();
         $book = $this->book->find($id);
+        $restaurant = $this->rest->find($book->id_res);
 
-        if (strtotime("+30 minute", strtotime(date("H:i")))>strtotime($book->time)) {
+        /*if (strtotime("+30 minute", strtotime(date("H:i")))>strtotime($book->time)) {
             return Redirect::to($link)->withMessage('ใกล้ถึงเวลาแล้ว ยกเลิกไม่ได้');
-        }
+        }*/
+        if (BookController::checkTime($link,$book) || $restaurant->id_owner == Auth::id()) {
+            $book->delete();
+            return Redirect::to($link)->withMessage('Books canceled');
+         }
+         else
+            return Redirect::to($link)->withMessage('ใกล้ถึงเวลาแล้ว ยกเลิกไม่ได้');
 
-        
-        $book->delete();
-        
-        return Redirect::to($link)->withMessage('Books canceled');
     }
 
     public function showDetailBook ($id_book) {
@@ -212,11 +215,30 @@ class BookController extends BaseController {
     }
 
     public function showEdit ($id_book) {
+        $link = "user/".Auth::id();
         $book = $this->book->find($id_book);
         $restaurant = $this->rest->find($book->id_res);
-        $data = BookController::index($restaurant);
-        return View::make('editBook',array('book'=>$book, 'data'=>$data));
+
+        if (BookController::checkTime($link, $book) || $restaurant->id_owner == Auth::id()) {
+            
+            
+            $data = BookController::index($restaurant);
+            return View::make('editBook',array('book'=>$book, 'data'=>$data));
+        }
+        else
+            return Redirect::to($link)->withMessage('ใกล้ถึงเวลาแล้ว edit ไม่ได้ <br>Please contact restaurant');
+        
     }
+
+    public function checkTime ($link, $book)
+    {
+        if ($book->date == date("m/d")) {
+            if (strtotime("+30 minute", strtotime(date("H:i")))>strtotime($book->time))
+                return false;
+        }
+
+        return true;
+    } 
 
     public function edit($id_book) {
         $data =  Input::all() ;

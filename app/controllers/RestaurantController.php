@@ -136,21 +136,23 @@ class RestaurantController extends BaseController {
                     return Redirect::to($link)->withErrors($validator->messages());
             }
 
-        if (!in_array(Input::file('pic')->getClientOriginalExtension(), array('jpg', 'gif', 'png'))) 
-            return Redirect::to($link)->withMessage('Invalid image extension we just allow JPG, GIF, PNG');
+        if (!in_array(Input::file('pic')->getClientOriginalExtension(), array('jpg', 'gif', 'png', 'jpeg'))) 
+            return Redirect::to($link)->withMessage('Invalid image extension we just allow JPG, GIF, PNG, JPEG');
 
         //set name of picture => "idRes_idPicOfRes"
         $rest = $this->rest->find($id_res);
         $stringPic = $rest->name_pic;
-        if ($stringPic=="") {
+        if ($stringPic==NULL) {
             $name = $id_res."_1";
+            $rest->name_pic = $name;
         }
         else {
             $pics = explode("_", $stringPic);
             $name = $id_res."_".($pics[count($pics)-1]+1);
+            $rest->name_pic = $stringPic.",".$name;
         }
         
-        $rest->name_pic = $stringPic.",".$name;
+        
         $rest->save();
 
         $messages = Input::file('pic')->getClientOriginalName()." UPLOADED!!";
