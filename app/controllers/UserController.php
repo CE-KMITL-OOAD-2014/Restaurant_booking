@@ -22,7 +22,7 @@ class UserController extends BaseController {
   		return View::make('userHome')->with('user',$user);
 	}
 
-	public function currentBook($books) {
+	/*public function currentBook($books) {
 		$currentBookeds[0] = "";
         $i = 0;
 
@@ -44,21 +44,13 @@ class UserController extends BaseController {
             $i++;
         }
 
-        if (strrchr($currentBookeds[0], "No Booked!")) {
-            $currentBookeds[0] = substr($currentBookeds[0], 0, 10);
-        }
-        
-        elseif ($currentBookeds[0]=="") {
-            $currentBookeds[0] = "No Booked!";
-        }
-
         return $currentBookeds;
-	}
+	}*/
 
 	public function showBooked ($id)
 	{
 		$books = DB::table('books')->where('id_user',$id)->get();
-		$currentBookeds = UserController::currentBook($books);
+		$currentBookeds = BookController::currentBook($books);
 		foreach ($currentBookeds as $currentBooked) {
 			echo $currentBooked;
 		}
@@ -78,7 +70,7 @@ class UserController extends BaseController {
 	{
 		$restaurant = $this->rest->find($id_res);
 		$books = DB::table('books')->where('id_res',$id_res)->get();
-		$currentBookeds = UserController::currentBook($books);
+		$currentBookeds = BookController::currentBook($books);
 		return View::make('manageRestaurant',array('restaurant'=>$restaurant,'currentBookeds'=>$currentBookeds));
 	}
 

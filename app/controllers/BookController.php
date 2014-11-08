@@ -108,6 +108,31 @@ class BookController extends BaseController {
 
 	}
 
+    public static function currentBook($books) {
+        $currentBookeds[0] = "";
+        $i = 0;
+
+        foreach ($books as $book) {
+            if( strtotime(date("m/d")) < strtotime($book->date) )
+            {
+                
+                $currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/showBook/$book->id\">DETAIL</a> "
+                                ."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br> ";
+            }
+
+            if ( strtotime(date("m/d")) == strtotime($book->date) )
+            {
+                if( strtotime(date("H:i")) < strtotime($book->time) )
+                
+                $currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/showBook/$book->id\">DETAIL</a> "
+                             ."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br> ";
+            }
+            $i++;
+        }
+
+        return $currentBookeds;
+    }
+
     public function calDate($restaurant) {
         $days = explode(",", $restaurant->day);
 
@@ -195,9 +220,7 @@ class BookController extends BaseController {
         $book = $this->book->find($id);
         $restaurant = $this->rest->find($book->id_res);
 
-        /*if (strtotime("+30 minute", strtotime(date("H:i")))>strtotime($book->time)) {
-            return Redirect::to($link)->withMessage('ใกล้ถึงเวลาแล้ว ยกเลิกไม่ได้');
-        }*/
+        
         if (BookController::checkTime($link,$book) || $restaurant->id_owner == Auth::id()) {
             $book->delete();
             return Redirect::to($link)->withMessage('Books canceled');
