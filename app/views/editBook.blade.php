@@ -2,12 +2,12 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Booking</title>
+        <title>Edit Book ID {{$book->id}}</title>
     </head>
 
     <body>
 
-        <h2> Booking restaurant {{ $data["name"] }} : </h2>
+        <h2> Edit Book ID {{$book->id}} : </h2>
 
         @if ($errors->any())
 
@@ -27,16 +27,20 @@
 
         <p> Your ID : {{$id = Auth::id();}} </p>
 
-        <form action="{{ url('booking_action') }}" method="POST">
+        <?php $link = "editBook_action/".$book->id ?>
+        <form action="{{ url($link) }}" method="POST">
 
         <input type="hidden" name="id_res" value={{ $data["id"] }} >
-        <input type="hidden" name="id_user" value={{ $id }} >
+        <input type="hidden" name="id_user" value={{ $book->id_user }} >
 
-            <p> Date:  <!-- <input type="date" name="date"> -->
+            <p> Date:  
                 <select name="date" id="date">
                     <?php
                         $days = explode(",", $data["day"] );
                         foreach ($days as $day) {
+                            if ($book->date == $day) {
+                                echo "<option value=\"".$day."\" selected>".date("l d/m",strtotime($day))."</option>";
+                            }
                             echo "<option value=\"".$day."\">".date("l d/m",strtotime($day))."</option>";
                         }
                     ?>
@@ -47,16 +51,15 @@
 
             <p> Party Size: 
             <select name="amout" id="amout">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
+                <?php
+                    for ($i=1; $i <11 ; $i++) { 
+                        if ($i == $book->amout) {
+                            echo "<option value=\"".$i." \" selected>".$i."</option>";
+                        }
+                        else
+                            echo "<option value=\"".$i."\">".$i."</option>";
+                    }
+                ?>
             </select> </p>
 
             <p> Time : 
@@ -65,7 +68,11 @@
                     <?php
                         $times = explode(",", $data["avail"] );
                         foreach ($times as $time) {
-                            echo "<option value=\"".$time."\">".$time."</option>";
+                            if ($book->time == $time) {
+                                echo "<option value=\"".$time."\"  selected>".$time."</option>";
+                            }
+                            else
+                                echo "<option value=\"".$time."\">".$time."</option>";
                         }
                     ?>
                 </select>
@@ -77,7 +84,11 @@
                     <?php
                         $areas = explode(",", $data["area"] );
                         foreach ($areas as $area) {
-                            echo "<option value=\"".$area."\">".$area."</option>";
+                            if ($book->area == $area) {
+                                echo "<option value=\"".$area."\" selected>".$area."</option>";
+                            }
+                            else
+                                echo "<option value=\"".$area."\">".$area."</option>";
                         }
                     ?>
                 </select> 

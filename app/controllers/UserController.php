@@ -22,25 +22,39 @@ class UserController extends BaseController {
   		return View::make('userHome')->with('user',$user);
 	}
 
+	/*public function currentBook($books) {
+		$currentBookeds[0] = "";
+        $i = 0;
+
+        foreach ($books as $book) {
+            if( strtotime(date("m/d")) < strtotime($book->date) )
+            {
+                
+                $currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/showBook/$book->id\">DETAIL</a> "
+                                ."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br> ";
+            }
+
+            if ( strtotime(date("m/d")) == strtotime($book->date) )
+            {
+                if( strtotime(date("H:i")) < strtotime($book->time) )
+                
+                $currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/showBook/$book->id\">DETAIL</a> "
+                             ."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br> ";
+            }
+            $i++;
+        }
+
+        return $currentBookeds;
+	}*/
+
 	public function showBooked ($id)
 	{
 		$books = DB::table('books')->where('id_user',$id)->get();
-
-		foreach ($books as $book) {
-			if( strtotime(date("m/d")) < strtotime($book->date) )
-			{
-				
-				echo $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br>";
-
-			}
-
-			if ( strtotime(date("m/d")) == strtotime($book->date) )
-			{
-				if( strtotime(date("H:i")) < strtotime($book->time) )
-				
-				echo $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br>";
-			}
+		$currentBookeds = BookController::currentBook($books);
+		foreach ($currentBookeds as $currentBooked) {
+			echo $currentBooked;
 		}
+
 	}
 
 	public function showRestaurant ($id)
@@ -50,5 +64,78 @@ class UserController extends BaseController {
 		foreach ($rests as $rest) {
 			echo $rest->id." : ".$rest->name."<a href=\"http://localhost/ResBook/public/index.php/manage/$rest->id\">MANAGE</a><br>";
 		}
+	}
+
+	public function manage ($id_res)
+	{
+		$restaurant = $this->rest->find($id_res);
+		$books = DB::table('books')->where('id_res',$id_res)->get();
+		$currentBookeds = BookController::currentBook($books);
+		return View::make('manageRestaurant',array('restaurant'=>$restaurant,'currentBookeds'=>$currentBookeds));
+	}
+
+	//show Edit profile page
+	public function showEdit ($id) {
+		$user = $this->user->find($id);
+		return View::make('editProfile')->with('user',$user);
+	}
+
+	//Edit profile
+	public function edit () {
+		//To do : add confirm old password before edit.
+		$data =  Input::all() ;
+        $rule  =  array(
+                'name'       => 'required',
+                'lastname'   => 'required',
+                'email'      => 'required|email',
+                'tel'        => 'required|min:10',
+                'password'   => 'required|min:6|same:cpassword',
+                'cpassword'  => 'required|min:6'
+            ) ;
+
+        $validator = Validator::make($data,$rule);
+
+        $link = "edit/".Auth::id();
+        if ($validator->fails())
+        {
+            	
+            return Redirect::to($link)->withErrors($validator->messages());
+        }
+
+        else
+        {
+         	$check_email = DB::table('users')->where('email',$data['email'])->get() ;
+         	$check_tel = DB::table('users')->where('tel',$data['tel'])->get() ;
+
+         	if (count($check_email)>1 || count($check_tel) > 1) {
+          		return Redirect::to($link)->withMessage('Duplicate email or tel');
+         	}
+         	
+         	if (count($check_email)==1 ) {
+          		if ($check_email[0]->id != Auth::id()) {
+
+           			return Redirect::to($link)->withMessage('Duplicate email');
+          		}
+         	}
+         
+         	if (count($check_tel) == 1) {
+          		if ($check_tel[0]->id != Auth::id()) {
+
+           			return Redirect::to($link)->withMessage('Duplicate tel');
+          		}
+         	}
+
+                    
+        	$user  = $this->user->find(Auth::id());
+        	$user->name = Input::get('name');
+        	$user->lastname = Input::get('lastname');
+        	$user->password = Input::get('password');
+        	$user->email = Input::get('email');
+        	$user->tel = Input::get('tel');
+        	$user->save();
+
+        	$link = "user/".Auth::id();
+        	return Redirect::to($link)->withMessage('edit profile complete! ^^');
+        }
 	}
 }

@@ -14,7 +14,7 @@ public function store()
 {
             $data =  Input::except(array('_token')) ;
             $rule  =  array(
-                    'name'       => 'required|unique:users',
+                    'name'       => 'required',
                     'lastname'   => 'required',
                     'email'      => 'required|email|unique:users',
                     'tel'        => 'required|min:10|unique:users',
