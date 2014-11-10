@@ -17,31 +17,31 @@
 <!--[if IEMobile]>  <meta http-equiv="cleartype" content="on">  <![endif]-->
 
 <!-- Bootstrap -->
-<link href=" css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Main Style -->
-<link href=" css/main.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
 
 <!-- Supersized -->
-<link href=" css/supersized.css" rel="stylesheet">
-<link href=" css/supersized.shutter.css" rel="stylesheet">
+<link href="/css/supersized.css" rel="stylesheet">
+<link href="/css/supersized.shutter.css" rel="stylesheet">
 
 <!-- FancyBox -->
-<link href=" css/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="/css/fancybox/jquery.fancybox.css" rel="stylesheet">
 
 <!-- Font Icons -->
-<link href=" css/fonts.css" rel="stylesheet">
+<link href="/css/fonts.css" rel="stylesheet">
 
 <!-- Shortcodes -->
-<link href=" css/shortcodes.css" rel="stylesheet">
+<link href="/css/shortcodes.css" rel="stylesheet">
 
 <!-- Responsive -->
-<link href=" css/bootstrap-responsive.min.css" rel="stylesheet">
-<link href=" css/responsive.css" rel="stylesheet">
+<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="/css/responsive.css" rel="stylesheet">
 
 <!-- Supersized -->
-<link href=" css/supersized.css" rel="stylesheet">
-<link href=" css/supersized.shutter.css" rel="stylesheet">
+<link href="/css/supersized.css" rel="stylesheet">
+<link href="/css/supersized.shutter.css" rel="stylesheet">
 
 <!-- Google Font -->
 <link href="http://fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900" rel="stylesheet" type="text/css">
@@ -119,12 +119,12 @@
     	<a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-        	<a id="goUp" href="http://localhost/" title="Eat with me">Brushed Template</a>
+        	<a id="goUp" href="/" title="Eat with me">Brushed Template</a>
         </div>
         
         <nav id="menu">
         	<ul id="menu-nav">
-                <li><form class="form-inline " action="http://localhost/index.php/search" method="POST">
+                <li><form class="form-inline " action="/index.php/search" method="POST">
                     <span class="form-group">
                           <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" style="width: 400px;">
                           <button type="submit" class="button button-mini">
@@ -262,7 +262,7 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src=" img/work/thumbs/image-01.jpg" alt="
+                                <img src="/_include/img/work/thumbs/image-01.jpg" alt="
                                 <br>
                                 <a href='#' class='button button-small pull-right' role='button'>more detail</a>
                                 ">
@@ -277,7 +277,7 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src=" img/work/thumbs/image-02.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img src="/_include/img/work/thumbs/image-02.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
@@ -289,7 +289,7 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src=" img/work/thumbs/image-03.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img src="/_include/img/work/thumbs/image-03.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
@@ -301,7 +301,7 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src=" img/work/thumbs/image-08.jpg" alt="Video">
+                                <img src="/_include/img/work/thumbs/image-08.jpg" alt="Video">
                             </li>
                         	<!-- End Item Project -->
                             
@@ -313,7 +313,7 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src=" img/work/thumbs/image-04.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img src="/_include/img/work/thumbs/image-04.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
@@ -325,7 +325,7 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src=" img/work/thumbs/image-05.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img src="/_include/img/work/thumbs/image-05.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
@@ -337,7 +337,7 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src=" img/work/thumbs/image-09.jpg" alt="Video">
+                                <img src="/_include/img/work/thumbs/image-09.jpg" alt="Video">
                             </li>
                         	<!-- End Item Project -->
                             
@@ -349,7 +349,7 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src=" img/work/thumbs/image-06.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img src="/_include/img/work/thumbs/image-06.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
@@ -361,7 +361,7 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src=" img/work/thumbs/image-07.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img src="/_include/img/work/thumbs/image-07.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                         </ul>
@@ -391,17 +391,17 @@
 
 
 <!-- Js -->
-<script src=" js/jquery-1.11.1.min.js"></script> <!-- jQuery Core -->
-<script src=" js/bootstrap.min.js"></script> <!-- Bootstrap -->
-<script src=" js/supersized.3.2.7.min.js"></script> <!-- Slider -->
-<script src=" js/waypoints.js"></script> <!-- WayPoints -->
-<script src=" js/waypoints-sticky.js"></script> <!-- Waypoints for Header -->
-<script src=" js/jquery.isotope.js"></script> <!-- Isotope Filter -->
-<script src=" js/jquery.fancybox.pack.js"></script> <!-- Fancybox -->
-<script src=" js/jquery.fancybox-media.js"></script> <!-- Fancybox for Media -->
-<script src=" js/jquery.tweet.js"></script> <!-- Tweet -->
-<script src=" js/plugins.js"></script> <!-- Contains: jPreloader, jQuery Easing, jQuery ScrollTo, jQuery One Page Navi -->
-<script src=" js/main.js"></script> <!-- Default JS -->
+<script src="/_include/js/jquery-1.11.1.min.js"></script> <!-- jQuery Core -->
+<script src="/_include/js/bootstrap.min.js"></script> <!-- Bootstrap -->
+<script src="/_include/js/supersized.3.2.7.min.js"></script> <!-- Slider -->
+<script src="/_include/js/waypoints.js"></script> <!-- WayPoints -->
+<script src="/_include/js/waypoints-sticky.js"></script> <!-- Waypoints for Header -->
+<script src="/_include/js/jquery.isotope.js"></script> <!-- Isotope Filter -->
+<script src="/_include/js/jquery.fancybox.pack.js"></script> <!-- Fancybox -->
+<script src="/_include/js/jquery.fancybox-media.js"></script> <!-- Fancybox for Media -->
+<script src="/_include/js/jquery.tweet.js"></script> <!-- Tweet -->
+<script src="/_include/js/plugins.js"></script> <!-- Contains: jPreloader, jQuery Easing, jQuery ScrollTo, jQuery One Page Navi -->
+<script src="/_include/js/main.js"></script> <!-- Default JS -->
 <!-- End Js -->
 
 

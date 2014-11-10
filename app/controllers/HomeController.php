@@ -65,7 +65,7 @@ class HomeController extends BaseController {
 			} else {	 	
 
 				// validation not successful, send back to form	
-				return Redirect::to('login')->withMessage('Incorrect E-mail or password');
+				return Redirect::to('login')->withErrors('Incorrect E-mail or password');
 
 			}
 

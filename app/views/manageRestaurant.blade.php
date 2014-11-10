@@ -101,12 +101,12 @@
         <a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-            <a id="goUp" href="http://localhost " title="Eat with me">Brushed Template</a>
+            <a id="goUp" href="/" title="Eat with me">Brushed Template</a>
         </div>
         
         <nav id="menu">
             <ul id="menu-nav">
-                <li><form class="form-inline " action="http://localhost/index.php/search" method="POST">
+                <li><form class="form-inline " action="/index.php/search" method="POST">
                     <span class="form-group">
                           <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" style="width: 400px;">
                           <button type="submit" class="button button-mini">
@@ -218,8 +218,8 @@
 
         <div class="col-sm-3 col-md-3">
 
-            {{"<a href=\"http://localhost/index.php/editRes/$restaurant->id\">EDIT</a><br>"}}
-            {{"<a href=\"http://localhost/index.php/delete/$restaurant->id\">DELETE This restaurant</a><br>"}}
+            {{"<a href=\"/index.php/editRes/$restaurant->id\">EDIT</a><br>"}}
+            {{"<a href=\"/index.php/delete/$restaurant->id\">DELETE This restaurant</a><br>"}}
             <br><br><br><br><br><br><br>
         </div>
         
@@ -228,7 +228,7 @@
 
         Upload picture : 
         
-        {{ "<form action=\"http://localhost/index.php/uploadpic/$restaurant->id\"" }}
+        {{ "<form action=\"/index.php/uploadpic/$restaurant->id\"" }}
             method="POST"
             enctype="multipart/form-data">
             <input type="file" name="pic" >
@@ -251,7 +251,7 @@
             <?php
                 if ($currentBookeds[0]!="") {
                     foreach ($currentBookeds as $currentBooked) {
-                        $link = "http://localhost/index.php/showBook/".$currentBooked->id;
+                        $link = "/index.php/showBook/".$currentBooked->id;
                         echo "<tr>";
                         echo "<td><a href=\"".$link."\">".$currentBooked->id."</a></td>";
                         echo "<td>".$currentBooked->date."</td>";

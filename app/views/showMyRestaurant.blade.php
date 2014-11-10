@@ -101,12 +101,12 @@
     	<a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-        	<a id="goUp" href="http://localhost/" title="Eat with me">Brushed Template</a>
+        	<a id="goUp" href="/" title="Eat with me">Brushed Template</a>
         </div>
         
         <nav id="menu">
         	<ul id="menu-nav">
-                <li><form class="form-inline " action="http://localhost/index.php/search" method="POST">
+                <li><form class="form-inline " action="/index.php/search" method="POST">
                     <span class="form-group">
                           <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" style="width: 400px;">
                           <button type="submit" class="button button-mini">
@@ -193,7 +193,7 @@
   							
   							foreach ($restaurants as $restaurant) {
                 				
-                    				$link = "http://localhost/index.php/manage/".$restaurant->id;
+                    				$link = "/index.php/manage/".$restaurant->id;
                     				echo "<tr>";
                     				echo "<td><a href=\"".$link."\">".$restaurant->name."</a></td>";
                     				echo "<td>".$restaurant->addr."</td>";

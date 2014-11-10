@@ -104,12 +104,12 @@
         <a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-            <a id="goUp" href="http://localhost" title="Eat with me">Brushed Template</a>
+            <a id="goUp" href="/" title="Eat with me">Brushed Template</a>
         </div>
         
         <nav id="menu">
             <ul id="menu-nav">
-                <li><form class="form-inline " action="http://localhost/index.php/search" method="POST">
+                <li><form class="form-inline " action="/index.php/search" method="POST">
                     <span class="form-group">
                           <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" style="width: 400px;">
                           <button type="submit" class="button button-mini">
@@ -209,7 +209,7 @@
 
                 @if (Session::has('message'))
 
-                    <p style="color:red;">{{ Session::get('message') }}</p>
+                    <p style="color:green;">{{ Session::get('message') }}</p>
 
                 @endif
 
@@ -223,7 +223,7 @@
 
                 @endif
 
-                    <form class="form-horizontal" action="http://localhost/index.php/login" method="POST">
+                    <form class="form-horizontal" action="/index.php/login" method="POST">
                         <fieldset>
                            
                           <div class="form-group">

@@ -40,7 +40,7 @@ public function store()
 
                     $this->user->save($user);
 
-                    return Redirect::to('register')->withMessage('Data inserted');
+                    return Redirect::to('login')->withMessage('Complete Register, You can login!');
             }
 }
 }

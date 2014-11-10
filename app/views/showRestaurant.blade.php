@@ -16,7 +16,7 @@
 	<p>ที่นั่งทั้งหมด : {{ $data->seat }} </p>
 	<p> เบอร์โทรศัพท์ : {{$data->tel}} </p>
 
-	{{"<a href=\"http://localhost/ResBook/public/index.php/book/$data->id\">book</a>"}}
+	{{"<a href=\"/index.php/book/$data->id\">book</a>"}}
 
 </body>
 </html>
