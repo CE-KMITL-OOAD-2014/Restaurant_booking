@@ -3,7 +3,7 @@
 Route::get('/', function()
 {
 	//return View::make('hello');
-	return View::make('home');
+	return View::make('index');
 });
 
 Route::get('register', array('uses'=>'HomeController@showRegister'));

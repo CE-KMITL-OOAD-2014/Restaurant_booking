@@ -22,48 +22,22 @@ class UserController extends BaseController {
   		return View::make('userHome')->with('user',$user);
 	}
 
-	/*public function currentBook($books) {
-		$currentBookeds[0] = "";
-        $i = 0;
-
-        foreach ($books as $book) {
-            if( strtotime(date("m/d")) < strtotime($book->date) )
-            {
-                
-                $currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/showBook/$book->id\">DETAIL</a> "
-                                ."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br> ";
-            }
-
-            if ( strtotime(date("m/d")) == strtotime($book->date) )
-            {
-                if( strtotime(date("H:i")) < strtotime($book->time) )
-                
-                $currentBookeds[$i] = $book->id." "."<a href=\"http://localhost/ResBook/public/index.php/showBook/$book->id\">DETAIL</a> "
-                             ."<a href=\"http://localhost/ResBook/public/index.php/cancel/$book->id\">CENCEL</a><br> ";
-            }
-            $i++;
-        }
-
-        return $currentBookeds;
-	}*/
 
 	public function showBooked ($id)
 	{
 		$books = DB::table('books')->where('id_user',$id)->get();
 		$currentBookeds = BookController::currentBook($books);
-		foreach ($currentBookeds as $currentBooked) {
+		/*foreach ($currentBookeds as $currentBooked) {
 			echo $currentBooked;
-		}
+		}*/
+    return View::make('showBooked',array('currentBookeds'=>$currentBookeds));
 
 	}
 
 	public function showRestaurant ($id)
 	{
 		$rests = DB::table('restaurants')->where('id_owner',$id)->get();
-
-		foreach ($rests as $rest) {
-			echo $rest->id." : ".$rest->name."<a href=\"http://localhost/ResBook/public/index.php/manage/$rest->id\">MANAGE</a><br>";
-		}
+    return View::make('showMyRestaurant',array('restaurants'=>$rests));
 	}
 
 	public function manage ($id_res)
