@@ -242,7 +242,7 @@
   							if ($str=="ALL") {
   								foreach ($restaurants as $restaurant) {
                 				
-                    				$link = "http://localhost/index.php/restaurant/".$restaurant->id;
+                    				$link = "/index.php/restaurant/".$restaurant->id;
                     				echo "<tr>";
                     				echo "<td><a href=\"".$link."\">".$restaurant->name."</a></td>";
                     				echo "<td>".$restaurant->addr."</td>";
@@ -254,7 +254,7 @@
 
   							foreach ($restaurants as $restaurant) {
                 				if (strrchr($restaurant->name, $str)) {
-                    				$link = "http://localhost/index.php/restaurant/".$restaurant->id;
+                    				$link = "/index.php/restaurant/".$restaurant->id;
                     				echo "<tr>";
                     				echo "<td><a href=\"".$link."\">".$restaurant->name."</a></td>";
                     				echo "<td>".$restaurant->addr."</td>";

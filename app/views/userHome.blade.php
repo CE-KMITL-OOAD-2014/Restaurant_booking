@@ -101,14 +101,14 @@
         <a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-            <a id="goUp" href="/" title="Eat with me">Brushed Template</a>
+            <a id="goUp" href="/" title="Eat with me">EatWME</a>
         </div>
         
         <nav id="menu">
             <ul id="menu-nav">
                 <li><form class="form-inline " action="/index.php/search" method="POST">
                     <span class="form-group">
-                          <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" style="width: 400px;">
+                          <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" width=20%>
                           <button type="submit" class="button button-mini">
                           <i class="font-icon-search"></i>
                           </button>
@@ -172,12 +172,30 @@
                         </div>
 
                 </div>
-                <!--end Collapes-->
            </nav>
         </div>
+
+<!-- ===================================end nav=================================== -->
             
             <div class="col-sm-9 col-md-9">
                 <div class="row">
+
+                    @if ($errors->any())
+
+                        <ul style="color:red;">
+
+                            {{ implode('', $errors->all('<li>:message</li>')) }}
+
+                        </ul>
+
+                    @endif
+
+                    @if (Session::has('message'))
+
+                        <p style="color:green;">{{ Session::get('message') }}</p>
+
+                    @endif
+
                     <section id="projects">
                         <ul id="thumbs">
                         

@@ -190,19 +190,21 @@
   					<tbody>
 
   						<?php
+                $i=0;
   							if ($currentBookeds[0]!="") {
                   foreach ($currentBookeds as $currentBooked) {
                     $link = "/index.php/showBook/".$currentBooked->id;
                     echo "<tr>";
-                    echo "<td><a href=\"".$link."\">".$currentBooked->id."</a></td>";
+                    echo "<td><a href=\"".$link."\">".$restaurantsName[$i]."</a></td>";
                     echo "<td>".$currentBooked->date."</td>";
                     echo "<td>".$currentBooked->time."</td>";
                     echo "</tr>";
+                    $i++;
                   }
                 }
                 else
                   echo "<tr><td>No Booked!</td></tr>";
-  							
+
   						?>
   					</tbody>
 				</table>

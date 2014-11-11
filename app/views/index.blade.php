@@ -119,14 +119,14 @@
     	<a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-        	<a id="goUp" href="/" title="Eat with me">Brushed Template</a>
+        	<a id="goUp" href="/" title="Eat with me">EatWME</a>
         </div>
         
         <nav id="menu">
         	<ul id="menu-nav">
                 <li><form class="form-inline " action="/index.php/search" method="POST">
                     <span class="form-group">
-                          <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" style="width: 400px;">
+                          <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" width=100%>
                           <button type="submit" class="button button-mini">
                           <i class="font-icon-search"></i>
                           </button>
@@ -195,6 +195,31 @@
                         </div>
 
                         <div class=\"accordion-group\">
+                        <div class=\"\">
+                            <a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#leftMenu\" href=\"#collapseFour\">
+                                <i class=\"icon-list-alt\"></i> My Restaurants (new)
+                            </a>
+                        </div>
+                        <div id=\"collapseFour\" class=\"accordion-body collapse\" style=\"height: 0px; \">
+                            <div class=\"accordion-inner\">
+                                <ul>
+                                    <li>This is one</li>
+                                    <li>This is two</li>
+                                    <li>This is Three</li>
+                                </ul>                 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/regisres \">
+                                  <i class=\"icon-home\"></i> Open Restaurant! 
+                                </a>
+                          </div>
+                        </div>
+
+                        <div class=\"accordion-group\">
                             <div class=\"\">
                                 <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/edit/$id\">
                                   <i class=\"icon-home\"></i> Edit Profile 
@@ -205,8 +230,24 @@
                         {{"<!-- panel Lacation -->
                         <div class=\"accordion-group\">
                             <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/regisres \">
+                                  <i class=\"icon-home\"></i> Open Restaurant! 
+                                </a>
+                          </div>
+                        </div>
+
+                        <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/showall \">
+                                  <i class=\"icon-home\"></i> All Restaurant
+                                </a>
+                          </div>
+                        </div>
+
+                        <div class=\"accordion-group\">
+                            <div class=\"\">
                                 <a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#leftMenu\" href=\"#collapseThree\">
-                                    <i class=\"icon-th-list\"></i> Open Restaurant!
+                                    <i class=\"icon-th-list\"></i> Forms
                                 </a>
                             </div>
                             <div id=\"collapseThree\" class=\"accordion-body collapse\" style=\"height: 0px; \">
@@ -225,22 +266,13 @@
                         </div>
                         <!--End Lacation-->
 
-                    <div class=\"accordion-group\">
-                        <div class=\"\">
-                            <a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#leftMenu\" href=\"#collapseFour\">
-                                <i class=\"icon-list-alt\"></i> Forms
-                            </a>
-                        </div>
-                        <div id=\"collapseFour\" class=\"accordion-body collapse\" style=\"height: 0px; \">
-                            <div class=\"accordion-inner\">
-                                <ul>
-                                    <li>This is one</li>
-                                    <li>This is two</li>
-                                    <li>This is Three</li>
-                                </ul>                 
-                            </div>
-                        </div>
-                    </div>"}}
+                        <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"# \">
+                                  <i class=\"icon-home\"></i> About Us
+                                </a>
+                          </div>
+                        </div>"}}
 
                     @endif
 

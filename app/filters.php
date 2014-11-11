@@ -43,7 +43,7 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login')->withMessage('Plz LOGIN !!!');
+			return Redirect::guest('login')->withErrors('Please Login and try again.');
 		}
 	}
 });

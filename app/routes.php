@@ -25,7 +25,7 @@ Route::post('regisres_action',array('uses' => 'RestaurantController@store'));
 
 Route::get('user/{id}', array('before' => 'auth' ,'uses' => 'UserController@index'));
 
-Route::get('restaurant/{id}',array('uses' => 'RestaurantController@show'));
+Route::get('restaurant/{id}',array('uses' => 'ShowRestaurantsController@show'));
 
 Route::get('book/{id}',array('before' => 'auth' ,'uses' => 'BookController@showBookPage'));
 
@@ -58,3 +58,7 @@ Route::get('editBook/{id}',array('uses'=>'BookController@showEdit'));
 Route::post('editBook_action/{id_book}',array('uses'=>'BookController@edit'));
 
 Route::post('search',array('uses'=>'RestaurantController@search'));
+
+Route::get('showall',array('uses'=>'ShowRestaurantsController@showall'));
+
+Route::get('test', array('uses'=>'BookController@currentBook'));

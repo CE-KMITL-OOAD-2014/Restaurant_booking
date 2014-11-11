@@ -26,11 +26,16 @@ class UserController extends BaseController {
 	public function showBooked ($id)
 	{
 		$books = DB::table('books')->where('id_user',$id)->get();
-		$currentBookeds = BookController::currentBook($books);
-		/*foreach ($currentBookeds as $currentBooked) {
-			echo $currentBooked;
-		}*/
-    return View::make('showBooked',array('currentBookeds'=>$currentBookeds));
+		$data = BookController::currentBook($books);
+		$currentBookeds = $data[0];
+    $restaurantsName[0] = "";
+    $i=0;
+    //$restaurant = $this->rest->find(1);
+    foreach ($currentBookeds as $currentBooked) {
+      $restaurantsName[$i] = $this->rest->find($currentBooked->id_res)->name;
+    }
+
+    return View::make('showBooked',array('currentBookeds'=>$currentBookeds,'restaurantsName'=>$restaurantsName));
 
 	}
 
