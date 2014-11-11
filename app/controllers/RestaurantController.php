@@ -71,19 +71,10 @@ class RestaurantController extends BaseController {
         
                 $this->rest->save($rest);
 
-                return Redirect::to('logout')->withMessage('Data inserted');
+                return Redirect::to('/')->withMessage('Your Restaurant is Ready!');
             }
 	}
 
-	/*public function show($id)
-	{
-		$data = $this->rest->find($id);
-        if($data==NULL)
-            return Redirect::to('logout')->withMessage('Restaurant does not exist');
-        
-		return View::make('showDetailRestaurant')->with('restaurant',$data);
-
-	}*/
 
     public function search () {
         $restaurants = DB::table('restaurants')->get();
@@ -97,12 +88,11 @@ class RestaurantController extends BaseController {
     public function deleteRestaurant ($id)
     {
         //To do : add popup to comfirm delete.
-        $link = "user/".Auth::id();
         $restaurant = $this->rest->find($id);
 
         $restaurant->delete();
         
-        return Redirect::to($link)->withMessage('Deleted restaurant id : {{$id}}');
+        return Redirect::to('/')->withMessage('Deleted restaurant id : {{$id}}');
     }
 
     public function uploadPic ($id_res)
@@ -122,7 +112,7 @@ class RestaurantController extends BaseController {
             }
 
         if (!in_array(Input::file('pic')->getClientOriginalExtension(), array('jpg', 'gif', 'png', 'jpeg'))) 
-            return Redirect::to($link)->withMessage('Invalid image extension we just allow JPG, GIF, PNG, JPEG');
+            return Redirect::to($link)->withErrors('Invalid image extension we just allow JPG, GIF, PNG, JPEG');
 
         //set name of picture => "idRes_idPicOfRes"
         $rest = $this->rest->find($id_res);
@@ -210,7 +200,7 @@ class RestaurantController extends BaseController {
             $rest->save();
 
             $link = "manage/".$id_res;
-            return Redirect::to($link)->withMessage('edit profile complete! ^^');
+            return Redirect::to($link)->withMessage('edit profile complete.');
         }
     }
 

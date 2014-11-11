@@ -177,8 +177,16 @@
                     <!-- collape list in Listing -->
                     <div class="accordion" id="leftMenu">
                     @if (Auth::id()!="")
-                    <?php $id=Auth::id();?>
+                        <?php $id=Auth::id();?>
                         {{"<div class=\"accordion-group\">
+                                <div class=\"\">
+                                    <a data-parent=\"#leftMenu\" class=\"external\" href=\"/profile/$id\">
+                                        <i class=\"icon-home\"></i> My Profile 
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class=\"accordion-group\">
                             <div class=\"\">
                                 <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/show/$id \">
                                   <i class=\"icon-home\"></i> Booked lists 
@@ -220,12 +228,19 @@
                         </div>
 
                         <div class=\"accordion-group\">
+                                <div class=\"\">
+                                    <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/edit/$id\">
+                                        <i class=\"icon-home\"></i> Edit Profile 
+                                    </a>
+                                </div>
+                            </div>
+
+                        <div class=\"accordion-group\">
                             <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/edit/$id\">
-                                  <i class=\"icon-home\"></i> Edit Profile 
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"# \">
+                                  <i class=\"icon-home\"></i> About Us
                                 </a>
-                          </div>
-                        </div>"}}
+                          </div>"}}
                     @else
                         {{"<!-- panel Lacation -->
                         <div class=\"accordion-group\">
@@ -280,12 +295,30 @@
                 <!--end Collapes-->
            </nav>
         </div>
-            
+
+<!-- ==================================end nav============================================ -->
+
             <div class="col-sm-9 col-md-9">
             	<div class="row">
+
+                    @if ($errors->any())
+
+                        <h4><ul style="color:red;">
+
+                            {{ implode('', $errors->all('<li>:message</li>')) }}
+
+                        </ul></h4>
+
+                    @endif
+
+                    @if (Session::has('message'))
+
+                        <h4 style="color:green;">{{ Session::get('message') }}</h4>
+
+                    @endif
+
                 	<section id="projects">
-                    	<ul id="thumbs">
-                        
+                    	<ul id="thumbs">                        
 							<!-- Item Project and Filter Name -->
                         	<li class="item-thumbs span3 design">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->

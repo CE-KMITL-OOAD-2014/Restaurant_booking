@@ -59,8 +59,7 @@ class HomeController extends BaseController {
 
 				// validation successful!
 				$id = Auth::id();
-				$link = "user/".$id;
-				return Redirect::to($link);
+				return Redirect::to('/');
 
 			} else {	 	
 

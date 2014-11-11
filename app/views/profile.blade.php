@@ -88,7 +88,7 @@
 <!-- This section is for Splash Screen -->
 <div class="ole">
 <section id="jSplash">
-	<div id="circle"></div>
+    <div id="circle"></div>
 </section>
 </div>
 <!-- End of Splash Screen -->
@@ -98,14 +98,14 @@
 <!-- Header -->
 <header>
     <div class="sticky-nav">
-    	<a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
+        <a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-        	<a id="goUp" href="/" title="Eat with me">EatWME</a>
+            <a id="goUp" href="/" title="Eat with me">EatWME</a>
         </div>
         
         <nav id="menu">
-        	<ul id="menu-nav">
+            <ul id="menu-nav">
                 <li><form class="form-inline " action="/index.php/search" method="POST">
                     <span class="form-group">
                           <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" style="width: 400px;">
@@ -116,12 +116,12 @@
                     
                 </form></li>
                 @if (Auth::id()!="") 
-                        {{ "<li><a href=\"/logout_action\" class=\"external\">Logout</a></li>
+                        {{ "<li><a href=\"/index.php/logout_action\" class=\"external\">Logout</a></li>
                         <li><a href=\"#about\">About Us</a></li>" }}
                     
                 @else 
-                        {{ "<li><a href=\"/register\" class=\"external\">Register</a></li>
-                        <li><a href=\"/login\" class=\"external\">Login</a></li>
+                        {{ "<li><a href=\"/index.php/register\" class=\"external\">Register</a></li>
+                        <li><a href=\"/index.php/login\" class=\"external\">Login</a></li>
                         <li><a href=\"#about\">About Us</a></li>" }}
                 @endif
             </ul>
@@ -133,8 +133,8 @@
 
 <!-- Our Work Section -->
 <div id="work" class="page">
-	<div class="container">
-    	<!-- Title Page -->
+    <div class="container">
+        <!-- Title Page -->
         <div class="row">
             <div class="col-sm-12 col-md-12">
                 <div class="title-page">
@@ -147,14 +147,13 @@
         
         <!-- Portfolio Projects -->
         <div class="row">
-        	<div class="col-sm-3 col-md-3">
+            <div class="col-sm-3 col-md-3">
                 <nav id="options" class="work-nav">
                     <li class="type-work">Menu</li>
 
                     <!-- collape list in Listing -->
                     <div class="accordion" id="leftMenu">
 
-                        @if (Auth::id()!="")
                         <?php $id=Auth::id();?>
                         {{"<div class=\"accordion-group\">
                                 <div class=\"\">
@@ -219,99 +218,30 @@
                                   <i class=\"icon-home\"></i> About Us
                                 </a>
                           </div>"}}
-                    @else
-                        {{"<!-- panel Lacation -->
-                        <div class=\"accordion-group\">
-                            <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/regisres \">
-                                  <i class=\"icon-home\"></i> Open Restaurant! 
-                                </a>
-                          </div>
-                        </div>
-
-                        <div class=\"accordion-group\">
-                            <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/showall \">
-                                  <i class=\"icon-home\"></i> All Restaurant
-                                </a>
-                          </div>
-                        </div>
-
-                        <div class=\"accordion-group\">
-                            <div class=\"\">
-                                <a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#leftMenu\" href=\"#collapseThree\">
-                                    <i class=\"icon-th-list\"></i> Forms
-                                </a>
-                            </div>
-                            <div id=\"collapseThree\" class=\"accordion-body collapse\" style=\"height: 0px; \">
-                                <div class=\"accordion-inner\">
-                                    <!-- Filter -->
-                                    <nav id=\"options\" class=\"work-nav\">
-                                        <ul id=\"filters\" class=\"option-set\" data-option-key=\"filter\">
-                                            <li><a href=\"#filter\" data-option-value=\"*\" class=\"selected\">All</a></li> <!-- for all -->
-                                            <li><a href=\"#filter\" data-option-value=\".photography\">Location</a></li> <!-- photography=location -->
-                                            <li><a href=\"#filter\" data-option-value=\".video\">Video</a></li>
-                                        </ul>
-                                    </nav>
-                                    <!-- End Filter -->              
-                                </div>
-                            </div>
-                        </div>
-                        <!--End Lacation-->
-
-                        <div class=\"accordion-group\">
-                            <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"# \">
-                                  <i class=\"icon-home\"></i> About Us
-                                </a>
-                          </div>
-                        </div>"}}
-
-                    @endif
+                    
                 </div>
                 <!--end Collapes-->
            </nav>
         </div>
             
             <div class="col-sm-9 col-md-9">
-            <h2>{{$restaurant->name}}</h2>
-            	<div class="col-sm-3 col-md-3">
+                <h2>Profile User {{$user->name}} </h2>
+                
+                <div class="col-sm-3 col-md-3">
                     <b>Name </b><br>
-                    <b>Addr </b><br>
-                    <b>DAY OPEN </b><br>
-                    <b>OPEN </b><br>
-                    <b>CLOSE </b><br>
-                    <b>Area </b><br>
-                    <b>ที่นั่งทั้งหมด </b><br>
-                    <b>เบอร์โทรศัพท์ </b><br>
+                    <b>Lastname </b><br>
+                    <b>E-mail </b><br>
+                    <b>Tel </b><br>
+                    <b>เป็นสมาชิกเมื่อ </b><br>
                 </div>
 
                 <div class="col-sm-9 col-md-9">
-                    {{ $restaurant->name }}<br>
-                    {{ $restaurant->addr }}<br>
-                    {{$restaurant->day}} <br>
-                    {{$restaurant->time_open}}<br>
-                    {{$restaurant->time_close}}<br>
-                    {{ $restaurant->area }}<br>
-                    {{ $restaurant->seat }}<br>
-                    {{$restaurant->tel}}<br><br>
+                    {{ $user->name }}<br>
+                    {{ $user->lastname }}<br>
+                    {{ $user->email }} <br>
+                    {{ $user->tel }}<br>
+                    {{ $user->created_at }}<br><br>
                 </div>
-
-				<h4> {{"<a href=\"/book/$restaurant->id\">BOOK!</a>"}} </h4>
-            
-                <?php
-                    $pics = explode(",", $restaurant->name_pic);
-                    if ($pics[0]=="") 
-                        echo "<img src=\"/pics/pic\" height=100% width=100% >";
-            
-                    else {
-                        foreach ($pics as $pic) {
-                            echo "<img src=\"/pics/".$pic."\" height=100% width=100% ><br><br>";
-                        }
-                    }
-                ?>
-                <br>
-
             </div>
         </div>
         <!-- End Portfolio Projects -->
@@ -323,13 +253,13 @@
 
 <!-- Footer -->
 <footer>
-	<p class="credits">credit: ©2013 Brushed. <a href="http://themes.alessioatzeni.com/html/brushed/" title="Brushed | Responsive One Page Template">Brushed Template</a> by <a href="http://www.alessioatzeni.com/" title="Alessio Atzeni | Web Designer &amp; Front-end Developer">Alessio Atzeni</a></p>
+    <p class="credits">credit: ©2013 Brushed. <a href="http://themes.alessioatzeni.com/html/brushed/" title="Brushed | Responsive One Page Template">Brushed Template</a> by <a href="http://www.alessioatzeni.com/" title="Alessio Atzeni | Web Designer &amp; Front-end Developer">Alessio Atzeni</a></p>
 </footer>
 <!-- End Footer -->
 
 <!-- Back To Top -->
 <a id="back-to-top" href="#">
-	<i class="font-icon-arrow-simple-up"></i>
+    <i class="font-icon-arrow-simple-up"></i>
 </a>
 <!-- End Back to Top -->
 

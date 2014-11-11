@@ -33,8 +33,7 @@ class BookController extends BaseController {
         $restaurant = $this->rest->find($id);
 
         if($restaurant==NULL) {
-            $link = "user/".Auth::id();
-            return Redirect::to($link)->withErrors('Restaurant does not exist');
+            return Redirect::to('/')->withErrors('Restaurant does not exist');
         }
 
         $data = BookController::index($restaurant);
@@ -95,8 +94,7 @@ class BookController extends BaseController {
                     $book->setArea(Input::get('area'));
         
                     $this->book->save($book);
-                    $link = "user/".Input::get('id_user');
-                    return Redirect::to($link)->withMessage('<h3>Complete Booking.</h3>');
+                    return Redirect::to('/')->withMessage('<h3 style="color:green;">Complete Booking.</h3>');
                 }                
                 
                 else
@@ -110,18 +108,12 @@ class BookController extends BaseController {
 
     public static function currentBook($books) {
         $currentBookeds[0] = "";
-        $restaurantsName[0] = "";
         $i = 0;
-        //$res = $this->rest->find(1);
-        //$restaurant = $this->rest->find($book->id_res);
 
         foreach ($books as $book) {
             if( strtotime(date("m/d")) < strtotime($book->date) )
             {
                 $currentBookeds[$i] = $book;
-
-                /*$res = $this->rest->find(1);
-                $restaurantsName[$i] = $res;*/
                 $i++;
             }
 
@@ -130,8 +122,6 @@ class BookController extends BaseController {
                 if( strtotime(date("H:i")) < strtotime($book->time) )
                 {
                     $currentBookeds[$i] = $book;
-                    /*$res = $this->rest->find(1);
-                    $restaurantsName[$i] = $res;*/
                     $i++;
                 }
             }
@@ -139,10 +129,8 @@ class BookController extends BaseController {
             
         }
 
-        $data[0] = $currentBookeds;
-        $data[1] = $restaurantsName;
 
-        return $data;
+        return $currentBookeds;
     }
 
     public function calDate($restaurant) {
@@ -228,17 +216,16 @@ class BookController extends BaseController {
     public function cancel($id) 
     {
         //To do : add popup to comfirm cancel.
-        $link = "user/".Auth::id();
         $book = $this->book->find($id);
         $restaurant = $this->rest->find($book->id_res);
 
         
-        if (BookController::checkTime($link,$book) || $restaurant->id_owner == Auth::id()) {
+        if (BookController::checkTime($book) || $restaurant->id_owner == Auth::id()) {
             $book->delete();
-            return Redirect::to($link)->withMessage('Books canceled');
+            return Redirect::to('/')->withMessage('Books canceled');
          }
          else
-            return Redirect::to($link)->withErrors('ใกล้ถึงเวลาแล้ว ยกเลิกไม่ได้');
+            return Redirect::to('/')->withErrors('ใกล้ถึงเวลาแล้ว ยกเลิกไม่ได้');
 
     }
 
@@ -250,22 +237,21 @@ class BookController extends BaseController {
     }
 
     public function showEdit ($id_book) {
-        $link = "user/".Auth::id();
         $book = $this->book->find($id_book);
         $restaurant = $this->rest->find($book->id_res);
 
-        if (BookController::checkTime($link, $book) || $restaurant->id_owner == Auth::id()) {
+        if (BookController::checkTime($book) || $restaurant->id_owner == Auth::id()) {
             
             
             $data = BookController::index($restaurant);
             return View::make('editBook',array('book'=>$book, 'data'=>$data));
         }
         else
-            return Redirect::to($link)->withErrors('ใกล้ถึงเวลาแล้ว edit ไม่ได้ <br>Please contact restaurant');
+            return Redirect::to('/')->withErrors('ใกล้ถึงเวลาแล้ว edit ไม่ได้ <br>Please contact restaurant');
         
     }
 
-    public function checkTime ($link, $book)
+    public function checkTime ($book)
     {
         if ($book->date == date("m/d")) {
             if (strtotime("+30 minute", strtotime(date("H:i")))>strtotime($book->time))
@@ -327,8 +313,7 @@ class BookController extends BaseController {
                 $book->area = Input::get('area');
                 $book->save();
 
-                $complete = "showBook/".$id_book;
-                return Redirect::to($complete)->withMessage('Completed edit booking info...');
+                return Redirect::to('/')->withMessage('Completed edit booking info...');
             }                
                 
             else {

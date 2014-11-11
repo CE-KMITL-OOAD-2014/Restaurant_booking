@@ -101,14 +101,14 @@
         <a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-            <a id="goUp" href="/" title="Eat with me">Brushed Template</a>
+            <a id="goUp" href="/" title="Eat with me">EatWME</a>
         </div>
         
         <nav id="menu">
             <ul id="menu-nav">
                 <li><form class="form-inline " action="/index.php/search" method="POST">
                     <span class="form-group">
-                          <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" style="width: 400px;">
+                          <input type="text" class="form-control" placeholder="seach name restaurant..." name="str" id="str" style="width: 400px;">
                           <button type="submit" class="button button-mini">
                           <i class="font-icon-search"></i>
                           </button>
@@ -116,12 +116,12 @@
                     
                 </form></li>
                 @if (Auth::id()!="") 
-                        {{ "<li><a href=\"/index.php/logout_action\" class=\"external\">Logout</a></li>
+                        {{ "<li><a href=\"/logout_action\" class=\"external\">Logout</a></li>
                         <li><a href=\"#about\">About Us</a></li>" }}
                     
                 @else 
-                        {{ "<li><a href=\"/index.php/register\" class=\"external\">Register</a></li>
-                        <li><a href=\"/index.php/login\" class=\"external\">Login</a></li>
+                        {{ "<li><a href=\"/register\" class=\"external\">Register</a></li>
+                        <li><a href=\"/login\" class=\"external\">Login</a></li>
                         <li><a href=\"#about\">About Us</a></li>" }}
                 @endif
             </ul>
@@ -154,11 +154,18 @@
                     <!-- collape list in Listing -->
                     <div class="accordion" id="leftMenu">
 
-                        @if (Auth::id()!="")
-                        <?php $id=Auth::id(); ?>
+                        <?php $id=Auth::id();?>
                         {{"<div class=\"accordion-group\">
+                                <div class=\"\">
+                                    <a data-parent=\"#leftMenu\" class=\"external\" href=\"/profile/$id\">
+                                        <i class=\"icon-home\"></i> My Profile 
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class=\"accordion-group\">
                             <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/show/$id\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/show/$id \">
                                   <i class=\"icon-home\"></i> Booked lists 
                                 </a>
                           </div>
@@ -173,40 +180,9 @@
                         </div>
 
                         <div class=\"accordion-group\">
-                            <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/edit/$id\">
-                                  <i class=\"icon-home\"></i> Edit Profile 
-                                </a>
-                          </div>
-                        </div>"}}
-                    @else
-                        {{"<!-- panel Lacation -->
-                        <div class=\"accordion-group\">
-                            <div class=\"\">
-                                <a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#leftMenu\" href=\"#collapseThree\">
-                                    <i class=\"icon-th-list\"></i> Lacation
-                                </a>
-                            </div>
-                            <div id=\"collapseThree\" class=\"accordion-body collapse\" style=\"height: 0px; \">
-                                <div class=\"accordion-inner\">
-                                    <!-- Filter -->
-                                    <nav id=\"options\" class=\"work-nav\">
-                                        <ul id=\"filters\" class=\"option-set\" data-option-key=\"filter\">
-                                            <li><a href=\"#filter\" data-option-value=\"*\" class=\"selected\">All</a></li> <!-- for all -->
-                                            <li><a href=\"#filter\" data-option-value=\".photography\">Location</a></li> <!-- photography=location -->
-                                            <li><a href=\"#filter\" data-option-value=\".video\">Video</a></li>
-                                        </ul>
-                                    </nav>
-                                    <!-- End Filter -->              
-                                </div>
-                            </div>
-                        </div>
-                        <!--End Lacation-->
-
-                    <div class=\"accordion-group\">
                         <div class=\"\">
                             <a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#leftMenu\" href=\"#collapseFour\">
-                                <i class=\"icon-list-alt\"></i> Forms
+                                <i class=\"icon-list-alt\"></i> My Restaurants (new)
                             </a>
                         </div>
                         <div id=\"collapseFour\" class=\"accordion-body collapse\" style=\"height: 0px; \">
@@ -218,9 +194,31 @@
                                 </ul>                 
                             </div>
                         </div>
-                    </div>"}}
+                    </div>
 
-                    @endif
+                    <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/regisres \">
+                                  <i class=\"icon-home\"></i> Open Restaurant! 
+                                </a>
+                          </div>
+                        </div>
+
+                        <div class=\"accordion-group\">
+                                <div class=\"\">
+                                    <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/edit/$id\">
+                                        <i class=\"icon-home\"></i> Edit Profile 
+                                    </a>
+                                </div>
+                            </div>
+
+                        <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"# \">
+                                  <i class=\"icon-home\"></i> About Us
+                                </a>
+                          </div>"}}
+                    
                 </div>
                 <!--end Collapes-->
            </nav>
@@ -230,6 +228,7 @@
                 <h2>Booked Details</h2>
                 
                 <div class="col-sm-3 col-md-3">
+                    <b>Book ID </b><br>
                     <b>Restaurant </b><br>
                     <b>Customer </b><br>
                     <b>Date </b><br>
@@ -241,7 +240,8 @@
                 </div>
 
                 <div class="col-sm-6 col-md-6">
-                    {{ $res_name }}<br>
+                    {{ $book->id }}<br>
+                    {{ "<a href=\"/restaurant/$book->id_res\">$res_name</a>" }}<br>
                     {{ $username }}<br>
                     {{ $book->date }} <br>
                     {{ $book->time }}<br>

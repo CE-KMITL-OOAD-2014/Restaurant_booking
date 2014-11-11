@@ -145,59 +145,42 @@
         <div class="row">
             <div class="col-sm-3 col-md-3">
                 <nav id="options" class="work-nav">
-                    <li class="type-work">Restaurant Listings</li>
+                    <li class="type-work">Menu</li>
 
                     <!-- collape list in Listing -->
                     <div class="accordion" id="leftMenu">
 
-                        <div class="accordion-group">
-                            <div class="">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#">
-                                  <i class="icon-home"></i> Featured Restaurants 
+                        {{"<!-- panel Lacation -->
+                        <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/regisres \">
+                                  <i class=\"icon-home\"></i> Open Restaurant! 
                                 </a>
                           </div>
                         </div>
 
-                        <!--panel cuisine-->
-                        <div class="accordion-group">
-                          <div class="">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseTwo">
-                                <i class="icon-th"></i> Cuisine
-                            </a>
+                        <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/showall \">
+                                  <i class=\"icon-home\"></i> All Restaurant
+                                </a>
                           </div>
-                          <!--list in cuisine -->
-                          <div id="collapseTwo" class="accordion-body collapse" style="height: 0px; ">
-                            <div class="accordion-inner">
-                            <!-- Filter -->
-                            <nav id="options" class="work-nav">
-                                <ul id="filters" class="option-set" data-option-key="filter">
-                                    <li><a href="#filter" data-option-value="*" class="selected">All</a></li> <!-- for all -->
-                                    <li><a href="#filter" data-option-value=".photography">Location</a></li> <!-- photography=location -->
-                                    <li><a href="#filter" data-option-value=".video">Video</a></li>
-                                </ul>
-                            </nav>
-                            <!-- End Filter -->
-                            </div>
-                          </div>
-                          <!-- End list in cuisine-->
                         </div>
-                        <!--End panel cuisine -->
 
-                        <!-- panel Lacation -->
-                        <div class="accordion-group">
-                            <div class="">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseThree">
-                                    <i class="icon-th-list"></i> Lacation
+                        <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#leftMenu\" href=\"#collapseThree\">
+                                    <i class=\"icon-th-list\"></i> Forms
                                 </a>
                             </div>
-                            <div id="collapseThree" class="accordion-body collapse" style="height: 0px; ">
-                                <div class="accordion-inner">
+                            <div id=\"collapseThree\" class=\"accordion-body collapse\" style=\"height: 0px; \">
+                                <div class=\"accordion-inner\">
                                     <!-- Filter -->
-                                    <nav id="options" class="work-nav">
-                                        <ul id="filters" class="option-set" data-option-key="filter">
-                                            <li><a href="#filter" data-option-value="*" class="selected">All</a></li> <!-- for all -->
-                                            <li><a href="#filter" data-option-value=".photography">Location</a></li> <!-- photography=location -->
-                                            <li><a href="#filter" data-option-value=".video">Video</a></li>
+                                    <nav id=\"options\" class=\"work-nav\">
+                                        <ul id=\"filters\" class=\"option-set\" data-option-key=\"filter\">
+                                            <li><a href=\"#filter\" data-option-value=\"*\" class=\"selected\">All</a></li> <!-- for all -->
+                                            <li><a href=\"#filter\" data-option-value=\".photography\">Location</a></li> <!-- photography=location -->
+                                            <li><a href=\"#filter\" data-option-value=\".video\">Video</a></li>
                                         </ul>
                                     </nav>
                                     <!-- End Filter -->              
@@ -206,54 +189,13 @@
                         </div>
                         <!--End Lacation-->
 
-                    <div class="accordion-group">
-                        <div class="">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseFour">
-                                <i class="icon-list-alt"></i> Forms
-                            </a>
-                        </div>
-                        <div id="collapseFour" class="accordion-body collapse" style="height: 0px; ">
-                            <div class="accordion-inner">
-                                <ul>
-                                    <li>This is one</li>
-                                    <li>This is two</li>
-                                    <li>This is Three</li>
-                                </ul>                 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-group">
-                        <div class="">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseFive">
-                                <i class="icon-cog"></i> Plugins
-                            </a>
-                        </div>
-                        <div id="collapseFive" class="accordion-body collapse" style="height: 0px; ">
-                            <div class="accordion-inner">
-                                <ul>
-                                    <li>This is one</li>
-                                    <li>This is two</li>
-                                    <li>This is Three</li>
-                                </ul>                 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-group">
-                        <div class="">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseSix">
-                                <i class="icon-file"></i> Templates
-                            </a>
-                        </div>
-                        <div id="collapseSix" class="accordion-body collapse" style="height: 0px; ">
-                            <div class="accordion-inner">
-                                <ul>
-                                    <li>This is one</li>
-                                    <li>This is two</li>
-                                    <li>This is Three</li>
-                                </ul>                 
-                            </div>
-                        </div>
-                    </div>
+                        <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"# \">
+                                  <i class=\"icon-home\"></i> About Us
+                                </a>
+                          </div>
+                        </div>"}}
                 </div>
                 <!--end Collapes-->
            </nav>
@@ -266,7 +208,7 @@
 
                 @if (Session::has('message'))
 
-                    <p style="color:red;">{{ Session::get('message') }}</p>
+                    <p style="color:green;">{{ Session::get('message') }}</p>
 
                 @endif
 

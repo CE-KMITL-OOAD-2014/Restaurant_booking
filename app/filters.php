@@ -94,6 +94,6 @@ Route::filter('over',function()
 {
 	$res = DB::table('restaurants')->where('id_owner',Auth::id())->get();
 	if(count($res)>4){
-		return Redirect::to('logout')->withMessage('ร้านครบ 5 ร้านแล้ว');
+		return Redirect::to('/')->withErrors('sorry, already 5 restaurants');
 	}
 });

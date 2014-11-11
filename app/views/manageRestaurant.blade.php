@@ -101,7 +101,7 @@
         <a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-            <a id="goUp" href="/" title="Eat with me">Brushed Template</a>
+            <a id="goUp" href="/" title="Eat with me">EatWME</a>
         </div>
         
         <nav id="menu">
@@ -146,30 +146,70 @@
 
                     <!-- collape list in Listing -->
                     <div class="accordion" id="leftMenu">
-                    <?php $id=Auth::id(); ?>
-                        <div class="accordion-group">
-                            <div class="">
-                                {{"<a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/show/$id\">
+                    <?php $id=Auth::id();?>
+                        {{"<div class=\"accordion-group\">
+                                <div class=\"\">
+                                    <a data-parent=\"#leftMenu\" class=\"external\" href=\"/profile/$id\">
+                                        <i class=\"icon-home\"></i> My Profile 
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/show/$id \">
                                   <i class=\"icon-home\"></i> Booked lists 
-                                </a>"}}
+                                </a>
                           </div>
                         </div>
 
-                        <div class="accordion-group">
-                            <div class="">
-                                {{"<a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/showRes/$id\">
+                        <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/showRes/$id\">
                                   <i class=\"icon-home\"></i> My Restaurants
-                                </a>"}}
+                                </a>
                           </div>
                         </div>
 
-                        <div class="accordion-group">
-                            <div class="">
-                                {{"<a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/edit/$id\">
-                                  <i class=\"icon-home\"></i> Edit Profile 
-                                </a>"}}
+                        <div class=\"accordion-group\">
+                        <div class=\"\">
+                            <a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#leftMenu\" href=\"#collapseFour\">
+                                <i class=\"icon-list-alt\"></i> My Restaurants (new)
+                            </a>
+                        </div>
+                        <div id=\"collapseFour\" class=\"accordion-body collapse\" style=\"height: 0px; \">
+                            <div class=\"accordion-inner\">
+                                <ul>
+                                    <li>This is one</li>
+                                    <li>This is two</li>
+                                    <li>This is Three</li>
+                                </ul>                 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/regisres \">
+                                  <i class=\"icon-home\"></i> Open Restaurant! 
+                                </a>
                           </div>
                         </div>
+
+                        <div class=\"accordion-group\">
+                                <div class=\"\">
+                                    <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/edit/$id\">
+                                        <i class=\"icon-home\"></i> Edit Profile 
+                                    </a>
+                                </div>
+                            </div>
+
+                        <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"# \">
+                                  <i class=\"icon-home\"></i> About Us
+                                </a>
+                          </div>"}}
                 </div>
                 <!--end Collapes-->
            </nav>
@@ -190,7 +230,7 @@
 
         @if (Session::has('message'))
 
-            <p style="color:red;">{{ Session::get('message') }}</p>
+            <p style="color:green;">{{ Session::get('message') }}</p>
 
         @endif
 
@@ -235,6 +275,7 @@
             <input type="submit" >          
         </form><br>
         
+        <br><br>
         <h4>Booked List :</h4>
         <table class="table table-hover">
         <thead>
@@ -244,21 +285,26 @@
                 <th>Time</th>
                 <th>Area</th>
                 <th>Amout</th>
+                <th>Details</th>
             </tr>
         </thead>
         <tbody>
 
             <?php
+                $i=0;
                 if ($currentBookeds[0]!="") {
                     foreach ($currentBookeds as $currentBooked) {
-                        $link = "/index.php/showBook/".$currentBooked->id;
+                        $details = "/index.php/showBook/".$currentBooked->id;
+                        $link = "/index.php/profile/".$currentBooked->id_user;
                         echo "<tr>";
-                        echo "<td><a href=\"".$link."\">".$currentBooked->id."</a></td>";
+                        echo "<td><a href=\"".$link."\">".$customersName[$i]."</a></td>";
                         echo "<td>".$currentBooked->date."</td>";
                         echo "<td>".$currentBooked->time."</td>";
                         echo "<td>".$currentBooked->area."</td>";
                         echo "<td>".$currentBooked->amout."</td>";
+                        echo "<td><a href=\"$details\">Details</a></td>";
                         echo "</tr>";
+                        $i++;
                     }
                 }
                 else
@@ -267,21 +313,17 @@
             ?>
         </tbody>
         </table>
+        <br><br>
 
-        <?php
-            foreach ($currentBookeds as $currentBooked) {
-                echo $currentBooked;
-            }
-        ?>
-        Pic : <br>
+
         <?php
             $pics = explode(",", $restaurant->name_pic);
             if ($pics[0]=="") {
-                echo "<img src=\"/pics/pic\" height=100% width=100% >";
+                echo "<img src=\"/pics/pic\" height=100% width=100% ><br><br>";
             }
             else {
                 foreach ($pics as $pic) {
-                    echo "<img src=\"/pics/".$pic."\" height=100% width=100% >";
+                    echo "<img src=\"/pics/".$pic."\" height=100% width=100% ><br><br>";
                 }
             }
         ?>

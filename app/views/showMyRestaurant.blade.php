@@ -101,7 +101,7 @@
     	<a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-        	<a id="goUp" href="/" title="Eat with me">Brushed Template</a>
+        	<a id="goUp" href="/" title="Eat with me">EatWMW</a>
         </div>
         
         <nav id="menu">
@@ -148,35 +148,76 @@
                     <div class="accordion" id="leftMenu">
 
                         <div class="accordion" id="leftMenu">
-                        <?php $id=Auth::id(); ?>
-                        <div class="accordion-group">
-                            <div class="">
-                                {{"<a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/show/$id\">
+                        <?php $id=Auth::id();?>
+                        {{"<div class=\"accordion-group\">
+                                <div class=\"\">
+                                    <a data-parent=\"#leftMenu\" class=\"external\" href=\"/profile/$id\">
+                                        <i class=\"icon-home\"></i> My Profile 
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/show/$id \">
                                   <i class=\"icon-home\"></i> Booked lists 
-                                </a>"}}
+                                </a>
                           </div>
                         </div>
 
-                        <div class="accordion-group">
-                            <div class="">
-                                {{"<a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/showRes/$id\">
+                        <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/showRes/$id\">
                                   <i class=\"icon-home\"></i> My Restaurants
-                                </a>"}}
+                                </a>
                           </div>
                         </div>
 
-                        <div class="accordion-group">
-                            <div class="">
-                                {{"<a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/edit/$id\">
-                                  <i class=\"icon-home\"></i> Edit Profile 
-                                </a>"}}
+                        <div class=\"accordion-group\">
+                        <div class=\"\">
+                            <a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#leftMenu\" href=\"#collapseFour\">
+                                <i class=\"icon-list-alt\"></i> My Restaurants (new)
+                            </a>
+                        </div>
+                        <div id=\"collapseFour\" class=\"accordion-body collapse\" style=\"height: 0px; \">
+                            <div class=\"accordion-inner\">
+                                <ul>
+                                    <li>This is one</li>
+                                    <li>This is two</li>
+                                    <li>This is Three</li>
+                                </ul>                 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/regisres \">
+                                  <i class=\"icon-home\"></i> Open Restaurant! 
+                                </a>
                           </div>
                         </div>
+
+                        <div class=\"accordion-group\">
+                                <div class=\"\">
+                                    <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/edit/$id\">
+                                        <i class=\"icon-home\"></i> Edit Profile 
+                                    </a>
+                                </div>
+                            </div>
+
+                        <div class=\"accordion-group\">
+                            <div class=\"\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"# \">
+                                  <i class=\"icon-home\"></i> About Us
+                                </a>
+                          </div>"}}
                 </div>
-                <!--end Collapes-->
            </nav>
         </div>
-            
+
+<!-- ===================================end nav========================================== -->
+
             <div class="col-sm-9 col-md-9">
             	<h2> My Restaurants </h2>
             	<table class="table table-hover">
