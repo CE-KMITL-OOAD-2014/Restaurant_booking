@@ -115,7 +115,7 @@
 
 <!-- Header -->
 <header>
-    <div class="sticky-nav">
+    <div class="sticky-nav" >
     	<a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
@@ -137,12 +137,12 @@
                 
                     @if (Auth::id()!="") 
                         {{ "<li><a href=\"/index.php/logout_action\" class=\"external\">Logout</a></li>
-                        <li><a href=\"#about\">About Us</a></li>" }}
+                        <li><a href=\"/aboutus\" class=\"external\">About Us</a></li>" }}
                     
                     @else 
                         {{ "<li><a href=\"index.php/register\" class=\"external\">Register</a></li>
                         <li><a href=\"index.php/login\" class=\"external\">Login</a></li>
-                        <li><a href=\"#about\">About Us</a></li>" }}
+                        <li><a href=\"/aboutus\" class=\"external\">About Us</a></li>" }}
                     @endif
                 
 
@@ -202,23 +202,6 @@
                           </div>
                         </div>
 
-                        <div class=\"accordion-group\">
-                        <div class=\"\">
-                            <a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#leftMenu\" href=\"#collapseFour\">
-                                <i class=\"icon-list-alt\"></i> My Restaurants (new)
-                            </a>
-                        </div>
-                        <div id=\"collapseFour\" class=\"accordion-body collapse\" style=\"height: 0px; \">
-                            <div class=\"accordion-inner\">
-                                <ul>
-                                    <li>This is one</li>
-                                    <li>This is two</li>
-                                    <li>This is Three</li>
-                                </ul>                 
-                            </div>
-                        </div>
-                    </div>
-
                     <div class=\"accordion-group\">
                             <div class=\"\">
                                 <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/regisres \">
@@ -237,7 +220,7 @@
 
                         <div class=\"accordion-group\">
                             <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"# \">
+                                <a data-parent=\"#leftMenu\" href=\"/aboutus\" class=\"external\">
                                   <i class=\"icon-home\"></i> About Us
                                 </a>
                           </div>"}}
@@ -261,29 +244,7 @@
 
                         <div class=\"accordion-group\">
                             <div class=\"\">
-                                <a class=\"accordion-toggle\" data-toggle=\"collapse\" data-parent=\"#leftMenu\" href=\"#collapseThree\">
-                                    <i class=\"icon-th-list\"></i> Forms
-                                </a>
-                            </div>
-                            <div id=\"collapseThree\" class=\"accordion-body collapse\" style=\"height: 0px; \">
-                                <div class=\"accordion-inner\">
-                                    <!-- Filter -->
-                                    <nav id=\"options\" class=\"work-nav\">
-                                        <ul id=\"filters\" class=\"option-set\" data-option-key=\"filter\">
-                                            <li><a href=\"#filter\" data-option-value=\"*\" class=\"selected\">All</a></li> <!-- for all -->
-                                            <li><a href=\"#filter\" data-option-value=\".photography\">Location</a></li> <!-- photography=location -->
-                                            <li><a href=\"#filter\" data-option-value=\".video\">Video</a></li>
-                                        </ul>
-                                    </nav>
-                                    <!-- End Filter -->              
-                                </div>
-                            </div>
-                        </div>
-                        <!--End Lacation-->
-
-                        <div class=\"accordion-group\">
-                            <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"# \">
+                                <a data-parent=\"#leftMenu\" href=\"/aboutus\" class=\"external\">
                                   <i class=\"icon-home\"></i> About Us
                                 </a>
                           </div>
@@ -324,7 +285,7 @@
                                 for ($i=0 ; $i<count($pics) ; $i++) {
                                     echo    "<li class=\"item-thumbs span3 design\">
                                                                             
-                                                <a class=\"hover-wrap fancybox\" data-fancybox-group=\"gallery\" title=\"".$restaurants[$i]->name."\" href=\"".$pics[$i]."\">
+                                                <a class=\"hover-wrap fancybox\" data-fancybox-group=\"gallery\" title=\"".$restaurants[$i]->name."\" href=\"/restaurant/".$restaurants[$i]->id."\">
                                                     <span class=\"overlay-img\"></span>
                                                     <span class=\"overlay-img-thumb font-icon-plus\"></span>
                                                 </a>

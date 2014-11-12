@@ -56,3 +56,5 @@ Route::post('search',array('uses'=>'RestaurantController@search'));
 Route::get('showall',array('uses'=>'ShowRestaurantsController@showall'));
 
 Route::get('profile/{id}',array('before' => 'auth' ,'uses'=>'UserController@showProfile'));
+
+Route::get('aboutus',array('uses'=>'AboutusController@aboutus'));
