@@ -21,7 +21,7 @@ Route::post('regisres_action',array('uses' => 'RestaurantController@store'));
 
 Route::get('restaurant/{id}',array('uses' => 'ShowRestaurantsController@show'));
 
-Route::get('book/{id}',array('before' => 'auth' ,'uses' => 'BookController@showBookPage'));
+Route::get('book/{id}',array('before' => 'auth' ,'uses' => 'ShowBookController@showBookPage'));
 
 Route::post('booking_action',array('before' => 'auth' ,'uses' => 'BookController@book'));
 
@@ -45,9 +45,9 @@ Route::get('editRes/{id}',array('uses'=>'RestaurantController@showEdit'));
 
 Route::post('editRes_action/{id_res}',array('uses'=>'RestaurantController@edit'));
 
-Route::get('showBook/{id}',array('uses'=>'BookController@showDetailBook'));
+Route::get('showBook/{id}',array('uses'=>'ShowBookController@showDetailBook'));
 
-Route::get('editBook/{id}',array('uses'=>'BookController@showEdit'));
+Route::get('editBook/{id}',array('uses'=>'ShowBookController@showEdit'));
 
 Route::post('editBook_action/{id_book}',array('uses'=>'BookController@edit'));
 

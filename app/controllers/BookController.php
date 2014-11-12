@@ -13,10 +13,13 @@ class BookController extends BaseController {
         $this->user = $user;
 	}
 
-	public function index ($restaurant) {
+    //set data of restaurant for show page and show edit restaurant
+	public static function index ($restaurant) {
 
-        $avail = BookController::calTime($restaurant);
-        $day = BookController::calDate($restaurant);
+        $calculate = new Calculate;
+
+        $avail = $calculate->calTime($restaurant);
+        $day = $calculate->calDate($restaurant);
 
 		$data = array('id' => $restaurant->id , 
 			'id_owner' => $restaurant->id_owner, 
@@ -28,19 +31,6 @@ class BookController extends BaseController {
 		
 		return $data;
 	}
-
-    public function showBookPage ($id) {
-        $restaurant = $this->rest->find($id);
-
-        if($restaurant==NULL) {
-            return Redirect::to('/')->withErrors('Restaurant does not exist');
-        }
-
-        $data = BookController::index($restaurant);
-        
-        return View::make('booking')->with('data',$data);
-    }
-
 
 	public function book () {
 
@@ -59,6 +49,8 @@ class BookController extends BaseController {
                 $link = "book/".(Input::get('id_res'));
                 return Redirect::to($link)->withErrors($validator->messages());
             }
+
+            //make booking
             else
             {
                 if (Input::get('date')==date("m/d")) {
@@ -106,121 +98,15 @@ class BookController extends BaseController {
 
 	}
 
-    public static function currentBook($books) {
-        $currentBookeds[0] = "";
-        $i = 0;
-
-        foreach ($books as $book) {
-            if( strtotime(date("m/d")) < strtotime($book->date) )
-            {
-                $currentBookeds[$i] = $book;
-                $i++;
-            }
-
-            if ( strtotime(date("m/d")) == strtotime($book->date) )
-            {
-                if( strtotime(date("H:i")) < strtotime($book->time) )
-                {
-                    $currentBookeds[$i] = $book;
-                    $i++;
-                }
-            }
-
-            
-        }
-
-
-        return $currentBookeds;
-    }
-
-    public function calDate($restaurant) {
-        $days = explode(",", $restaurant->day);
-
-        $Currentdate = date("Y-m-d");
-        $date = strtotime("+0 day", strtotime($Currentdate));
-        $results[0] = "";
-
-        for ($i=0; $i < 15; $i++) { 
-            for ($j=0; $j < count($days); $j++) { 
-                if ($days[$j]==date("l", $date)) {
-                    
-                    $results[$i] = date("m/d", $date);
-                    break;
-                }
-                
-            }
-            
-            if ($j==count($days)) {
-
-                $i--;
-            }
-            $date = date("Y-m-d",$date);
-            $date = strtotime("+1 day", strtotime($date));            
-        }
-
-        $results = implode(",", $results);
-        return $results;
-
-    }
-
-    public function calTime($restaurant) {
-
-        $open = $restaurant->time_open;
-        $close = $restaurant->time_close;
-        $results[0] = $open;
-
-        if($open[3]=='0'){
-                        
-
-            for ($i=1 ; $results[count($results)-1]!=$close ; $i++) {
-                $time = explode(":", $results[$i-1]);
-
-                if(($i%2)!=0){                                
-                    $results[$i] = $time[0].":"."30";
-                }
-                else {
-                    if ($results[$i-1] == "23:30") 
-                        $results[$i] = "00:00";
-                    
-                    else
-                        $results[$i] = ($time[0]+1).":"."00";
-                }
-
-            }
-               
-        }
-
-        elseif ($open[3]=='3') {
-
-            for ($i=1 ; $results[count($results)-1]!=$close ; $i++) {
-                $time = explode(":", $results[$i-1]);
-
-                if(($i%2)==0){                                
-                    $results[$i] = $time[0].":"."30";
-                }
-                else {
-                    if ($results[$i-1] == "23:30") 
-                        $results[$i] = "00:00";
-                    
-                    else                    
-                        $results[$i] = ($time[0]+1).":"."00";
-                }
-
-            }
-             
-        }
-        $avail = implode(",", $results);
-        return $avail;
-    }
-
     public function cancel($id) 
     {
         //To do : add popup to comfirm cancel.
         $book = $this->book->find($id);
         $restaurant = $this->rest->find($book->id_res);
 
-        
-        if (BookController::checkTime($book) || $restaurant->id_owner == Auth::id()) {
+        //can cancel
+        $calculate = new Calculate();
+        if ($calculate->checkTime($book) || $restaurant->id_owner == Auth::id()) {
             $book->delete();
             return Redirect::to('/')->withMessage('Books canceled');
          }
@@ -228,38 +114,6 @@ class BookController extends BaseController {
             return Redirect::to('/')->withErrors('ใกล้ถึงเวลาแล้ว ยกเลิกไม่ได้');
 
     }
-
-    public function showDetailBook ($id_book) {
-        $book = $this->book->find($id_book);
-        $res_name = $this->rest->find($book->id_res)->name;
-        $username = $this->user->find($book->id_user)->name;
-        return View::make('showDetailBook',array('book'=>$book, 'res_name'=>$res_name, 'username'=>$username));
-    }
-
-    public function showEdit ($id_book) {
-        $book = $this->book->find($id_book);
-        $restaurant = $this->rest->find($book->id_res);
-
-        if (BookController::checkTime($book) || $restaurant->id_owner == Auth::id()) {
-            
-            
-            $data = BookController::index($restaurant);
-            return View::make('editBook',array('book'=>$book, 'data'=>$data));
-        }
-        else
-            return Redirect::to('/')->withErrors('ใกล้ถึงเวลาแล้ว edit ไม่ได้ <br>Please contact restaurant');
-        
-    }
-
-    public function checkTime ($book)
-    {
-        if ($book->date == date("m/d")) {
-            if (strtotime("+30 minute", strtotime(date("H:i")))>strtotime($book->time))
-                return false;
-        }
-
-        return true;
-    } 
 
     public function edit($id_book) {
         $data =  Input::all() ;
@@ -278,6 +132,8 @@ class BookController extends BaseController {
             
             return Redirect::to($link)->withErrors($validator->messages());
         }
+
+        //making editing
         else
         {
             if (Input::get('date')==date("m/d")) {
@@ -289,6 +145,7 @@ class BookController extends BaseController {
 
             }
 
+            //check amout that booked
             $test = DB::table('books')->where('id_res',Input::get('id_res'))->where('time',Input::get('time'))->where('date',Input::get('date'))->where('area',Input::get('area'))->get();
             $currentBook = 0;
             for ($i=0; $i < count($test); $i++) { 
@@ -297,13 +154,13 @@ class BookController extends BaseController {
                 }
                 
             }
-
             $res = $this->rest->find(Input::get('id_res'));
             $areas = explode(",", $res->area); 
             $seats = explode(",", $res->seat);
             $indexArea = array_search(Input::get('area'), $areas);
             $seat = $seats[$indexArea];
-                
+               
+            //can edit book 
             if ($currentBook+(Input::get('amout')) <= $seat )
             {
                 $book  = $this->book->find($id_book);
@@ -315,7 +172,8 @@ class BookController extends BaseController {
 
                 return Redirect::to('/')->withMessage('Completed edit booking info...');
             }                
-                
+            
+            //Seat unavailable now   
             else {
                 return Redirect::to($link)->withErrors('Seat unavailable now...');
             }

@@ -1,6 +1,7 @@
 @extends('layouts.baseIndex')
 
 @section('homeslider')
+
     <!-- Homepage Slider -->
     <div id="home-slider">  
         <div class="overlay"></div>
@@ -26,20 +27,18 @@
 @section('body')
     <section id="projects">
         <ul id="thumbs">                        
-							
-            <?php
-                for ($i=0 ; $i<count($pics) ; $i++) {
-                    echo    "<li class=\"item-thumbs span3 design\">
-                                                                            
-                                <a class=\"hover-wrap fancybox\" data-fancybox-group=\"gallery\" title=\"".$restaurants[$i]->name."\" href=\"/restaurant/".$restaurants[$i]->id."\">
-                                    <span class=\"overlay-img\"></span>
-                                    <span class=\"overlay-img-thumb font-icon-plus\"></span>
-                                </a>
-                                                                    
-                                <img src=\"".$pics[$i]."\" alt=\"".$restaurants[$i]->addr." <br> ".$restaurants[$i]->tel."\">
-                            </li>";
-                }
-            ?>
+			
+            <!-- show thumbs of random picture of restaurants -->				
+            @for ($i=0 ; $i<count($pics) ; $i++) 
+                {{"<li class=\"item-thumbs span3 design\">
+                    <a class=\"hover-wrap fancybox\" data-fancybox-group=\"gallery\" title=\"".$restaurants[$i]->name."\" href=\"/restaurant/".$restaurants[$i]->id."\">
+                    <span class=\"overlay-img\"></span>
+                    <span class=\"overlay-img-thumb font-icon-plus\"></span>
+                    </a>
+                                                                                                    
+                    <img src=\"".$pics[$i]."\" alt=\"".$restaurants[$i]->addr." <br> ".$restaurants[$i]->tel."\">
+                    </li>"}}
+            @endfor
                         	
         </ul>
     </section>

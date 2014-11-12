@@ -5,7 +5,8 @@ use Core\Storage\Book\BookRepository as Book;
 use Core\Storage\Restaurant\RestaurantRepository as Restaurant;
  
 class UserController extends BaseController {
-	public function __construct(User $user, Book $book, Restaurant $rest)
+	
+    public function __construct(User $user, Book $book, Restaurant $rest)
 	{
   		$this->user = $user;
   		$this->book = $book;
@@ -16,7 +17,8 @@ class UserController extends BaseController {
 	public function showBooked ($id)
 	{
 		$books = DB::table('books')->where('id_user',$id)->get();
-		$currentBookeds = BookController::currentBook($books);
+        $checkCurrentBooked = new CheckCurrentBooked();
+		$currentBookeds = $checkCurrentBooked->currentBook($books);
         $restaurantsName[0] = "";
         $i=0;
 
@@ -48,7 +50,8 @@ class UserController extends BaseController {
 	{
 		$restaurant = $this->rest->find($id_res);
 		$books = DB::table('books')->where('id_res',$id_res)->get();
-		$currentBookeds = BookController::currentBook($books);
+		$checkCurrentBooked = new CheckCurrentBooked();
+        $currentBookeds = $checkCurrentBooked->currentBook($books);
     $customersName[0] = "";
     $i=0;
 

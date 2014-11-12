@@ -17,6 +17,8 @@
         <center><h1>About Us</h1></center>
         <br>
         <table>
+
+            <!-- Tuck Info -->
             <tr>
                 <td class="col-sm-12 col-md-6">
                     <img src="/img/tuck.JPG" width="60%" >
@@ -28,9 +30,8 @@
                     <p>King Mongkut's Institute of Technology Ladkrabang</p>
                 </td>
             </tr>
-        </table>
 
-        <table>
+            <!-- View Info -->
             <tr>
                 <td class="col-sm-12 col-md-6">
                     <h2>View &nbsp;&nbsp;&nbsp; ==> </h2>
