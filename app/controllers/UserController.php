@@ -17,22 +17,25 @@ class UserController extends BaseController {
 	{
 		$books = DB::table('books')->where('id_user',$id)->get();
 		$currentBookeds = BookController::currentBook($books);
-    $restaurantsName[0] = "";
-    $i=0;
+        $restaurantsName[0] = "";
+        $i=0;
 
-    foreach ($currentBookeds as $currentBooked) {
-      $restaurantsName[$i] = $this->rest->find($currentBooked->id_res)->name;
-      $i++;
-    }
+        if ($currentBookeds[0]!="") {
+            foreach ($currentBookeds as $currentBooked) {
+                $restaurantsName[$i] = $this->rest->find($currentBooked->id_res)->name;
+                $i++;
+            }
+        }
+    
 
-    return View::make('showBooked',array('currentBookeds'=>$currentBookeds,'restaurantsName'=>$restaurantsName));
+        return View::make('showBooked',array('currentBookeds'=>$currentBookeds,'restaurantsName'=>$restaurantsName));
 
 	}
 
 	public function showRestaurant ($id)
 	{
 		$rests = DB::table('restaurants')->where('id_owner',$id)->get();
-    return View::make('showMyRestaurant',array('restaurants'=>$rests));
+        return View::make('showMyRestaurant',array('restaurants'=>$rests));
 	}
 
   public function showProfile ($id)

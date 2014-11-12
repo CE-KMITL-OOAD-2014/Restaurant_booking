@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en-US"><!--<![endif]--><head>
-
+<html lang="en-US"><!--<![endif]-->
+<head>
 <!-- Meta Tags -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -17,31 +17,31 @@
 <!--[if IEMobile]>  <meta http-equiv="cleartype" content="on">  <![endif]-->
 
 <!-- Bootstrap -->
-<link href="/_include/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Main Style -->
-<link href="/_include/css/main.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
 
 <!-- Supersized -->
-<link href="/_include/css/supersized.css" rel="stylesheet">
-<link href="/_include/css/supersized.shutter.css" rel="stylesheet">
+<link href="/css/supersized.css" rel="stylesheet">
+<link href="/css/supersized.shutter.css" rel="stylesheet">
 
 <!-- FancyBox -->
-<link href="/_include/css/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="/css/fancybox/jquery.fancybox.css" rel="stylesheet">
 
 <!-- Font Icons -->
-<link href="/_include/css/fonts.css" rel="stylesheet">
+<link href="/css/fonts.css" rel="stylesheet">
 
 <!-- Shortcodes -->
-<link href="/_include/css/shortcodes.css" rel="stylesheet">
+<link href="/css/shortcodes.css" rel="stylesheet">
 
 <!-- Responsive -->
-<link href="/_include/css/bootstrap-responsive.min.css" rel="stylesheet">
-<link href="/_include/css/responsive.css" rel="stylesheet">
+<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="/css/responsive.css" rel="stylesheet">
 
 <!-- Supersized -->
-<link href="/_include/css/supersized.css" rel="stylesheet">
-<link href="/_include/css/supersized.shutter.css" rel="stylesheet">
+<link href="/css/supersized.css" rel="stylesheet">
+<link href="/css/supersized.shutter.css" rel="stylesheet">
 
 <!-- Google Font -->
 <link href="http://fonts.googleapis.com/css?family=Titillium+Web:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900" rel="stylesheet" type="text/css">
@@ -55,7 +55,7 @@
 <link rel="apple-touch-icon" sizes="144x144" href="#">
 
 <!-- Modernizr -->
-<script src="/_include/js/modernizr.js"></script>
+<script src=" js/modernizr.js"></script>
 
 <!-- Analytics -->
 <script type="text/javascript">
@@ -88,27 +88,27 @@
 <!-- This section is for Splash Screen -->
 <div class="ole">
 <section id="jSplash">
-    <div id="circle"></div>
+	<div id="circle"></div>
 </section>
 </div>
 <!-- End of Splash Screen -->
 
-
+@yield('homeslider')
 
 <!-- Header -->
 <header>
-    <div class="sticky-nav">
-        <a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
+    <div class="sticky-nav" >
+    	<a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
         
         <div id="logo">
-            <a id="goUp" href="/" title="Eat with me">EatWMW</a>
+        	<a id="goUp" href="/" title="Eat with me">EatWME</a>
         </div>
         
         <nav id="menu">
-            <ul id="menu-nav">
-                <li><form class="form-inline " action="/search" method="POST">
+        	<ul id="menu-nav">
+                <li><form class="form-inline " action="/index.php/search" method="POST">
                     <span class="form-group">
-                          <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" style="width: 400px;">
+                          <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" width=100%>
                           <button type="submit" class="button button-mini">
                           <i class="font-icon-search"></i>
                           </button>
@@ -116,16 +116,19 @@
                     
                 </form></li>
                 
+                
                     @if (Auth::id()!="") 
-                        {{ "<li><a href=\"/logout_action\" class=\"external\">Logout</a></li>
+                        {{ "<li><a href=\"/index.php/logout_action\" class=\"external\">Logout</a></li>
                         <li><a href=\"/aboutus\" class=\"external\">About Us</a></li>" }}
                     
                     @else 
-                        {{ "<li><a href=\"/register\" class=\"external\">Register</a></li>
-                        <li><a href=\"/login\" class=\"external\">Login</a></li>
+                        {{ "<li><a href=\"index.php/register\" class=\"external\">Register</a></li>
+                        <li><a href=\"index.php/login\" class=\"external\">Login</a></li>
                         <li><a href=\"/aboutus\" class=\"external\">About Us</a></li>" }}
                     @endif
+                
 
+                
             </ul>
         </nav>
         
@@ -135,8 +138,8 @@
 
 <!-- Our Work Section -->
 <div id="work" class="page">
-    <div class="container">
-        <!-- Title Page -->
+	<div class="container">
+    	<!-- Title Page -->
         <div class="row">
             <div class="col-sm-12 col-md-12">
                 <div class="title-page">
@@ -149,14 +152,13 @@
         
         <!-- Portfolio Projects -->
         <div class="row">
-            <div class="col-sm-3 col-md-3">
+        	<div class="col-sm-3 col-md-3">
                 <nav id="options" class="work-nav">
                     <li class="type-work">Menu</li>
 
                     <!-- collape list in Listing -->
                     <div class="accordion" id="leftMenu">
-
-                        @if (Auth::id()!="")
+                    @if (Auth::id()!="")
                         <?php $id=Auth::id();?>
                         {{"<div class=\"accordion-group\">
                                 <div class=\"\">
@@ -168,7 +170,7 @@
 
                             <div class=\"accordion-group\">
                             <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/show/$id \">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/show/$id \">
                                   <i class=\"icon-home\"></i> Booked lists 
                                 </a>
                           </div>
@@ -176,7 +178,7 @@
 
                         <div class=\"accordion-group\">
                             <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/showRes/$id\">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/showRes/$id\">
                                   <i class=\"icon-home\"></i> My Restaurants
                                 </a>
                           </div>
@@ -184,7 +186,7 @@
 
                     <div class=\"accordion-group\">
                             <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/regisres \">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/regisres \">
                                   <i class=\"icon-home\"></i> Open Restaurant! 
                                 </a>
                           </div>
@@ -192,7 +194,7 @@
 
                         <div class=\"accordion-group\">
                                 <div class=\"\">
-                                    <a data-parent=\"#leftMenu\" class=\"external\" href=\"/edit/$id\">
+                                    <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/edit/$id\">
                                         <i class=\"icon-home\"></i> Edit Profile 
                                     </a>
                                 </div>
@@ -208,7 +210,7 @@
                         {{"<!-- panel Lacation -->
                         <div class=\"accordion-group\">
                             <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/regisres \">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/regisres \">
                                   <i class=\"icon-home\"></i> Open Restaurant! 
                                 </a>
                           </div>
@@ -216,7 +218,7 @@
 
                         <div class=\"accordion-group\">
                             <div class=\"\">
-                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/showall \">
+                                <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/showall \">
                                   <i class=\"icon-home\"></i> All Restaurant
                                 </a>
                           </div>
@@ -231,16 +233,36 @@
                         </div>"}}
 
                     @endif
+
                 </div>
+                <!--end Collapes-->
            </nav>
         </div>
 
-<!-- ===================================end nav========================================== -->
+<!-- ==================================end nav============================================ -->
 
             <div class="col-sm-9 col-md-9">
-                
-            @yield('body')
+            	<div class="row">
 
+                    @if ($errors->any())
+
+                        <h4><ul style="color:red;">
+
+                            {{ implode('', $errors->all('<li>:message</li>')) }}
+
+                        </ul></h4>
+
+                    @endif
+
+                    @if (Session::has('message'))
+
+                        <h4 style="color:green;">{{ Session::get('message') }}</h4>
+
+                    @endif
+
+                    @yield('body')
+                    
+            	</div>
             </div>
         </div>
         <!-- End Portfolio Projects -->
@@ -249,15 +271,16 @@
 <!-- End Our Work Section -->
 
 
+
 <!-- Footer -->
 <footer>
-    <p class="credits">credit: ©2013 Brushed. <a href="http://themes.alessioatzeni.com/html/brushed/" title="Brushed | Responsive One Page Template">Brushed Template</a> by <a href="http://www.alessioatzeni.com/" title="Alessio Atzeni | Web Designer &amp; Front-end Developer">Alessio Atzeni</a></p>
+	<p class="credits">credit: ©2013 Brushed. <a href="http://themes.alessioatzeni.com/html/brushed/" title="Brushed | Responsive One Page Template">Brushed Template</a> by <a href="http://www.alessioatzeni.com/" title="Alessio Atzeni | Web Designer &amp; Front-end Developer">Alessio Atzeni</a></p>
 </footer>
 <!-- End Footer -->
 
 <!-- Back To Top -->
 <a id="back-to-top" href="#">
-    <i class="font-icon-arrow-simple-up"></i>
+	<i class="font-icon-arrow-simple-up"></i>
 </a>
 <!-- End Back to Top -->
 
