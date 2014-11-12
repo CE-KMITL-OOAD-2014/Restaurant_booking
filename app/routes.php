@@ -1,10 +1,6 @@
 <?php
 
-Route::get('/', function()
-{
-	//return View::make('hello');
-	return View::make('index');
-});
+Route::get('/', array('uses'=>'RandomRestaurantsController@showPic'));
 
 Route::get('register', array('uses'=>'HomeController@showRegister'));
 
