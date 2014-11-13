@@ -41,7 +41,7 @@
                     	</li>"}}
             	@endfor
             @else
-            	<p>No restaurant.</p>
+            	<h1>No restaurant.</h1>
             @endif
 
         </ul>
