@@ -25,10 +25,12 @@
 
 
 @section('body')
+
+@if ($pics[0]!="")
     <section id="projects">
         <ul id="thumbs">                        
 			
-			@if ($pics[0]!="")
+			
             	<!-- show thumbs of random picture of restaurants -->				
             	@for ($i=0 ; $i<count($pics) ; $i++) 
                 	{{"<li class=\"item-thumbs span3 design\">
@@ -40,10 +42,10 @@
                     	<img src=\"".$pics[$i]."\" alt=\"".$restaurants[$i]->addr." <br> ".$restaurants[$i]->tel."\">
                     	</li>"}}
             	@endfor
-            @else
-            	<h1>No restaurant.</h1>
-            @endif
-
         </ul>
     </section>
+@else
+    <h2 style="color:blue">No restaurant.</h2>
+@endif
+
 @stop
