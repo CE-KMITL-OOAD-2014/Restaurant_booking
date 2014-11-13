@@ -106,7 +106,7 @@
                         <li>
                             <form class="form-inline " action="/search" method="POST">
                                 <span class="form-group">
-                                    <input type="text" class="form-control" placeholder="seach from name of restaurant..." name="str" id="str" style="width: 400px;">
+                                    <input type="text" class="form-control" placeholder="seach..." name="str" id="str" width=100%">
                                     <button type="submit" class="button button-mini">
                                         <i class="font-icon-search"></i>
                                     </button>
