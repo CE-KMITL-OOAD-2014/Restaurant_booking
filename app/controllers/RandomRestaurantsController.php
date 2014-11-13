@@ -37,6 +37,7 @@ class RandomRestaurantsController extends BaseController {
 
 	}
 
+    //show random picture on index page
     public function showPic () {
         $restaurants = RandomRestaurantsController::random();
         $restaurant_pics[0] = "";

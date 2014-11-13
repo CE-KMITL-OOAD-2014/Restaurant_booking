@@ -7,35 +7,28 @@ class RestaurantController extends BaseController {
 	{
   		$this->rest = $rest;
 	}
-	/**
- 	* Display a listing of the resource.
- 	*
- 	* @return Response
- 	*/
-	public function index()
+
+    //generate set of time between 00:00 - 23:30
+	public static function index()
 	{
-        $results[0] = "00:00";
+        $times[0] = "00:00";
         $close = "23:30";
-        for ($i=1 ; $results[count($results)-1]!=$close ; $i++) {
-            $time = explode(":", $results[$i-1]);
+        for ($i=1 ; $times[count($times)-1]!=$close ; $i++) {
+            $time = explode(":", $times[$i-1]);
 
             if(($i%2)!=0){                                
-                $results[$i] = $time[0].":"."30";
+                $times[$i] = $time[0].":"."30";
             }
             else {
-                $results[$i] = ($time[0]+1).":"."00";
+                $times[$i] = ($time[0]+1).":"."00";
             }   
 
         }
 
-  		return $results;
+  		return $times;
 	}
 
-    public function showRegisRestaurant () {
-        $results = RestaurantController::index();
-        return View::make('formOpen')->with('results',$results);
-    }
-
+    //create restaurant
 	public function store()
 	{
             $data =  Input::all() ;
@@ -75,23 +68,6 @@ class RestaurantController extends BaseController {
             }
 	}
 
-
-    public function search () {
-        $str = Input::get('str');
-        $restaurants = DB::table('restaurants')->where('name','like','%'.$str.'%')
-                                                ->orWhere('addr','like','%'.$str.'%')
-                                                ->orWhere('day','like','%'.$str.'%')
-                                                ->orWhere('time_open','like','%'.$str.'%')
-                                                ->orWhere('time_close','like','%'.$str.'%')
-                                                ->orWhere('area','like','%'.$str.'%')
-                                                ->orWhere('tel','like','%'.$str.'%')->get();
-        
-
-        if ($str=="") $str = "ALL";
-
-        return View::make('search',array('str'=>$str, 'restaurants'=>$restaurants));
-    }
-
     public function deleteRestaurant ($id)
     {
         //To do : add popup to comfirm delete.
@@ -102,52 +78,6 @@ class RestaurantController extends BaseController {
         return Redirect::to('/')->withMessage('Deleted restaurant id : {{$id}}');
     }
 
-    public function uploadPic ($id_res)
-    {
-        $link = "manage/".$id_res;
-
-        $data =  Input::all() ;
-            $rule  =  array(
-                    'pic'       => 'required'
-                ) ;
-
-            $validator = Validator::make($data,$rule);
-
-            if ($validator->fails())
-            {
-                    return Redirect::to($link)->withErrors($validator->messages());
-            }
-
-        if (!in_array(Input::file('pic')->getClientOriginalExtension(), array('jpg', 'gif', 'png', 'jpeg'))) 
-            return Redirect::to($link)->withErrors('Invalid image extension we just allow JPG, GIF, PNG, JPEG');
-
-        //set name of picture => "idRes_idPicOfRes"
-        $rest = $this->rest->find($id_res);
-        $stringPic = $rest->name_pic;
-        if ($stringPic==NULL) {
-            $name = $id_res."_1";
-            $rest->name_pic = $name;
-        }
-        else {
-            $pics = explode("_", $stringPic);
-            $name = $id_res."_".($pics[count($pics)-1]+1);
-            $rest->name_pic = $stringPic.",".$name;
-        }
-        
-        
-        $rest->save();
-
-        $messages = Input::file('pic')->getClientOriginalName()." UPLOADED!!";
-        Input::file('pic')->move(base_path().'/public/pics/',$name);
-        return Redirect::to($link)->withMessage($messages);
-    }
-
-    public function showEdit($id_res) {
-        $rest = $this->rest->find($id_res);
-        $results = RestaurantController::index();
-
-        return View::make('editRestaurant',array('results'=>$results , 'restaurant'=>$rest));
-    }
 
     public function edit ($id_res) {
         //To do : add confirm old password before edit.

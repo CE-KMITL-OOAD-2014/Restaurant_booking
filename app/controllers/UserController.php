@@ -13,64 +13,40 @@ class UserController extends BaseController {
   		$this->rest = $rest;
 	}
 
+    //create user
+    public function store()
+    {
+        $data =  Input::except(array('_token')) ;
+        $rule  =  array(
+                'name'       => 'required',
+                'lastname'   => 'required',
+                'email'      => 'required|email|unique:users',
+                'tel'        => 'required|min:10|unique:users',
+                'password'   => 'required|min:6|same:cpassword',
+                'cpassword'  => 'required|min:6'
+            ) ;
 
-	public function showBooked ($id)
-	{
-		$books = DB::table('books')->where('id_user',$id)->get();
-        $checkCurrentBooked = new CheckCurrentBooked();
-		$currentBookeds = $checkCurrentBooked->currentBook($books);
-        $restaurantsName[0] = "";
-        $i=0;
+        $validator = Validator::make($data,$rule);
 
-        if ($currentBookeds[0]!="") {
-            foreach ($currentBookeds as $currentBooked) {
-                $restaurantsName[$i] = $this->rest->find($currentBooked->id_res)->name;
-                $i++;
-            }
+        if ($validator->fails())
+            return Redirect::to('register')->withErrors($validator->messages());
+
+        else
+        {
+                    
+                $user  = new CoreUser;
+                $user->setName(Input::get('name'));
+                $user->setLastname(Input::get('lastname'));
+                $user->setPassword(Input::get('password'));
+                $user->setEmail(Input::get('email'));
+                $user->setTel(Input::get('tel'));
+
+                $this->user->save($user);
+
+                return Redirect::to('login')->withMessage('Complete Register, You can login!');
         }
-    
-
-        return View::make('showBooked',array('currentBookeds'=>$currentBookeds,'restaurantsName'=>$restaurantsName));
-
-	}
-
-	public function showRestaurant ($id)
-	{
-		$rests = DB::table('restaurants')->where('id_owner',$id)->get();
-        return View::make('showMyRestaurant',array('restaurants'=>$rests));
-	}
-
-  public function showProfile ($id)
-  {
-      $user = $this->user->find($id);
-      return View::make('profile',array('user'=>$user));
-  }
-
-	public function manage ($id_res)
-	{
-		$restaurant = $this->rest->find($id_res);
-		$books = DB::table('books')->where('id_res',$id_res)->get();
-		$checkCurrentBooked = new CheckCurrentBooked();
-        $currentBookeds = $checkCurrentBooked->currentBook($books);
-    $customersName[0] = "";
-    $i=0;
-
-    if ($currentBookeds[0]!="") {
-      foreach ($currentBookeds as $currentBooked) {
-        $customersName[$i] = $this->user->find($currentBooked->id_user)->name;
-        $i++;
-      }
     }
-    
 
-		return View::make('manageRestaurant',array('restaurant'=>$restaurant,'currentBookeds'=>$currentBookeds,'customersName'=>$customersName));
-	}
-
-	//show Edit profile page
-	public function showEdit ($id) {
-		$user = $this->user->find($id);
-		return View::make('editProfile')->with('user',$user);
-	}
 
 	//Edit profile
 	public function edit () {

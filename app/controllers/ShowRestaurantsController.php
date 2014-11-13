@@ -28,4 +28,18 @@ class ShowRestaurantsController extends BaseController {
         return View::make('showDetailRestaurant')->with('restaurant',$data);
 
     }
+
+    //show page for registed restaurant
+    public function showRegisRestaurant () {
+        $results = RestaurantController::index();
+        return View::make('formOpen')->with('results',$results);
+    }
+
+    //show page for edit restaurant    
+    public function showEdit($id_res) {
+        $rest = $this->rest->find($id_res);
+        $results = RestaurantController::index();
+
+        return View::make('editRestaurant',array('results'=>$results , 'restaurant'=>$rest));
+    }
 }
