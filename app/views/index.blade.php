@@ -45,7 +45,7 @@
         </ul>
     </section>
 @else
-    <h2 style="color:blue">No restaurant.</h2>
+    <h2 style="color:green">No restaurant.</h2>
 @endif
 
 @stop
