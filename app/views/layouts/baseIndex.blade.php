@@ -107,7 +107,7 @@
                 <nav id="menu">
         	       <ul id="menu-nav">
                         <li>
-                            <form class="form-inline " action="/index.php/search" method="POST">
+                            <form class="form-inline " action="/search" method="POST">
                                 <span class="form-group">
                                     <input type="text" class="form-control" placeholder="seach..." name="str" id="str" width=100%>
                                     <button type="submit" class="button button-mini">
