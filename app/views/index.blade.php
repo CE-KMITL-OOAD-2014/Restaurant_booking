@@ -28,18 +28,22 @@
     <section id="projects">
         <ul id="thumbs">                        
 			
-            <!-- show thumbs of random picture of restaurants -->				
-            @for ($i=0 ; $i<count($pics) ; $i++) 
-                {{"<li class=\"item-thumbs span3 design\">
-                    <a class=\"hover-wrap fancybox\" data-fancybox-group=\"gallery\" title=\"".$restaurants[$i]->name."\" href=\"/restaurant/".$restaurants[$i]->id."\">
-                    <span class=\"overlay-img\"></span>
-                    <span class=\"overlay-img-thumb font-icon-plus\"></span>
-                    </a>
+			@if ($pics[0]!="")
+            	<!-- show thumbs of random picture of restaurants -->				
+            	@for ($i=0 ; $i<count($pics) ; $i++) 
+                	{{"<li class=\"item-thumbs span3 design\">
+                    	<a class=\"hover-wrap fancybox\" data-fancybox-group=\"gallery\" title=\"".$restaurants[$i]->name."\" href=\"/restaurant/".$restaurants[$i]->id."\">
+                    	<span class=\"overlay-img\"></span>
+                    	<span class=\"overlay-img-thumb font-icon-plus\"></span>
+                    	</a>
                                                                                                     
-                    <img src=\"".$pics[$i]."\" alt=\"".$restaurants[$i]->addr." <br> ".$restaurants[$i]->tel."\">
-                    </li>"}}
-            @endfor
-                        	
+                    	<img src=\"".$pics[$i]."\" alt=\"".$restaurants[$i]->addr." <br> ".$restaurants[$i]->tel."\">
+                    	</li>"}}
+            	@endfor
+            @else
+            	<p>No restaurant.</p>
+            @endif
+
         </ul>
     </section>
 @stop
