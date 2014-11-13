@@ -9,4 +9,3 @@ Thumbs.db
 app/config/database.php
 *.swp
 /public/pics
-/public/img
