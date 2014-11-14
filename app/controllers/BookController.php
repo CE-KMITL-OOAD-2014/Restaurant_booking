@@ -53,64 +53,54 @@ class BookController extends BaseController {
             //make booking
             else
             {
-                if (Input::get('date')==date("m/d")) {
-                    $currentTime = strtotime(date("H:i"));
-                    $bookTime = strtotime(Input::get('time'));
-                    if ($bookTime < $currentTime) {
-                        $link = "book/".(Input::get('id_res'));
+            	$id_res = Input::get('id_res');
+            	$id_user = Input::get('id_user');
+            	$date = Input::get('date');
+            	$time = Input::get('time');
+            	$area = Input::get('area');
+            	$amout = Input::get('amout');
+            	$link = "book/".(Input::get('id_res'));
+
+                if ( $date == date("m/d") ) {
+
+                    $check_time = new CheckTime;
+            		$checker = $check_time->checkLateTime($id_res, $date, $time);
+                    
+                    if (!$checker) {
                         return Redirect::to($link)->withErrors('เลยเวลาแล้ว!!!');
-                    }                   
-
+                    }
                 }
 
-                $test = DB::table('books')->where('id_res',Input::get('id_res'))->where('time',Input::get('time'))->where('date',Input::get('date'))->where('area',Input::get('area'))->get();
-                $currentBook = 0;
-                for ($i=0; $i < count($test); $i++) { 
-                    $currentBook += $test[$i]->amout;
+                $user = App::make('CoreUser');
+                if ($user->book($id_user,$id_res, $time, $date, $area, $amout)) {
+                	$user = $this->user->find(Auth::id());
+            		
+                    //set data for send e-mail to customer
+                    $data['name_res'] = $this->rest->find($data['id_res'])->name;
+            		$data['name_user'] = $user->name;
+                    $data['email'] = $user->email;
+                    SendEmail::setValue($data['email'],$data['name_user']);
+            		SendEmail::sendmail($data);
+                	return Redirect::to('/')->withMessage('<h3 style="color:green;">Complete Booking.</h3>');
                 }
-
-                $res = $this->rest->find(Input::get('id_res'));
-                $areas = explode(",", $res->area); 
-                $seats = explode(",", $res->seat);
-                $indexArea = array_search(Input::get('area'), $areas);
-                $seat = $seats[$indexArea];
-                
-                if ($currentBook+(Input::get('amout'))<=$seat )
-                {
-                    $book  = new CoreBook;
-                    $book->setIdRes(Input::get('id_res'));
-                    $book->setIdUser(Input::get('id_user'));
-                    $book->setDate(Input::get('date'));
-                    $book->setAmout(Input::get('amout'));
-                    $book->setTime(Input::get('time'));
-                    $book->setArea(Input::get('area'));
-        
-                    $this->book->save($book);
-                    return Redirect::to('/')->withMessage('<h3 style="color:green;">Complete Booking.</h3>');
-                }                
-                
                 else
-                    $link = "book/".Input::get('id_res');
                     return Redirect::to($link)->withErrors('Seat unavailable now...');
 
-                
             }
 
 	}
 
     public function cancel($id) 
     {
-        //To do : add popup to comfirm cancel.
-        $book = $this->book->find($id);
-        $restaurant = $this->rest->find($book->id_res);
 
-        //can cancel
-        $calculate = new Calculate();
-        if ($calculate->checkTime($book) || $restaurant->id_owner == Auth::id()) {
-            $book->delete();
-            return Redirect::to('/')->withMessage('Books canceled');
-         }
-         else
+      	$book = App::make('CoreBook');
+      	$book->setId($id);
+      	$book->setIdUser(Auth::id());
+
+      	if ($book->cancel()) 
+      		return Redirect::to('/')->withMessage('Books canceled');
+      	
+      	else
             return Redirect::to('/')->withErrors('ใกล้ถึงเวลาแล้ว ยกเลิกไม่ได้');
 
     }
@@ -136,48 +126,37 @@ class BookController extends BaseController {
         //making editing
         else
         {
-            if (Input::get('date')==date("m/d")) {
-                $currentTime = strtotime(date("H:i"));
-                $bookTime = strtotime(Input::get('time'));
-                if ($bookTime < $currentTime) {
-                    return Redirect::to($link)->withErrors('เลยเวลาแล้ว!!!');
-                }                   
+        	$id_res = Input::get('id_res');
+        	$time = Input::get('time');
+        	$date = Input::get('date');
+        	$area = Input::get('area');
+        	$amout = Input::get('amout');
 
-            }
-
-            //check amout that booked
-            $test = DB::table('books')->where('id_res',Input::get('id_res'))->where('time',Input::get('time'))->where('date',Input::get('date'))->where('area',Input::get('area'))->get();
-            $currentBook = 0;
-            for ($i=0; $i < count($test); $i++) { 
-                if ($test[$i]->id != $id_book) {
-                    $currentBook += $test[$i]->amout;
-                }
+            if ( $date ==date("m/d")) {
                 
-            }
-            $res = $this->rest->find(Input::get('id_res'));
-            $areas = explode(",", $res->area); 
-            $seats = explode(",", $res->seat);
-            $indexArea = array_search(Input::get('area'), $areas);
-            $seat = $seats[$indexArea];
-               
-            //can edit book 
-            if ($currentBook+(Input::get('amout')) <= $seat )
-            {
-                $book  = $this->book->find($id_book);
-                $book->date = Input::get('date');
-                $book->amout = Input::get('amout');
-                $book->time = Input::get('time');
-                $book->area = Input::get('area');
-                $book->save();
+                $check_time = new CheckTime;
+            	$checker = $check_time->checkLateTime($id_res, $date, $time);
+                    
+              	if (!$checker) {
+                  	return Redirect::to($link)->withErrors('เลยเวลาแล้ว!!!');
+              	}
 
-                return Redirect::to('/')->withMessage('Completed edit booking info...');
-            }                
+            }
+
+            $book = App::make('CoreBook');
+            if ($book->edit($id_book, $id_res, $time, $date, $area, $amout)) {
+            	$user = $this->user->find(Auth::id());
+            	$data['name_res'] = $this->rest->find($data['id_res'])->name;
+            	$data['name_user'] = $user->name;
+            	$sender = new SendEmail;
+            	$sender->sendmail($data, $user->email, $user->name);
+            	return Redirect::to('/')->withMessage('Completed edit booking info...');
+            }
             
-            //Seat unavailable now   
-            else {
-                return Redirect::to($link)->withErrors('Seat unavailable now...');
-            }
-                
+            else
+            	return Redirect::to($link)->withErrors('Seat unavailable now...');
+
+            
         }
     }
 

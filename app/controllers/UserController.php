@@ -33,17 +33,13 @@ class UserController extends BaseController {
 
         else
         {
-                    
-                $user  = new CoreUser;
-                $user->setName(Input::get('name'));
-                $user->setLastname(Input::get('lastname'));
-                $user->setPassword(Input::get('password'));
-                $user->setEmail(Input::get('email'));
-                $user->setTel(Input::get('tel'));
-
-                $this->user->save($user);
-
-                return Redirect::to('login')->withMessage('Complete Register, You can login!');
+        	$register = App::make('Register');
+        	if ($register->createUser($data)) 
+        		return Redirect::to('login')->withMessage('Complete Register, You can login!');
+        	
+        	else
+        		return Redirect::to('/')->withErrors('Sorry, Can\'t register, please try again later.');
+                
         }
     }
 
@@ -72,38 +68,23 @@ class UserController extends BaseController {
 
         else
         {
-         	$check_email = DB::table('users')->where('email',$data['email'])->get() ;
-         	$check_tel = DB::table('users')->where('tel',$data['tel'])->get() ;
+        	$user = App::make('CoreUser');
+        	$status = $user->edit(Auth::id(), $data);
 
-         	if (count($check_email)>1 || count($check_tel) > 1) {
-          		return Redirect::to($link)->withMessage('Duplicate email or tel');
-         	}
-         	
-         	if (count($check_email)==1 ) {
-          		if ($check_email[0]->id != Auth::id()) {
+        	if ( $status == 'true') {
+            	return Redirect::to('/')->withMessage('edit profile complete.');
+        	}
 
-           			return Redirect::to($link)->withMessage('Duplicate email');
-          		}
-         	}
-         
-         	if (count($check_tel) == 1) {
-          		if ($check_tel[0]->id != Auth::id()) {
+        	elseif ( $status == "email") 
+        		return Redirect::to($link)->withErrors('Sorry, The e-mail has already been taken.');
+        	
 
-           			return Redirect::to($link)->withMessage('Duplicate tel');
-          		}
-         	}
-
-                    
-        	$user  = $this->user->find(Auth::id());
-        	$user->name = Input::get('name');
-        	$user->lastname = Input::get('lastname');
-        	$user->password = Input::get('password');
-        	$user->email = Input::get('email');
-        	$user->tel = Input::get('tel');
-        	$user->save();
-
-
-        	return Redirect::to('/')->withMessage('edit profile complete.');
+        	elseif ( $status == "tel") 
+        		return Redirect::to($link)->withErrors('Sorry, The tel has already been taken.');
+        	
+        	else
+        		return Redirect::to($link)->withErrors('Sorry, The tel or e-mail has already been taken.');
         }
+
 	}
 }

@@ -25,6 +25,7 @@
         {{$restaurant->tel}}<br><br>
     </div>
 
+
 	<h4> {{"<a href=\"/book/$restaurant->id\">BOOK!</a>"}} </h4>
             
     <?php

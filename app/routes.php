@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', array('uses'=>'RandomRestaurantsController@showPic'));
+Route::get('/', array('uses'=>'RandomRestaurantsController@randomThump'));
 
 Route::get('register', array('uses'=>'HomeController@showRegister'));
 

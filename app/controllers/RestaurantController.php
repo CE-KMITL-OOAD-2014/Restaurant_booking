@@ -39,7 +39,7 @@ class RestaurantController extends BaseController {
                     'time_open'  => 'required',
                     'time_close' => 'required',
                     'areaList'	 => 'required',
-                    'tel'        => 'required|min:10|numeric|unique:restaurants'
+                    'tel'        => 'required|min:10|numeric'
                 ) ;
 
             $validator = Validator::make($data,$rule);
@@ -50,32 +50,31 @@ class RestaurantController extends BaseController {
             }
             else
             {
+            	$id_user = Auth::id();
+            	$name = Input::get('name');
+            	$addr = Input::get('addr');
+            	$day = Input::get('day');
+            	$time_open = Input::get('time_open');
+            	$time_close = Input::get('time_close');
+            	$areaList = Input::get('areaList');
+            	$seatList = Input::get('seatList');
+            	$tel = Input::get('tel');
 
-                $rest  = new CoreRestaurant;
-                $rest->setIdOwner(Auth::id());
-                $rest->setName(Input::get('name'));
-                $rest->setAddr(Input::get('addr'));
-                $rest->setDay(implode(",", Input::get('day')));
-                $rest->setTimeOpen(Input::get('time_open'));
-                $rest->setTimeClose(Input::get('time_close'));
-                $rest->setArea(implode(",", Input::get('areaList')));
-                $rest->setSeat(implode(",", Input::get('seatList')));
-                $rest->setTel(Input::get('tel'));
-        
-                $this->rest->save($rest);
-
-                return Redirect::to('/')->withMessage('Your Restaurant is Ready!');
+                
+                $user = App::make('CoreUser');
+                if ($user->createRes($id_user, $name, $addr, $day, $time_open, $time_close, $areaList, $seatList, $tel))
+                	return Redirect::to('/')->withMessage('Your Restaurant is Ready!');
             }
 	}
 
     public function deleteRestaurant ($id)
     {
-        //To do : add popup to comfirm delete.
-        $restaurant = $this->rest->find($id);
-
-        $restaurant->delete();
+        $restaurant = App::make('CoreRestaurant');
+        if ($restaurant->delete($id)) 
+        	return Redirect::to('/')->withMessage('Deleted restaurant.');
         
-        return Redirect::to('/')->withMessage('Deleted restaurant id : {{$id}}');
+       	else
+       		return Redirect::to('/')->withErrors('Sorry, can\'t delete restaurant');
     }
 
 
@@ -103,41 +102,24 @@ class RestaurantController extends BaseController {
 
         else
         {
-            $check_addr = DB::table('restaurants')->where('addr',$data['addr'])->get() ;
-            $check_tel = DB::table('restaurants')->where('tel',$data['tel'])->get() ;
 
-            if (count($check_addr)>1 || count($check_tel) > 1) {
-                return Redirect::to($link)->withMessage('Duplicate addr or tel');
-            }
+        	$restaurant = App::make('CoreRestaurant');
+        	$status = $restaurant->edit($id_res, $data);
+        	if ( $status == 'true') {
+        		$complete = "manage/".$id_res;
+            	return Redirect::to($complete)->withMessage('edit profile complete.');
+        	}
+
+        	elseif ( $status == "addr") 
+        		return Redirect::to($link)->withErrors('Sorry, The address has already been taken.');
+        	
+
+        	elseif ( $status == "tel") 
+        		return Redirect::to($link)->withErrors('Sorry, The tel has already been taken.');
+        	
+        	else
+        		return Redirect::to($link)->withErrors('Sorry, The tel or address has already been taken.');
             
-            if (count($check_addr)==1 ) {
-                if ($check_addr[0]->id != $id_res) {
-
-                    return Redirect::to($link)->withMessage('Duplicate address');
-                }
-            }
-         
-            if (count($check_tel) == 1) {
-                if ($check_tel[0]->id != $id_res) {
-
-                    return Redirect::to($link)->withMessage('Duplicate tel');
-                }
-            }
-
-                    
-            $rest  = $this->rest->find($id_res);
-            $rest->name = $data['name'];
-            $rest->addr = $data['addr'];
-            $rest->day = implode(",", Input::get('day'));
-            $rest->time_open = $data['time_open'];
-            $rest->time_close = $data['time_close'];
-            $rest->area = implode(",", Input::get('areaList'));
-            $rest->seat = implode(",", Input::get('seatList'));
-            $rest->tel = $data['tel'];
-            $rest->save();
-
-            $link = "manage/".$id_res;
-            return Redirect::to($link)->withMessage('edit profile complete.');
         }
     }
 

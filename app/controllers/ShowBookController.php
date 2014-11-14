@@ -35,8 +35,8 @@ class ShowBookController extends BaseController {
         $book = $this->book->find($id_book);
         $restaurant = $this->rest->find($book->id_res);
 
-        $calculate = new Calculate();
-        if ($calculate->checkTime($book) || $restaurant->id_owner == Auth::id()) {
+        $calculate = new CheckTime();
+        if ($calculate->checkTimeBefore($book) || $restaurant->id_owner == Auth::id()) {
             $data = BookController::index($restaurant);
             return View::make('editBook',array('book'=>$book, 'data'=>$data));
         }

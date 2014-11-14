@@ -84,15 +84,4 @@ class Calculate {
         return $avail;
     }
 
-    //check limited time for change book or cancel book ( 30 minute)
-    public function checkTime ($book)
-    {
-        if ($book->date == date("m/d")) {
-            if (strtotime("+30 minute", strtotime(date("H:i")))>strtotime($book->time))
-                return false;
-        }
-
-        return true;
-    } 
-
 }
