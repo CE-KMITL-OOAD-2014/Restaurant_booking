@@ -193,6 +193,14 @@
                                         </div>
 
                                         <div class=\"accordion-group\">
+                                                    <div class=\"\">
+                                                        <a data-parent=\"#leftMenu\" class=\"external\" href=\"/showall \">
+                                                            <i class=\"icon-home\"></i> All Restaurant
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                        <div class=\"accordion-group\">
                                             <div class=\"\">
                                                 <a data-parent=\"#leftMenu\" class=\"external\" href=\"/index.php/edit/$id\">
                                                     <i class=\"icon-home\"></i> Edit Profile 

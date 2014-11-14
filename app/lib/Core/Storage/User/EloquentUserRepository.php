@@ -25,17 +25,5 @@ class EloquentUserRepository implements UserRepository {
     $elo->tel = $input->getTel();
     return $elo->save();
   }
-
-  public function update($id,$input)
-  {
-    
-    $elo = User::find($id);
-    $elo->name = $input->getName();
-    $elo->lastname = $input->getLastname();
-    $elo->password = $input->getPassword();
-    $elo->email = $input->getEmail();
-    $elo->tel = $input->getTel();
-    return $elo->save();
-  }
  
 }
