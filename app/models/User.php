@@ -6,7 +6,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 class User extends Eloquent implements UserInterface, RemindableInterface {
 	
 	protected $table = 'users';
-	public $timestamps = false;
+	public $timestamps = true;
 
 	public function setPasswordAttribute($password)
   {

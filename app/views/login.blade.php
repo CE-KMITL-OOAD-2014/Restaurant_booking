@@ -1,18 +1,14 @@
-<!-- app/views/login.blade.php -->
+@extends('layouts.base')
 
-<!doctype html>
-<html>
-<head>
-	<title>Login</title>
-</head>
-<body>
+@section('body')
 
-	{{ Form::open(array('url' => 'login')) }}
-		<h1>Login</h1>
+    <div class="row">
 
-		@if (Session::has('message'))
+        <h1>Login</h1>
 
-            <p style="color:red;">{{ Session::get('message') }}</p>
+        @if (Session::has('message'))
+
+            <p style="color:green;">{{ Session::get('message') }}</p>
 
         @endif
 
@@ -26,18 +22,35 @@
 
         @endif
 
-		<p>
-			{{ Form::label('email', 'Email Address') }}
-			{{ Form::text('email', Input::old('email'), array('placeholder' => 'fill your email')) }}
-		</p>
+        <form class="form-horizontal" action="/login" method="POST">
+            <fieldset>
 
-		<p>
-			{{ Form::label('password', 'Password') }}
-			{{ Form::password('password') }}
-		</p>
+                <div class="form-group">
+                    <!-- Username -->
+                    <label class="control-label" for="username">E-mail</label>
+                    <div class="controls">
+                        <input type="text" id="email" name="email" placeholder="e-mail address" class="input-xlarge form-control">
+                    </div>
+                </div>
 
-		<p>{{ Form::submit('Submit!') }}</p>
-	{{ Form::close() }}
+                <div class="form-group">
+                    <!-- Password-->
+                    <label class="control-label" for="password">Password</label>
+                    <div class="controls">
+                        <input type="password" id="password" name="password" placeholder="password" class="input-xlarge form-control">
+                    </div>
+                </div>
 
-</body>
-</html>
+
+                <div class="form-group">
+                    <!-- Button -->
+                    <div class="controls">
+                        <button class="button button-small">Login</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>               
+
+    </div>
+
+@stop

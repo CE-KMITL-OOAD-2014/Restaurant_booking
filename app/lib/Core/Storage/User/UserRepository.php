@@ -8,6 +8,5 @@ interface UserRepository {
  
   public function save($input);
 
-  public function update($id,$input);
  
 }

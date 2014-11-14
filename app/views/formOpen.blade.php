@@ -1,13 +1,11 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Registration</title>
-    </head>
+@extends('layouts.base')
 
-    <body>
+@section('body')
 
-        <h2> Register Restaurant : </h2>
+    <div class="row">
+
+        <h2> Register Restaurant </h2>
+        <br>
 
         @if ($errors->any())
 
@@ -21,93 +19,149 @@
 
         @if (Session::has('message'))
 
-            <p>{{ Session::get('message') }}</p>
+            <p style="color:green;">{{ Session::get('message') }}</p>
 
         @endif
 
-        <p> Your ID : {{$id = Auth::id();}} </p>
 
-        <form action="{{ url('regisres_action') }}" method="POST">
+        <form class="form-horizontal" action="/regisres_action" method="POST">
+            <fieldset>
 
-            <p>Restaurant Name :</p>
+                <div class="form-group">
 
-            <p>{{ Form::text('name') }}</p>
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" id="name" name="name" placeholder="" class="input-xlarge form-control" style="width: 40%;">
+                    </div>
+                </div>
 
-            <p>Address :</p>
+                <div class="form-group">
 
-            <textarea name="addr" id="addr" rows="10" cols="30"></textarea>
+                    <label class="control-label" for="addr">Address</label>
+                    <div class="controls">
+                        <input type="textarea" id="addr" name="addr" placeholder="" class="input-xlarge form-control">
+                    </div>
+                </div>
 
-            <p>Date Open :</p>
+
+                <div class="form-group">
+
+                    <label class="control-label" for="day">Available days</label>
+                    <div class="controls">
+                        {{ Form::checkbox('day[]', 'Sunday', false) }}
+                        {{ Form::label('sun', 'Sunday') }} <br>
+
+                        {{ Form::checkbox('day[]', 'Monday', false) }}
+                        {{ Form::label('mon', 'Monday') }}<br>
+
+                        {{ Form::checkbox('day[]', 'Tuesday', false) }}
+                        {{ Form::label('tue', 'Tuesday') }}<br>
+
+                        {{ Form::checkbox('day[]', 'Wednesday', false) }}
+                        {{ Form::label('wed', 'Wednesday') }}<br>
+
+                        {{ Form::checkbox('day[]', 'Thursday', false) }}
+                        {{ Form::label('thu', 'Thursday') }}<br>
+
+                        {{ Form::checkbox('day[]', 'Friday', false) }}
+                        {{ Form::label('fri', 'Friday') }}<br>
+
+                        {{ Form::checkbox('day[]', 'Saturday', false) }}
+                        {{ Form::label('sat', 'Saturday') }}<br><br>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <label class="control-label" for="time_open">OPEN</label>
+                    <div class="controls">
+                        <select name="time_open" id="time_open">
+
+                            @foreach ($results as $result ) 
+                                {{ "<option value=\"".$result."\">".$result."</option>" }}
+                            @endforeach
+                        </select> <br>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+
+                    <label class="control-label" for="time_close">CLOSE</label>
+                    <div class="controls">
+                        <select name="time_close" id="time_close">
             
-            {{ Form::checkbox('day[]', '1', false) }}
-            {{ Form::label('sun', 'Sunday') }} <br>
+                            @foreach ($results as $result ) 
+                                {{ "<option value=\"".$result."\">".$result."</option>" }}
+                            @endforeach
+                        </select> <br>
+                    </div>
+                </div>
 
-            {{ Form::checkbox('day[]', '2', false) }}
-            {{ Form::label('mon', 'Monday') }}<br>
+                <div class="form-group">
 
-            {{ Form::checkbox('day[]', '3', false) }}
-            {{ Form::label('tue', 'Tuesday') }}<br>
+                    <label class="control-label" for="areaList">Add area in your restaurant</label>
+                    <div class="controls">
+                        <select multiple name="areaList[]" id="areaList" size="8" style="width: 30%;"></select>
+                        <p><input name="area" type="text" id="area" class="input-xlarge form-control" style="width: 30%;"> <button type="button" onclick="addArea()">Add</button> </p>
+                        <p>Click the button to add area in your Restaurant to list.</p>
+                        <p><b>Note :</b> ถ้าในร้านมีแค่มุมเดียว ใส่ "มุมทั่วไป"</p>
 
-            {{ Form::checkbox('day[]', '4', false) }}
-            {{ Form::label('wed', 'Wednesday') }}<br>
-
-            {{ Form::checkbox('day[]', '5', false) }}
-            {{ Form::label('thu', 'Thurseday') }}<br>
-
-            {{ Form::checkbox('day[]', '6', false) }}
-            {{ Form::label('fri', 'Friday') }}<br>
-
-            {{ Form::checkbox('day[]', '7', false) }}
-            {{ Form::label('sat', 'Saturday') }}<br><br>
-
-
-
-            <p>Select a time OPEN :  &nbsp;&nbsp;&nbsp;&nbsp;  <input type="time" name="time_open"> </p>
-            <p>Select a time CLOSE :  &nbsp;&nbsp;&nbsp;  <input type="time" name="time_close"> </p>
-            <br>
-
-            
-            <p>Area in your restaurant :</p>
-
-                <select multiple name="areaList[]" id="areaList" size="8" style="width: 200px;"> </select>
-
-            <p><input name="area" type="text" id="area"> <button type="button" onclick="addArea()">Add</button> <button type="button" onclick="myFunction()">Remove selected item</button></p>
-            <p>Click the button to add area in your Restaurant to list.</p>
-            <p><b>Note :</b> ถ้าในร้านมีแค่มุมเดียว ใส่ "มุมทั่วไป"</p>
-
-            
-
-            <script>
-                function myFunction() {
-                    var x = document.getElementById("areaList");
-                    x.remove(x.selectedIndex);
-                }
-            </script>
-
-            <script>
-                function addArea() {
-                    var x = document.getElementById("areaList");
-                    var option = document.createElement("option");
-                    option.text = document.getElementById("area").value;
-                    x.add(option);
-                    document.getElementById("area").value = "";
-
-                    for (var i=0; i<x.options.length; i++) {
-                        x.options[i].selected = true;
-                    }
-                }
-
-            </script>
+                        <p><b>จำนวนที่นั่งในแต่ละมุม :</b></p>
+                        <select multiple name="seatList[]" id="seatList" size="8" style="width: 30%;"></select>
+                        <p><input name="seat" type="text" id="seat" class="input-xlarge form-control" style="width: 30%;"> <button type="button" onclick="addSeat()">Add</button> </p>
+                        <p><b>Note :</b> ใส่ให้ครบทุก area</p>
 
 
+                        <script>
+                            function addArea() {
+                                var x = document.getElementById("areaList");
+                                var option = document.createElement("option");
+                                option.text = document.getElementById("area").value;
+                                x.add(option);
+                                document.getElementById("area").value = "";
 
-            <p>Tel number :</p>
+                                for (var i=0; i<x.options.length; i++) {
+                                    x.options[i].selected = true;
+                                }
+                            }
+                        </script>
 
-            <p>{{ Form::text('tel') }}</p>
+                        <script>
+                            function addSeat() {
+                                var x = document.getElementById("seatList");
+                                var option = document.createElement("option");
+                                option.text = document.getElementById("seat").value;
+                                x.add(option);
+                                document.getElementById("seat").value = "";
 
-            <p>{{ Form::submit('Submit') }}</p>
+                                for (var i=0; i<x.options.length; i++) {
+                                    x.options[i].selected = true;
+                                }
+                            }
+                        </script>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <label class="control-label" for="tel">Tel Number</label>
+                    <div class="controls">
+                        <input type="text" id="tel" name="tel" placeholder="" class="input-xlarge form-control" style="width: 40%;">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+
+                    <div class="controls">
+                        <button class="button button-small">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
 
         </form>
 
-    </body>
-</html>
+    </div>
+    
+@stop

@@ -1,58 +1,87 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Registration</title>
-    </head>
+@extends('layouts.base')
 
-    <body>
-        <h2> Register : </h2>
+@section('body')
 
-        @if ($errors->any())
+<div class="row">
 
-            <ul style="color:red;">
+    <h1>Create Account</h1>
 
-                {{ implode('', $errors->all('<li>:message</li>')) }}
+    @if (Session::has('message'))
 
-            </ul>
+        <p style="color:green;">{{ Session::get('message') }}</p>
 
-        @endif
+    @endif
 
-        @if (Session::has('message'))
+    @if ($errors->any())
 
-            <p>{{ Session::get('message') }}</p>
+        <ul style="color:red;">
 
-        @endif
+            {{ implode('', $errors->all('<li>:message</li>')) }}
 
-        {{ Form::open(array('url' => 'register_action')) }}
+        </ul>
 
-            <p>Name :</p>
+    @endif
 
-            <p>{{ Form::text('name') }}</p>
+    <form class="form-horizontal" action="/index.php/register_action" method="POST">
+        <fieldset>
 
-            <p>Last Name :</p>
+            <div class="form-group">
 
-            <p>{{ Form::text('lastname') }}</p>
+                <label class="control-label" for="name">Name</label>
+                <div class="controls">
+                    <input type="text" id="name" name="name" placeholder="" class="input-xlarge form-control">
+                </div>
+            </div>
 
-            <p>Password :</p>
+            <div class="form-group">
 
-            <p>{{ Form::password('password') }}</p>
+                <label class="control-label" for="lastname">Lastname</label>
+                <div class="controls">
+                    <input type="text" id="lastname" name="lastname" placeholder="" class="input-xlarge form-control">
+                </div>
+            </div>
 
-            <p>Confirm Password :</p>
+            <div class="form-group">
 
-            <p>{{ Form::password('cpassword') }}</p>
+                <label class="control-label" for="password">Password</label>
+                <div class="controls">
+                    <input type="password" id="password" name="password" placeholder="" class="input-xlarge form-control">
+                </div>
+            </div>
 
-            <p>Email :</p>
+            <div class="form-group">
 
-            <p>{{ Form::text('email') }}</p>
+                <label class="control-label" for="cpassword">Confirm Password</label>
+                <div class="controls">
+                    <input type="password" id="cpassword" name="cpassword" placeholder="" class="input-xlarge form-control">
+                </div>
+            </div>
 
-            <p>Tel number :</p>
+            <div class="form-group">
 
-            <p>{{ Form::text('tel') }}</p>
+                <label class="control-label" for="email">E-mail</label>
+                <div class="controls">
+                    <input type="text" id="email" name="email" placeholder="" class="input-xlarge form-control">
+                </div>
+            </div>
 
-            <p>{{ Form::submit('Submit') }}</p>
+            <div class="form-group">
 
-        {{ Form::close() }}
+                <label class="control-label" for="tel">Tel Number</label>
+                <div class="controls">
+                    <input type="text" id="tel" name="tel" placeholder="" class="input-xlarge form-control">
+                </div>
+            </div>
 
-    </body>
-</html>
+
+            <div class="form-group">
+                <div class="controls">
+                    <button class="button button-small">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+
+@stop

@@ -15,6 +15,11 @@ class StorageServiceProvider extends ServiceProvider {
       'Core\Storage\Restaurant\RestaurantRepository',
       'Core\Storage\Restaurant\EloquentRestaurantRepository'
     );
+
+    $this->app->bind(
+      'Core\Storage\Book\BookRepository',
+      'Core\Storage\Book\EloquentBookRepository'
+    );
   }
  
 }

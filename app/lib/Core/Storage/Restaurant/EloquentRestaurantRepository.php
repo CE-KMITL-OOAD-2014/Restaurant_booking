@@ -19,28 +19,17 @@ class EloquentRestaurantRepository implements RestaurantRepository {
 
     $elo = new Restaurant;
     $elo->id_owner = $input->getIdOwner();
+    $elo->name_pic = $input->getNamePic();
     $elo->name = $input->getName();
     $elo->addr = $input->getAddr();
     $elo->day = $input->getDay();
     $elo->time_open = $input->getTimeOpen();
     $elo->time_close = $input->getTimeClose();
     $elo->area = $input->getArea();
+    $elo->seat = $input->getSeat();
     $elo->tel = $input->getTel();
     return $elo->save();
   }
 
-  public function update($id,$input)
-  {
-    
-    $elo = Restaurant::find($id);
-    $elo->name = $input->getName();
-    $elo->addr = $input->getAddr();
-    $elo->day = $input->getDay();
-    $elo->time_open = $input->getTimeOpen();
-    $elo->time_close = $input->getTimeClose();
-    $elo->area = $input->getArea();
-    $elo->tel = $input->getTel();
-    return $elo->save();
-  }
  
 }
