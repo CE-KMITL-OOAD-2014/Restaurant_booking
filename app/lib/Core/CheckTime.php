@@ -14,14 +14,13 @@ class CheckTime {
         return true;
     } 
 
-    public function checkLateTime ($id_res, $date, $time)
+    public function checkLateTime ($time)
     {
         $currentTime = strtotime(date("H:i"));
         $bookTime = strtotime($time);
-        if ($bookTime < $currentTime) {
-            $link = "book/".$id_res;
+        if ($bookTime < $currentTime) 
             return false;
-        }   
+        
         else
             return true;                
 

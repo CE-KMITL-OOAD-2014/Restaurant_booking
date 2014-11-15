@@ -64,7 +64,7 @@ class BookController extends BaseController {
                 if ( $date == date("m/d") ) {
 
                     $check_time = new CheckTime;
-            		$checker = $check_time->checkLateTime($id_res, $date, $time);
+            		$checker = $check_time->checkLateTime($time);
                     
                     if (!$checker) {
                         return Redirect::to($link)->withErrors('เลยเวลาแล้ว!!!');
