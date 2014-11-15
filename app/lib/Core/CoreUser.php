@@ -38,19 +38,19 @@ class CoreUser {
 
     public function book ($id_user, $id_res, $time, $date, $area, $amout)
     {
-        $test = DB::table('books')->where('id_res',$id_res)->where('time',$time)->where('date',$date)->where('area',$area)->get();
+        $booked = DB::table('books')->where('id_res',$id_res)->where('time',$time)->where('date',$date)->where('area',$area)->get();
         $currentBook = 0;
 
-        //check currentty booked at time and area
-        for ($i=0; $i < count($test); $i++) { 
-            $currentBook += $test[$i]->amout;
+        //check current booked at time and area
+        for ($i=0; $i < count($booked); $i++) { 
+            $currentBook += $booked[$i]->amout;
         }
 
         $res = $this->rest->find($id_res);
         $areas = explode(",", $res->area); 
         $seats = explode(",", $res->seat);
-        $indexArea = array_search($area, $areas);
-        $seat = $seats[$indexArea];
+        $index = array_search($area, $areas);
+        $seat = $seats[$index];
                 
         if ( ($currentBook+$amout) <=$seat )
         {
@@ -76,7 +76,7 @@ class CoreUser {
         $check_tel = DB::table('users')->where('tel',$data['tel'])->get() ;
 
         if (count($check_email)>1 || count($check_tel) > 1) {
-            //return 'false';
+            return 'false';
         }
 
         if (count($check_email)==1 ) {

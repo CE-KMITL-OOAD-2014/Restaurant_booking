@@ -28,7 +28,7 @@ class SendEmail {
         {
         	$email = SendEmail::getEmail();
         	$name = SendEmail::getName();
-            $message->to($email, $name)->subject('Resevation Complete!');
+          	$message->to($email, $name)->subject('Reservation Complete!');
         });
     }
 
