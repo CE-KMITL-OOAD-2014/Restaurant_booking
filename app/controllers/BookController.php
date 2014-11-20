@@ -146,10 +146,13 @@ class BookController extends BaseController {
             $book = App::make('CoreBook');
             if ($book->edit($id_book, $id_res, $time, $date, $area, $amout)) {
             	$user = $this->user->find(Auth::id());
-            	$data['name_res'] = $this->rest->find($data['id_res'])->name;
+            	
+            	//set data for send e-mail to customer
+               	$data['name_res'] = $this->rest->find($data['id_res'])->name;
             	$data['name_user'] = $user->name;
-            	$sender = new SendEmail;
-            	$sender->sendmail($data, $user->email, $user->name);
+               	$data['email'] = $user->email;
+               	SendEmail::setValue($data['email'],$data['name_user']);
+            	SendEmail::sendmail($data);
             	return Redirect::to('/')->withMessage('Completed edit booking info...');
             }
             
